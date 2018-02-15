@@ -1,7 +1,11 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/test_db.php';
+use yii\helpers\ArrayHelper;
+
+$params = ArrayHelper::merge(
+    require (__DIR__ . '/params.php'),
+    require (__DIR__ . '/params-local.php')
+);
 
 /**
  * Application configuration shared by all test types
@@ -28,7 +32,13 @@ return [
         ],
     ],
     'components' => [
-        'db' => $db,
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=yii2basic_start_test',
+            'username' => 'root',
+            'password' => '',
+            'charset' => 'utf8',
+        ],
         'mailer' => [
             'useFileTransport' => true,
         ],
