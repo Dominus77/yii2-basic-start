@@ -1,4 +1,10 @@
 <?php
+use yii\helpers\ArrayHelper;
+
+$params = ArrayHelper::merge(
+    require(__DIR__ . '/params.php'),
+    require(__DIR__ . '/params-local.php')
+);
 
 return [
     'id' => 'app-console',
@@ -14,4 +20,5 @@ return [
     ],
     'components' => [
     ],
+    'params' => $params,
 ];
