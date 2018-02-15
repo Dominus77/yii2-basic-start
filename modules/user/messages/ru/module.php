@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Username' => 'Пользователь',
+    'Username' => 'Логин',
     'Password' => 'Пароль',
     'Remember Me' => 'Запомнить меня',
 

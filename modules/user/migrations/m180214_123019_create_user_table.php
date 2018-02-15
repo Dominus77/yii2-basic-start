@@ -1,10 +1,12 @@
 <?php
 
+namespace modules\user\migrations;
+
 use yii\db\Migration;
 
 /**
  * Class m180214_123019_create_user_table
- * @package app\users\migrations
+ * @package modules\user\migrations
  */
 class m180214_123019_create_user_table extends Migration
 {

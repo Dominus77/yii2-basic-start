@@ -3,7 +3,7 @@
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 
-/* @var $model app\models\LoginForm */
+/* @var $model \modules\user\models\LoginForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="form-group">
         <div class="col-lg-offset-1 col-lg-11">
-            <?= Html::submitButton('<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> ' . 'Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+            <?= Html::submitButton('<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> ' . Module::t('module','Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
         </div>
     </div>
 
@@ -44,6 +44,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="col-lg-offset-1" style="color:#999;">
         You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-        To modify the username/password, please check out the code <code>app\models\User::$users</code>.
+        To modify the username/password, please check out the code <code>modules\user\models\User::$users</code>.
     </div>
 </div>
