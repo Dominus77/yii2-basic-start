@@ -8,6 +8,7 @@ use modules\main\Module;
 $this->title = Module::t('module', 'About');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="main-default-about">
     <h1><?= Html::encode($this->title) ?></h1>
 
