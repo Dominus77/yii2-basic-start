@@ -9,24 +9,29 @@ use modules\user\Module;
 /**
  * Class LoginForm
  * @package modules\user\models
+ *
+ * @property string $email Email
+ * @property string $password Password
+ * @property bool $rememberMe Remember Me
  */
 class LoginForm extends Model
 {
-    public $username;
+    public $email;
     public $password;
-    public $rememberMe = true;
+    public $rememberMe = false;
 
-    private $_user = false;
-
+    private $_user;
 
     /**
-     * @return array the validation rules.
+     * @inheritdoc
+     * @return array
      */
     public function rules()
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            [['email', 'password'], 'required'],
+            [['email'], 'email'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
@@ -35,12 +40,14 @@ class LoginForm extends Model
     }
 
     /**
-     * @return array customized attribute labels
+     * @inheritdoc
+     * @return array
      */
     public function attributeLabels()
     {
         return [
             'username' => Module::t('module', 'Username'),
+            'email' => Module::t('module', 'Email'),
             'password' => Module::t('module', 'Password'),
             'rememberMe' => Module::t('module', 'Remember Me'),
         ];
@@ -51,42 +58,50 @@ class LoginForm extends Model
      * This method serves as the inline validation for password.
      *
      * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
      */
-    public function validatePassword($attribute, $params)
+    public function validatePassword($attribute)
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, Module::t('module', 'Invalid email or password.'));
             }
         }
     }
 
     /**
      * Logs in a user using the provided username and password.
+     *
      * @return bool whether the user is logged in successfully
      */
     public function login()
     {
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0);
+        } else {
+            return false;
         }
-        return false;
+    }
+
+    /**
+     * Logout user
+     * @return bool
+     */
+    public function logout()
+    {
+        return Yii::$app->user->logout();
     }
 
     /**
      * Finds user by [[username]]
      *
-     * @return User|null
+     * @return array|null|User
      */
-    public function getUser()
+    protected function getUser()
     {
-        if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+        if ($this->_user === null) {
+            $this->_user = User::findByUsernameEmail($this->email);
         }
-
         return $this->_user;
     }
 }
