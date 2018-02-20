@@ -19,6 +19,11 @@ class ContactForm extends Model
     public $body;
     public $verifyCode;
 
+    public $address;
+    // 40.964348 56.993841
+    public $longitude = '37.190278';
+    public $latitude = '55.997778';
+
 
     /**
      * @return array the validation rules.
