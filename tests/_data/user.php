@@ -30,4 +30,14 @@ return [
         'email' => 'im.tester@rutherford.com',
         'status' => '1',
     ],
+    [
+        'username' => 'imtester2',
+        'auth_key' => 'test102key',
+        'password_hash' => '$2y$13$CXT0Rkle1EMJ/c1l5bylL.EylfmQ39O5JlHJVFpNn618OUS1HwaIi',
+        'password_reset_token' => 'WweU9NwpuGYSfb7FEZMAxqtuz2PkEvv_2' . time(),
+        'created_at' => '1391885313',
+        'updated_at' => '1391885313',
+        'email' => 'im.tester2@rutherford.com',
+        'status' => '1',
+    ],
 ];
