@@ -47,21 +47,24 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 
-                <?= $form->field($model, 'name')->textInput(['autofocus' => true, 'placeholder' => true]) ?>
+                <?php if ($model->scenario === $model::SCENARIO_GUEST) : ?>
+                    <?= $form->field($model, 'name')->textInput(['autofocus' => true, 'placeholder' => true]) ?>
 
-                <?= $form->field($model, 'email')->textInput(['placeholder' => true]) ?>
-
+                    <?= $form->field($model, 'email')->textInput(['placeholder' => true]) ?>
+                <?php endif; ?>
                 <?= $form->field($model, 'subject')->textInput(['placeholder' => true]) ?>
 
                 <?= $form->field($model, 'body')->textarea(['rows' => 6, 'placeholder' => true]) ?>
 
-                <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
-                    'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
-                    'captchaAction' => Url::to('/main/default/captcha'),
-                    'options' => [
-                        'placeholder' => true
-                    ]
-                ]) ?>
+                <?php if ($model->scenario === $model::SCENARIO_GUEST) : ?>
+                    <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+                        'captchaAction' => Url::to('/main/default/captcha'),
+                        'options' => [
+                            'placeholder' => true
+                        ]
+                    ]) ?>
+                <?php endif; ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('<span class="glyphicon glyphicon-send" aria-hidden="true"></span> ' . Module::t('module', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>

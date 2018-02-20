@@ -38,25 +38,30 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+    $menuItems = [
+        ['label' => MainModule::t('module', 'Home'), 'url' => ['/main/default/index']],
+        ['label' => MainModule::t('module', 'About'), 'url' => ['/main/default/about']],
+        ['label' => MainModule::t('module', 'Contact'), 'url' => ['/main/default/contact']],
+    ];
+    if (Yii::$app->user->isGuest) {
+        $menuItems[] = ['label' => UserModule::t('module', 'Check in'), 'url' => ['/user/default/signup']];
+        $menuItems[] = ['label' => UserModule::t('module', 'Login'), 'url' => ['/user/default/login']];
+    } else {
+        /** @var modules\user\models\User $identity */
+        $identity = Yii::$app->user->identity;
+        $menuItems[] = [
+            'label' => UserModule::t('module', 'My Menu'),
+            'items' => [
+                ['label' => '<i class="glyphicon glyphicon-user"></i> ' . UserModule::t('module', 'Profile') . ' (' . $identity->username . ')', 'url' => ['/user/profile/index']],
+                ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . UserModule::t('module', 'Sign Out'), 'url' => ['/user/default/logout'], 'linkOptions' => ['data-method' => 'post']],
+            ],
+        ];
+    }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => MainModule::t('module', 'Home'), 'url' => ['/main/default/index']],
-            ['label' => MainModule::t('module', 'About'), 'url' => ['/main/default/about']],
-            ['label' => MainModule::t('module', 'Contact'), 'url' => ['/main/default/contact']],
-            Yii::$app->user->isGuest ? (
-            ['label' => UserModule::t('module', 'Login'), 'url' => ['/user/default/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/user/default/logout'], 'post')
-                . Html::submitButton(
-                    UserModule::t('module', 'Logout') . ' (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
+        'activateParents' => true,
+        'encodeLabels' => false,
+        'items' => array_filter($menuItems)
     ]);
     NavBar::end();
     ?>

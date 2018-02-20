@@ -19,6 +19,8 @@ class ContactForm extends Model
     public $body;
     public $verifyCode;
 
+    const SCENARIO_GUEST = 'guest';
+
     /**
      * @return array the validation rules.
      */
@@ -30,8 +32,8 @@ class ContactForm extends Model
             // email has to be a valid email address
             ['email', 'email'],
             // verifyCode needs to be entered correctly
-            ['verifyCode', 'required'],
-            ['verifyCode', 'captcha', 'captchaAction' => Url::to('/main/default/captcha')],
+            ['verifyCode', 'required', 'on' => self::SCENARIO_GUEST],
+            ['verifyCode', 'captcha', 'captchaAction' => Url::to('/main/default/captcha'), 'on' => self::SCENARIO_GUEST],
         ];
     }
 

@@ -58,6 +58,7 @@ $config = [
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
+            'traceLine' => '<a href="ide://open?url={file}&line={line}">{html}</a>',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

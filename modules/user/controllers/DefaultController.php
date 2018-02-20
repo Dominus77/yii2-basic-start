@@ -7,7 +7,14 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
+use yii\base\InvalidArgumentException;
+use yii\web\BadRequestHttpException;
 use modules\user\models\LoginForm;
+use modules\user\models\PasswordResetRequestForm;
+use modules\user\models\ResetPasswordForm;
+use modules\user\models\SignupForm;
+use modules\user\models\EmailConfirmForm;
+use modules\user\Module;
 
 /**
  * Class DefaultController
@@ -22,7 +29,7 @@ class DefaultController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'only' => ['logout'],
                 'rules' => [
                     [
@@ -33,7 +40,7 @@ class DefaultController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -73,5 +80,114 @@ class DefaultController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    /**
+     * Requests password reset.
+     *
+     * @return string|\yii\web\Response
+     */
+    public function actionRequestPasswordReset()
+    {
+        $model = new PasswordResetRequestForm();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            if ($model->sendEmail()) {
+                return $this->processGoHome(Module::t('module', 'Check your email for further instructions.'));
+            } else {
+                Yii::$app->session->setFlash('error', Module::t('module', 'Sorry, we are unable to reset password.'));
+            }
+        }
+        return $this->render('requestPasswordResetToken', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @param string $message
+     * @param string $type
+     * @return \yii\web\Response
+     */
+    public function processGoHome($message = '', $type = 'success')
+    {
+        if (!empty($message)) {
+            Yii::$app->session->setFlash($type, $message);
+        }
+        return $this->goHome();
+    }
+
+    /**
+     * Resets password.
+     *
+     * @param string $token
+     * @return string|\yii\web\Response
+     * @throws BadRequestHttpException
+     */
+    public function actionResetPassword($token)
+    {
+        try {
+            $model = new ResetPasswordForm($token);
+        } catch (InvalidArgumentException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $this->processResetPassword($model)) {
+            return $this->processGoHome(Module::t('module', 'Password changed successfully.'));
+        }
+
+        return $this->render('resetPassword', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @inheritdoc
+     * @param $model ResetPasswordForm
+     * @return bool
+     */
+    public function processResetPassword($model)
+    {
+        if ($model->validate() && $model->resetPassword()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Signs user up.
+     *
+     * @return string|Response
+     * @throws \yii\base\Exception
+     */
+    public function actionSignup()
+    {
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->signup()) {
+                return $this->processGoHome(Module::t('module', 'It remains to activate the account.'));
+            }
+        }
+        return $this->render('signup', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @param string $token
+     * @return Response
+     * @throws BadRequestHttpException
+     * @throws \Exception
+     */
+    public function actionEmailConfirm($token)
+    {
+        try {
+            $model = new EmailConfirmForm($token);
+        } catch (\InvalidArgumentException $e) {
+            throw new BadRequestHttpException($e->getMessage());
+        }
+
+        if ($model->confirmEmail()) {
+            return $this->processGoHome(Module::t('module', 'Thank you for registering!'));
+        }
+        return $this->processGoHome(Module::t('module', 'Error sending message!'), 'error');
     }
 }

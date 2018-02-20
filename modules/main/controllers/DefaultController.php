@@ -42,6 +42,16 @@ class DefaultController extends Controller
     public function actionContact()
     {
         $model = new ContactForm();
+        if (Yii::$app->user->isGuest) {
+            $model->scenario = $model::SCENARIO_GUEST;
+        } else {
+            $user = Yii::$app->user;
+            /** @var \modules\user\models\User $identity */
+            $identity = $user->identity;
+            $model->name = $identity->username;
+            $model->email = $identity->email;
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
 

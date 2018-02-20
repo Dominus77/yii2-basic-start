@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
+use modules\user\traits\ModuleTrait;
 use modules\user\Module;
 
 /**
@@ -37,6 +38,11 @@ use modules\user\Module;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
+    use ModuleTrait;
+
+    const LENGTH_STRING_PASSWORD_MIN = 6;
+    const LENGTH_STRING_PASSWORD_MAX = 16;
+
     // Status
     const STATUS_BLOCKED = 0;
     const STATUS_ACTIVE = 1;
@@ -63,7 +69,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'timestamp' => [
-                'class' => TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
             ],
         ];
     }
@@ -77,12 +83,12 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['username', 'required'],
             ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
-            ['username', 'unique', 'targetClass' => self::className(), 'message' => Module::t('module', 'This username is already taken.')],
+            ['username', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This username is already taken.')],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => self::className(), 'message' => Module::t('module', 'This email is already taken.')],
+            ['email', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This email is already taken.')],
             ['email', 'string', 'max' => 255],
 
             [['first_name', 'last_name'], 'string', 'max' => 45],
@@ -215,6 +221,31 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * Removes email confirmation token
+     */
+    public function removeEmailConfirmToken()
+    {
+        $this->email_confirm_token = null;
+    }
+
+    /**
+     * Finds user by password reset token
+     *
+     * @param mixed $token password reset token
+     * @return static|null
+     */
+    public static function findByPasswordResetToken($token)
+    {
+        if (!static::isPasswordResetTokenValid($token)) {
+            return null;
+        }
+        return static::findOne([
+            'password_reset_token' => $token,
+            'status' => self::STATUS_ACTIVE,
+        ]);
+    }
+
+    /**
      * @param mixed $email_confirm_token
      * @return bool|null|static
      */
@@ -232,14 +263,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function generateEmailConfirmToken()
     {
         $this->email_confirm_token = Yii::$app->security->generateRandomString();
-    }
-
-    /**
-     * Removes email confirmation token
-     */
-    public function removeEmailConfirmToken()
-    {
-        $this->email_confirm_token = null;
     }
 
     /**
@@ -403,5 +426,22 @@ class User extends ActiveRecord implements IdentityInterface
     public function isDeleted()
     {
         return $this->status === self::STATUS_DELETED;
+    }
+
+    /**
+     * Finds out if password reset token is valid
+     *
+     * @param mixed $token password reset token
+     * @return boolean
+     */
+    public static function isPasswordResetTokenValid($token)
+    {
+        if (empty($token)) {
+            return false;
+        }
+        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
+        $parts = explode('_', $token);
+        $timestamp = (int)end($parts);
+        return $timestamp + $expire >= time();
     }
 }
