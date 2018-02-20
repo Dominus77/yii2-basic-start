@@ -62,31 +62,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         'placeholder' => true
                     ]
                 ]) ?>
-                <?php
-                $script = new \yii\web\JsExpression("
-                    function(map)
-                    {
-                        var mapOptions = {
-                            center: new google.maps.LatLng(56.993841, 40.964348),
-                            zoom: 14,
-                            mapTypeId: google.maps.MapTypeId.ROADMAP,
-                            panControl: true,
-                            disableDefaultUI: true,
-                            zoomControl: true,
-                            maxZoom: 17,
-                            minZoom: 10
-                        };
-                        
-                        map.setOptions(mapOptions);
-                    }
-                ");
-                ?>
-                <?= $form->field($model, 'address')->widget(\kalyabin\maplocation\SelectMapLocationWidget::className(), [
-                    'attributeLatitude' => 'latitude',
-                    'attributeLongitude' => 'longitude',
-                    'googleMapApiKey' => 'AIzaSyBo672FTL3dIb74fOKkM3XKxxSnr3Vr3WU',
-                    'jsOptions' => ['onLoadMap' => $script],
-                ]); ?>
 
                 <div class="form-group">
                     <?= Html::submitButton('<span class="glyphicon glyphicon-send" aria-hidden="true"></span> ' . Module::t('module', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
