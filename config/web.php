@@ -63,6 +63,9 @@ $config = [
             'traceLevel' => YII_DEBUG ? 3 : 0,
         ],
     ],
+    'as afterAction' => [
+        'class' => '\modules\user\behavior\LastVisitBehavior',
+    ],
     'params' => $params,
 ];
 
