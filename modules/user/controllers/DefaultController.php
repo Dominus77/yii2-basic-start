@@ -4,6 +4,7 @@ namespace modules\user\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -92,7 +93,7 @@ class DefaultController extends Controller
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                return $this->processGoHome(Module::t('module', 'Check your email for further instructions.'));
+                return $this->processGoHome(Module::t('module', 'To the address {:Email} We sent you a letter with further instructions, check mail.', [':Email' => $model->email]));
             } else {
                 Yii::$app->session->setFlash('error', Module::t('module', 'Sorry, we are unable to reset password.'));
             }

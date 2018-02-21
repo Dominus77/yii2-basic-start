@@ -38,7 +38,7 @@ return [
     'If you have forgotten your password, use {:Link}' => 'If you have forgotten your password, use {:Link}',
     'Password Reset Form' => 'Password Reset Form',
     'Enter your email address and press {:Send}' => 'Enter your email address and press {:Send}',
-    'Check your email for further instructions.' => 'Check your email for further instructions.',
+    'To the address {:Email} We sent you a letter with further instructions, check mail.' => 'To the address <strong>{:Email}</strong> We sent you a letter with further instructions, check mail.',
     'Sorry, we are unable to reset password.' => 'Sorry, we are unable to reset password.',
     'The new password was successfully saved.' => 'The new password was successfully saved.',
     'It remains to activate the account, check your mail.' => 'It remains to activate the account, check your mail.',

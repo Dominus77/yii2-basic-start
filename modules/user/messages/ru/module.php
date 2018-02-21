@@ -38,7 +38,7 @@ return [
     'If you have forgotten your password, use {:Link}' => 'Если вы забыли свой пароль, воспользуйтесь {:Link}',
     'Password Reset Form' => 'Форма сброса пароля',
     'Enter your email address and press {:Send}' => 'Введите адрес Вашей электронной почты и нажмите {:Send}',
-    'Check your email for further instructions.' => 'Проверьте свою электронную почту для получения дальнейших инструкций.',
+    'To the address {:Email} We sent you a letter with further instructions, check mail.' => 'На адрес <strong>{:Email}</strong> мы выслали письмо с дальнейшими инструкциями, проверьте почту.',
     'Sorry, we are unable to reset password.' => 'Извините, мы не можем сбросить пароль.',
     'The new password was successfully saved.' => 'Новый пароль успешно сохранён.',
     'It remains to activate the account, check your mail.' => 'Осталось активировать учётную запись, проверьте Вашу почту.',
