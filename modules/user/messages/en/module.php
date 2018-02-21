@@ -13,6 +13,10 @@ return [
     'First Name' => 'First Name',
     'Last Name' => 'Last Name',
     'Registration Type' => 'Registration Type',
+    'Avatar' => 'Avatar',
+    'Current Password' => 'Current Password',
+    'New Password' => 'New Password',
+    'Repeat Password' => 'Repeat Password',
 
     'Blocked' => 'Blocked',
     'Active' => 'Active',
@@ -56,7 +60,6 @@ return [
 
     'Reset Password' => 'Reset Password',
     'Create a new password' => 'Create a new password',
-    'New Password' => 'New Password',
     'Password reset token cannot be blank.' => 'Password reset token cannot be blank.',
     'Wrong password reset token.' => 'Wrong password reset token.',
 
@@ -79,4 +82,17 @@ return [
     'Profile' => 'Profile',
     'Generate' => 'Generate',
     'Generate new key' => 'Generate new key',
+
+    'To change the avatar, please use the {:link} service.' => 'To change the avatar, please use the {:link} service.',
+
+    'Not all fields are filled in correctly.' => 'Not all fields are filled in correctly.',
+    'Incorrect current password.' => 'Incorrect current password.',
+    'Enter your current password.' => 'Enter your current password.',
+
+    'Profile successfully changed. ' => 'Profile successfully changed.',
+    'Error! Profile not changed.' => 'Error! Profile not changed.',
+    'Password changed successfully.' => 'Password changed successfully.',
+    'Error! Password changed not successfully.' => 'Error! Password changed not successfully.',
+
+    'The requested page does not exist.' => 'The requested page does not exist.',
 ];

@@ -11,7 +11,7 @@ $this->title = Module::t('module', 'Profile');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="users-frontend-profile-index">
+<div class="user-profile-index">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <div class="nav-tabs">

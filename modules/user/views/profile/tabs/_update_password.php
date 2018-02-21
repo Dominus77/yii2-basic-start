@@ -3,11 +3,10 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
-use modules\users\widgets\passfield\Passfield;
-use modules\users\Module;
+use modules\user\Module;
 
 /* @var $this yii\web\View */
-/* @var $model modules\users\models\User */
+/* @var $model modules\user\models\User */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -28,43 +27,27 @@ use modules\users\Module;
     ]);
     ?>
 
-    <?= Passfield::widget([
-        'form' => $form,
-        'model' => $model,
-        'attribute' => 'newPassword',
-        'options' => [
-            'maxlength' => true,
-            'class' => 'form-control',
-            'placeholder' => Module::t('module', 'New Password'),
-        ],
-        'config' => [
-            'locale' => mb_substr(Yii::$app->language, 0, strrpos(Yii::$app->language, '-')),
-            'showToggle' => true,
-            'showGenerate' => true,
-            'showWarn' => true,
-            'showTip' => true,
-            'length' => [
-                'min' => $model::LENGTH_STRING_PASSWORD_MIN,
-                'max' => $model::LENGTH_STRING_PASSWORD_MAX,
-            ]
-        ],
-    ]); ?>
+    <?= $form->field($model, 'newPassword')->passwordInput([
+        'maxlength' => true,
+        'class' => 'form-control',
+        'placeholder' => true,
+    ]) ?>
 
     <?= $form->field($model, 'newPasswordRepeat')->passwordInput([
         'maxlength' => true,
         'class' => 'form-control',
-        'placeholder' => Module::t('module', 'Repeat Password'),
+        'placeholder' => true,
     ]) ?>
 
     <?= $form->field($model, 'currentPassword', ['enableAjaxValidation' => true])->passwordInput([
         'maxlength' => true,
         'class' => 'form-control',
-        'placeholder' => Module::t('module', 'Current Password'),
+        'placeholder' => true,
     ]) ?>
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <?= Html::submitButton('<span class="fa fa-floppy-o"></span> ' . Module::t('module', 'Save'), [
+            <?= Html::submitButton('<span class="glyphicon glyphicon-floppy-saved"></span> ' . Module::t('module', 'Save'), [
                 'class' => 'btn btn-primary',
                 'name' => 'submit-button',
             ]) ?>

@@ -13,6 +13,10 @@ return [
     'First Name' => 'Имя',
     'Last Name' => 'Фамилия',
     'Registration Type' => 'Тип регистрации',
+    'Avatar' => 'Аватар',
+    'Current Password' => 'Текущий пароль',
+    'New Password' => 'Новый пароль',
+    'Repeat Password' => 'Повторить пароль',
 
     'Blocked' => 'Заблокирован',
     'Active' => 'Активирован',
@@ -56,7 +60,6 @@ return [
 
     'Reset Password' => 'Сброс пароля',
     'Create a new password' => 'Придумайте новый пароль',
-    'New Password' => 'Новый пароль',
     'Password reset token cannot be blank.' => 'Ключ сброса пароля не может быть пустым.',
     'Wrong password reset token.' => 'Не верный ключ сброса пароля.',
 
@@ -79,4 +82,17 @@ return [
     'Profile' => 'Профиль',
     'Generate' => 'Генерировать',
     'Generate new key' => 'Генерировать новый ключ',
+
+    'To change the avatar, please use the {:link} service.' => 'Чтобы изменить аватар, воспользуйтесь сервисом {:link}.',
+
+    'Not all fields are filled in correctly.' => 'Не все поля заполнены корректно.',
+    'Incorrect current password.' => 'Текущий пароль указан не верно.',
+    'Enter your current password.' => 'Укажите ваш текущий пароль.',
+
+    'Profile successfully changed.' => 'Профиль успешно сохранён.',
+    'Error! Profile not changed.' => 'Ошибка! Не удалось сохранить профиль.',
+    'Password changed successfully.' => 'Пароль успешно изменён.',
+    'Error! Password changed not successfully.' => 'Ошибка! Не удалось сохранить новый пароль.',
+
+    'The requested page does not exist.' => 'Запрошенная страницы не существует.',
 ];

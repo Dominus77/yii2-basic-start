@@ -82,6 +82,64 @@ class ProfileController extends Controller
     }
 
     /**
+     * @return string
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdate()
+    {
+        $model = $this->findModel();
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * @return Response
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdateProfile()
+    {
+        $model = $this->findModel();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
+        } else {
+            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Profile not changed.'));
+        }
+        return $this->redirect(['update', 'tab' => 'profile']);
+    }
+
+    /**
+     * @return array|Response
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdatePassword()
+    {
+        $model = $this->findModel();
+        $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
+        } else {
+            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Password changed not successfully.'));
+        }
+        return $this->redirect(['update', 'tab' => 'password']);
+    }
+
+    /**
+     * @return array|Response
+     * @throws NotFoundHttpException
+     */
+    public function actionAjaxValidatePasswordForm()
+    {
+        $model = $this->findModel();
+        $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+        return $this->redirect(['index']);
+    }
+
+    /**
      * Action Generate new auth key
      * @throws NotFoundHttpException
      */

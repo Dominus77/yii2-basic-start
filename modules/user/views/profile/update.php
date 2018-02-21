@@ -1,16 +1,16 @@
 <?php
 
-use modules\users\Module;
 use yii\bootstrap\Tabs;
+use modules\user\Module;
 
 /* @var $this yii\web\View */
-/* @var $model modules\users\models\User */
+/* @var $model modules\user\models\User */
 
 $this->title = Module::t('module', 'Update');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Profile'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="users-frontend-profile-update">
+<div class="user-profile-update">
     <div class="nav-tabs">
         <?= Tabs::widget([
             'options' => ['role' => 'tablist'],
@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'label' => Module::t('module', 'Avatar'),
-                    'content' => $this->render('../../common/profile/tabs/_update_avatar', [
+                    'content' => $this->render('tabs/_update_avatar', [
                         'model' => $model,
                     ]),
                     'options' => ['id' => 'avatar', 'role' => 'tabpanel'],

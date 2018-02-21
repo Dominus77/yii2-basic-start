@@ -112,6 +112,22 @@ a.desc:after {
     outline: none;
 }
 
+div.required label:after {
+    content: " *";
+    color: red;
+}
+
+.nav-tabs-custom > .tab-content {
+    background: #fff none repeat scroll 0 0;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    padding: 10px;
+}
+
+.nav-tabs > .tab-content {
+    padding: 10px;
+}
+
 .yii-logo {
     width: auto;
     height: 32px;
