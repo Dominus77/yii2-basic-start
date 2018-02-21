@@ -11,4 +11,6 @@ return [
     'Body' => 'Сообщение',
     'Verification Code' => 'Проверочный код',
     'Submit' => 'Отправить',
+
+    'Thank you for contacting us. We will respond to you as soon as possible.' => 'Благодарим Вас за обращение к нам. Мы ответим вам как можно скорее.',
 ];

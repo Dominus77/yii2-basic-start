@@ -28,6 +28,8 @@ return [
     'Sign Up' => 'Sign Up',
     'Send' => 'Send',
     'Save' => 'Save',
+    'Update' => 'Update',
+    'Delete' => 'Delete',
 
     'Invalid email or password.' => 'Invalid email or password.',
 
@@ -75,4 +77,6 @@ return [
 
     'My Menu' => 'My Menu',
     'Profile' => 'Profile',
+    'Generate' => 'Generate',
+    'Generate new key' => 'Generate new key',
 ];

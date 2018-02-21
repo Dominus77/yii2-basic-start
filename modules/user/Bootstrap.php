@@ -27,6 +27,7 @@ class Bootstrap
                 // Declaration of rules here
                 '<_a:(login|logout|request-password-reset|reset-password|signup|email-confirm)>' => 'user/default/<_a>',
                 'profile' => 'user/profile/index',
+                'profile/<_a:[\w\-]+>' => 'user/profile/<_a>',
             ]
         );
     }

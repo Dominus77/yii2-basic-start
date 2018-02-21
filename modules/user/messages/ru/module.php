@@ -28,6 +28,8 @@ return [
     'Sign Up' => 'Зарегистрироваться',
     'Send' => 'Отправить',
     'Save' => 'Сохранить',
+    'Update' => 'Редактировать',
+    'Delete' => 'Удалить',
 
     'Invalid email or password.' => 'Не правильные email или пароль.',
 
@@ -75,4 +77,6 @@ return [
 
     'My Menu' => 'Моё меню',
     'Profile' => 'Профиль',
+    'Generate' => 'Генерировать',
+    'Generate new key' => 'Генерировать новый ключ',
 ];
