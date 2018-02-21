@@ -2,8 +2,8 @@
 
 namespace tests\models;
 
-use modules\user\models\User;
 use app\fixtures\User as UserFixture;
+use modules\user\models\User;
 
 /**
  * Class UserTest
@@ -30,6 +30,9 @@ class UserTest extends \Codeception\Test\Unit
         ]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function testFindUserById()
     {
         /** @var $user \modules\user\models\User */
@@ -39,6 +42,9 @@ class UserTest extends \Codeception\Test\Unit
         expect_not(User::findIdentity(999));
     }
 
+    /**
+     * @inheritdoc
+     */
     public function testFindUserByAccessToken()
     {
         /** @var $user \modules\user\models\User */
@@ -48,6 +54,9 @@ class UserTest extends \Codeception\Test\Unit
         expect_not(User::findIdentityByAccessToken('non-existing'));
     }
 
+    /**
+     * @inheritdoc
+     */
     public function testFindUserByUsername()
     {
         expect_that($user = User::findByUsername('imtester'));

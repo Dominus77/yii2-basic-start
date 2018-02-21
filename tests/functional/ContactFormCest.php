@@ -1,17 +1,32 @@
 <?php
 
+/**
+ * Class ContactFormCest
+ */
 class ContactFormCest 
 {
+    /**
+     * @inheritdoc
+     * @param FunctionalTester $I
+     */
     public function _before(\FunctionalTester $I)
     {
         $I->amOnPage(['/main/default/contact']);
     }
 
+    /**
+     * @inheritdoc
+     * @param FunctionalTester $I
+     */
     public function openContactPage(\FunctionalTester $I)
     {
-        $I->see('Contact', 'h1');        
+        $I->see('Contact', 'h1');
     }
 
+    /**
+     * @inheritdoc
+     * @param FunctionalTester $I
+     */
     public function submitEmptyForm(\FunctionalTester $I)
     {
         $I->submitForm('#contact-form', []);
@@ -24,6 +39,10 @@ class ContactFormCest
         $I->see('Verification Code cannot be blank');
     }
 
+    /**
+     * @inheritdoc
+     * @param FunctionalTester $I
+     */
     public function submitFormWithIncorrectEmail(\FunctionalTester $I)
     {
         $I->submitForm('#contact-form', [
@@ -41,6 +60,11 @@ class ContactFormCest
         $I->dontSee('The verification code is incorrect', '.help-inline');        
     }
 
+    /**
+     * @inheritdoc
+     * @param FunctionalTester $I
+     * @throws \_generated\ModuleException
+     */
     public function submitFormSuccessfully(\FunctionalTester $I)
     {
         $I->submitForm('#contact-form', [

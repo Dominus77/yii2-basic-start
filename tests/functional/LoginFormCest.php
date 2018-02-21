@@ -2,8 +2,15 @@
 
 use app\fixtures\User as UserFixture;
 
+/**
+ * Class LoginFormCest
+ */
 class LoginFormCest
 {
+    /**
+     * @inheritdoc
+     * @param FunctionalTester $I
+     */
     public function _before(\FunctionalTester $I)
     {
         $I->haveFixtures([
@@ -16,6 +23,7 @@ class LoginFormCest
     }
 
     /**
+     * @inheritdoc
      * @param $email
      * @param $password
      * @return array
@@ -29,6 +37,7 @@ class LoginFormCest
     }
 
     /**
+     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function checkEmpty(\FunctionalTester $I)
@@ -39,6 +48,7 @@ class LoginFormCest
     }
 
     /**
+     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function checkWrongPassword(\FunctionalTester $I)
@@ -48,12 +58,13 @@ class LoginFormCest
     }
 
     /**
+     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function checkValidLogin(\FunctionalTester $I)
     {
         $I->submitForm('#login-form', $this->formParams('sfriesen@jenkins.info', 'password_0'));
-        //$I->see('Profile (erau)', 'a'); // TODO: когда будет создана страница профиля
+        $I->see('Profile (erau)', 'a');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
     }

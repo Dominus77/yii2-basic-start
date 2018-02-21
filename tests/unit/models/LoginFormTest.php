@@ -6,6 +6,10 @@ use Yii;
 use modules\user\models\LoginForm;
 use app\fixtures\User as UserFixture;
 
+/**
+ * Class LoginFormTest
+ * @package tests\models
+ */
 class LoginFormTest extends \Codeception\Test\Unit
 {
     /**

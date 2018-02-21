@@ -2,6 +2,10 @@
 
 namespace tests\models;
 
+/**
+ * Class ContactFormTest
+ * @package tests\models
+ */
 class ContactFormTest extends \Codeception\Test\Unit
 {
     private $model;
@@ -10,6 +14,9 @@ class ContactFormTest extends \Codeception\Test\Unit
      */
     public $tester;
 
+    /**
+     * @inheritdoc
+     */
     public function testEmailIsSentOnContact()
     {
         /** @var \modules\main\models\ContactForm $model */
