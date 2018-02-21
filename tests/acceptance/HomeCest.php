@@ -2,8 +2,15 @@
 
 use yii\helpers\Url;
 
+/**
+ * Class HomeCest
+ */
 class HomeCest
 {
+    /**
+     * @inheritdoc
+     * @param AcceptanceTester $I
+     */
     public function ensureThatHomePageWorks(AcceptanceTester $I)
     {
         $I->amOnPage(Url::toRoute('/main/default/index'));

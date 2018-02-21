@@ -2,19 +2,34 @@
 
 use yii\helpers\Url;
 
+/**
+ * Class ContactCest
+ */
 class ContactCest
 {
+    /**
+     * @inheritdoc
+     * @param AcceptanceTester $I
+     */
     public function _before(\AcceptanceTester $I)
     {
         $I->amOnPage(Url::toRoute('/main/default/contact'));
     }
-    
+
+    /**
+     * @inheritdoc
+     * @param AcceptanceTester $I
+     */
     public function contactPageWorks(AcceptanceTester $I)
     {
         $I->wantTo('ensure that contact page works');
         $I->see('Contact', 'h1');
     }
 
+    /**
+     * @inheritdoc
+     * @param AcceptanceTester $I
+     */
     public function contactFormCanBeSubmitted(AcceptanceTester $I)
     {
         $I->amGoingTo('submit contact form with correct data');

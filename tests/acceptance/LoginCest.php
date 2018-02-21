@@ -2,8 +2,15 @@
 
 use yii\helpers\Url;
 
+/**
+ * Class LoginCest
+ */
 class LoginCest
 {
+    /**
+     * @inheritdoc
+     * @param AcceptanceTester $I
+     */
     public function ensureThatLoginWorks(AcceptanceTester $I)
     {
         $I->amOnPage(Url::toRoute('/user/default/login'));
