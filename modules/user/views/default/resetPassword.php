@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-default-reset-password">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?= Module::t('module', 'Create a new password') ?></p>
+    <p><?= Module::t('module', 'Create a new password') ?>.</p>
 
     <div class="row">
         <div class="col-lg-5">

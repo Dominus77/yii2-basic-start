@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-default-request-password-reset">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p><?= Module::t('module', 'Enter your email address'); ?></p>
+    <p><?= Module::t('module', 'Enter your email address and press {:Send}', [':Send' => Module::t('module', 'Send')]); ?></p>
 
     <div class="row">
         <div class="col-lg-5">

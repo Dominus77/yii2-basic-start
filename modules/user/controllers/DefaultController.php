@@ -131,7 +131,7 @@ class DefaultController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $this->processResetPassword($model)) {
-            return $this->processGoHome(Module::t('module', 'Password changed successfully.'));
+            return $this->processGoHome(Module::t('module', 'The new password was successfully saved.'));
         }
 
         return $this->render('resetPassword', [
@@ -163,7 +163,7 @@ class DefaultController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($model->signup()) {
-                return $this->processGoHome(Module::t('module', 'It remains to activate the account.'));
+                return $this->processGoHome(Module::t('module', 'It remains to activate the account, check your mail.'));
             }
         }
         return $this->render('signup', [
@@ -186,7 +186,7 @@ class DefaultController extends Controller
         }
 
         if ($model->confirmEmail()) {
-            return $this->processGoHome(Module::t('module', 'Thank you for registering!'));
+            return $this->processGoHome(Module::t('module', 'Thank you for registering! Now you can log in using your credentials.'));
         }
         return $this->processGoHome(Module::t('module', 'Error sending message!'), 'error');
     }

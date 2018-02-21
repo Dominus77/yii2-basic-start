@@ -75,10 +75,12 @@ class SignupForm extends Model
             $user->generateEmailConfirmToken();
 
             if ($user->save()) {
-                Yii::$app->mailer->compose(['text' => '@modules/user/mail/emailConfirm'], ['user' => $user])
-                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name])
+                Yii::$app->mailer->compose(
+                    ['html' => '@modules/user/mail/emailConfirm-html', 'text' => '@modules/user/mail/emailConfirm-text'],
+                    ['user' => $user])
+                    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
                     ->setTo($this->email)
-                    ->setSubject(Module::t('module', 'The message was successfully sent!') . ' ' . Yii::$app->name)
+                    ->setSubject(Yii::$app->name . ' | ' . Module::t('module', 'Account activation'))
                     ->send();
 
                 return $user;
