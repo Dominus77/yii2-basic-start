@@ -3,10 +3,6 @@
 namespace modules\user\models;
 
 use Yii;
-use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
-use yii\web\IdentityInterface;
-use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use modules\user\models\query\UserQuery;
 use modules\user\traits\ModuleTrait;
@@ -37,103 +33,9 @@ use modules\user\Module;
  * @property string statusName Name status
  * @property int|string registrationType Type registered
  */
-class User extends ActiveRecord implements IdentityInterface
+class User extends BaseUser
 {
     use ModuleTrait;
-
-    /**
-     * Length password symbols min
-     */
-    const LENGTH_STRING_PASSWORD_MIN = 6;
-
-    /**
-     * Length password symbols max
-     */
-    const LENGTH_STRING_PASSWORD_MAX = 16;
-
-    /**
-     * Users Statuses
-     */
-    const STATUS_BLOCKED = 0;
-    const STATUS_ACTIVE = 1;
-    const STATUS_WAIT = 2;
-    const STATUS_DELETED = 3;
-
-    /**
-     * Type of registration
-     */
-    const TYPE_REGISTRATION_SYSTEM = 0;
-
-    /**
-     * @inheritdoc
-     * @return string
-     */
-    public static function tableName()
-    {
-        return '{{%user}}';
-    }
-
-    /**
-     * @inheritdoc
-     * @return array
-     */
-    public function behaviors()
-    {
-        return [
-            'timestamp' => [
-                'class' => TimestampBehavior::class,
-            ],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     * @return array
-     */
-    public function rules()
-    {
-        return [
-            ['username', 'required'],
-            ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
-            ['username', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This username is already taken.')],
-            ['username', 'string', 'min' => 2, 'max' => 255],
-
-            ['email', 'required'],
-            ['email', 'email'],
-            ['email', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This email is already taken.')],
-            ['email', 'string', 'max' => 255],
-
-            ['first_name', 'string', 'max' => 45],
-            ['last_name', 'string', 'max' => 45],
-
-            ['registration_type', 'safe'],
-
-            ['status', 'integer'],
-            ['status', 'default', 'value' => self::STATUS_WAIT],
-            ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     * @return array
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'created_at' => Module::t('module', 'Created'),
-            'updated_at' => Module::t('module', 'Updated'),
-            'last_visit' => Module::t('module', 'Last Visit'),
-            'username' => Module::t('module', 'Username'),
-            'email' => Module::t('module', 'Email'),
-            'auth_key' => Module::t('module', 'Auth Key'),
-            'status' => Module::t('module', 'Status'),
-            'first_name' => Module::t('module', 'First Name'),
-            'last_name' => Module::t('module', 'Last Name'),
-            'registration_type' => Module::t('module', 'Registration Type'),
-        ];
-    }
 
     /**
      * @return object|\yii\db\ActiveQuery
@@ -142,65 +44,6 @@ class User extends ActiveRecord implements IdentityInterface
     public static function find()
     {
         return Yii::createObject(UserQuery::class, [get_called_class()]);
-    }
-
-    /**
-     * @param int|string $id
-     * @return IdentityInterface
-     */
-    public static function findIdentity($id)
-    {
-        /** @var  IdentityInterface $result */
-        $result = static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
-        return $result;
-    }
-
-    /**
-     * @param mixed $token
-     * @param null|mixed $type
-     * @return IdentityInterface
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        /** @var  IdentityInterface $result */
-        $result = static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
-        return $result;
-    }
-
-    /**
-     * @return string|integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string current user auth key
-     */
-    public function getAuthKey()
-    {
-        return $this->auth_key;
-    }
-
-    /**
-     * @param string|mixed $authKey
-     * @return boolean if auth key is valid for current user
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->getAuthKey() === $authKey;
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
@@ -238,14 +81,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function setPassword($password)
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
-    }
-
-    /**
-     * Generates "remember me" authentication key
-     */
-    public function generateAuthKey()
-    {
-        $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
     /**
@@ -356,86 +191,6 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             self::TYPE_REGISTRATION_SYSTEM => Module::t('module', 'System'),
-        ];
-    }
-
-    /**
-     * Actions before saving
-     *
-     * @param bool $insert
-     * @return bool
-     */
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            if ($insert) {
-                $this->generateAuthKey();
-            }
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getStatusesArray()
-    {
-        return [
-            self::STATUS_BLOCKED => Module::t('module', 'Blocked'),
-            self::STATUS_ACTIVE => Module::t('module', 'Active'),
-            self::STATUS_WAIT => Module::t('module', 'Wait'),
-            self::STATUS_DELETED => Module::t('module', 'Deleted'),
-        ];
-    }
-
-    /**
-     * Set Status
-     * @return int|string
-     */
-    public function setStatus()
-    {
-        switch ($this->status) {
-            case self::STATUS_ACTIVE:
-                $this->status = self::STATUS_BLOCKED;
-                break;
-            case self::STATUS_DELETED:
-                $this->status = self::STATUS_WAIT;
-                break;
-            default:
-                $this->status = self::STATUS_ACTIVE;
-        }
-        return $this->status;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStatusName()
-    {
-        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
-    }
-
-    /**
-     * Return <span class="label label-success">Active</span>
-     * @return string
-     */
-    public function getStatusLabelName()
-    {
-        $name = ArrayHelper::getValue(self::getLabelsArray(), $this->status);
-        return Html::tag('span', $this->getStatusName(), ['class' => 'label label-' . $name]);
-    }
-
-    /**
-     * @return array
-     */
-    public static function getLabelsArray()
-    {
-        return [
-            self::STATUS_BLOCKED => 'default',
-            self::STATUS_ACTIVE => 'success',
-            self::STATUS_WAIT => 'warning',
-            self::STATUS_DELETED => 'danger',
         ];
     }
 
