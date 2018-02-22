@@ -1,4 +1,9 @@
 <?php
+/**
+ * @link http://www.yiiframework.com/
+ * @copyright Copyright (c) 2008 Yii Software LLC
+ * @license http://www.yiiframework.com/license/
+ */
 
 namespace app\widgets;
 
@@ -28,49 +33,65 @@ class Alert extends \yii\bootstrap\Widget
     /**
      * @var array the alert types configuration for the flash messages.
      * This array is setup as $key => $value, where:
-     * - key: the name of the session flash variable
-     * - value: the bootstrap alert type (i.e. danger, success, info, warning)
+     * - $key is the name of the session flash variable
+     * - $value is the bootstrap alert type (i.e. danger, success, info, warning)
      */
     public $alertTypes = [
-        'error'   => 'alert-danger',
-        'danger'  => 'alert-danger',
+        'error' => 'alert-danger',
+        'danger' => 'alert-danger',
         'success' => 'alert-success',
-        'info'    => 'alert-info',
+        'info' => 'alert-info',
         'warning' => 'alert-warning'
     ];
     /**
      * @var array the options for rendering the close button tag.
-     * Array will be passed to [[\yii\bootstrap\Alert::closeButton]].
      */
     public $closeButton = [];
 
 
-    /**
-     * {@inheritdoc}
-     */
-    public function run()
+    public function init()
     {
+        parent::init();
         $session = Yii::$app->session;
         $flashes = $session->getAllFlashes();
-        $appendClass = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
-
-        foreach ($flashes as $type => $flash) {
-            if (!isset($this->alertTypes[$type])) {
-                continue;
+        $appendCss = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
+        foreach ($flashes as $type => $data) {
+            if (isset($this->alertTypes[$type])) {
+                $data = (array)$data;
+                $this->processTypes($this->alertTypes[$type], $data, $appendCss);
+                $session->removeFlash($type);
             }
-
-            foreach ((array) $flash as $i => $message) {
-                echo \yii\bootstrap\Alert::widget([
-                    'body' => $message,
-                    'closeButton' => $this->closeButton,
-                    'options' => array_merge($this->options, [
-                        'id' => $this->getId() . '-' . $type . '-' . $i,
-                        'class' => $this->alertTypes[$type] . $appendClass,
-                    ]),
-                ]);
-            }
-
-            $session->removeFlash($type);
         }
+    }
+
+    /**
+     * @param string $type
+     * @param array $data
+     * @param string $appendCss
+     * @throws \Exception
+     */
+    protected function processTypes($type, $data, $appendCss)
+    {
+        foreach ($data as $i => $message) {
+            /** initialize css class for each alert box */
+            $this->options['class'] = $type . $appendCss;
+
+            /** assign unique id to each alert box */
+            $this->options['id'] = $this->getId() . '-' . $type . '-' . $i;
+            $this->renderFlash($message);
+        }
+    }
+
+    /**
+     * @param array $message
+     * @throws \Exception
+     */
+    protected function renderFlash($message)
+    {
+        echo \yii\bootstrap\Alert::widget([
+            'body' => $message,
+            'closeButton' => $this->closeButton,
+            'options' => $this->options,
+        ]);
     }
 }
