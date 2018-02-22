@@ -154,7 +154,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * @param mixed $token
-     * @param null $type
+     * @param null|mixed $type
      * @return null|static
      */
     public static function findIdentityByAccessToken($token, $type = null)
