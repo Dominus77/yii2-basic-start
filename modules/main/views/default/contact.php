@@ -4,7 +4,6 @@
  * @var $this yii\web\View
  * @var $form yii\bootstrap\ActiveForm
  * @var $model \modules\main\models\ContactForm
- * @var $mailer \yii\swiftmailer\Mailer
  */
 
 use yii\helpers\Html;
@@ -13,7 +12,6 @@ use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 use modules\main\Module;
 
-$mailer = Yii::$app->mailer;
 
 $this->title = Module::t('module', 'Contact');
 $this->params['breadcrumbs'][] = $this->title;
@@ -23,22 +21,9 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
-
         <div class="alert alert-success">
             <?= Module::t('module', 'Thank you for contacting us. We will respond to you as soon as possible.') ?>
         </div>
-
-        <p>
-            Note that if you turn on the Yii debugger, you should be able
-            to view the mail message on the mail panel of the debugger.
-            <?php if ($mailer && $mailer->useFileTransport): ?>
-                Because the application is in development mode, the email is not sent but saved as
-                a file under <code><?= Yii::getAlias($mailer->fileTransportPath) ?></code>. Please configure the
-                <code>useFileTransport</code> property of the <code>mail</code>
-                application component to be false to enable email sending.
-            <?php endif; ?>
-        </p>
-
     <?php else: ?>
 
         <p>
