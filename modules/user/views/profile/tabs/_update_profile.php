@@ -6,7 +6,7 @@ use yii\bootstrap\ActiveForm;
 use modules\user\Module;
 
 /* @var $this yii\web\View */
-/* @var $model modules\user\models\User */
+/* @var $model modules\user\models\Profile */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -17,8 +17,8 @@ use modules\user\Module;
         'fieldConfig' => [
             'horizontalCssClasses' => [
                 'label' => 'col-sm-2',
-                'offset' => 'col-sm-offset-2',
-                'wrapper' => 'col-sm-10',
+                'offset' => 'col-sm-offset-1',
+                'wrapper' => 'col-sm-3',
             ],
         ],
     ]); ?>

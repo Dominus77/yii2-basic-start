@@ -3,8 +3,9 @@
 namespace modules\user\controllers;
 
 use Yii;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
-use modules\user\models\User;
+use modules\user\models\Profile;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
@@ -103,7 +104,7 @@ class ProfileController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
         } else {
-            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Profile not changed.'));
+            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Profile not changed.') . $model->errors);
         }
         return $this->redirect(['update', 'tab' => 'profile']);
     }
@@ -158,7 +159,7 @@ class ProfileController extends Controller
 
     /**
      * Generate new auth key
-     * @return User|null
+     * @return Profile|null
      * @throws NotFoundHttpException
      */
     private function processGenerateAuthKey()
@@ -172,7 +173,7 @@ class ProfileController extends Controller
     /**
      * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @return null|User the loaded model
+     * @return null|Profile the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     private function findModel()
@@ -180,7 +181,7 @@ class ProfileController extends Controller
         if (!Yii::$app->user->isGuest) {
             /** @var object $identity */
             $identity = Yii::$app->user->identity;
-            if (($model = User::findOne($identity->id)) !== null) {
+            if (($model = Profile::findOne($identity->id)) !== null) {
                 return $model;
             }
         }

@@ -64,26 +64,6 @@ class User extends ActiveRecord implements IdentityInterface
     const TYPE_REGISTRATION_SYSTEM = 0;
 
     /**
-     * Scenarios
-     */
-    const SCENARIO_PASSWORD_UPDATE = 'updatePassword';
-
-    /**
-     * @var string
-     */
-    public $currentPassword;
-
-    /**
-     * @var string
-     */
-    public $newPassword;
-
-    /**
-     * @var string
-     */
-    public $newPasswordRepeat;
-
-    /**
      * @inheritdoc
      * @return string
      */
@@ -122,43 +102,15 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This email is already taken.')],
             ['email', 'string', 'max' => 255],
 
-            [['first_name', 'last_name'], 'string', 'max' => 45],
-            [['registration_type'], 'safe'],
+            ['first_name', 'string', 'max' => 45],
+            ['last_name', 'string', 'max' => 45],
+
+            ['registration_type', 'safe'],
 
             ['status', 'integer'],
             ['status', 'default', 'value' => self::STATUS_WAIT],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
-
-            [['currentPassword', 'newPassword', 'newPasswordRepeat'], 'required', 'on' => [self::SCENARIO_PASSWORD_UPDATE]],
-            ['newPassword', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'on' => [self::SCENARIO_PASSWORD_UPDATE]],
-            ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword', 'on' => [self::SCENARIO_PASSWORD_UPDATE]],
-            ['currentPassword', 'validateCurrentPassword', 'skipOnEmpty' => false, 'skipOnError' => false, 'on' => [self::SCENARIO_PASSWORD_UPDATE]],
         ];
-    }
-
-    /**
-     * @param string $attribute
-     */
-    public function validateCurrentPassword($attribute)
-    {
-        if (!empty($this->newPassword) && !empty($this->newPasswordRepeat) && !$this->hasErrors()) {
-            $this->processValidatePassword($attribute);
-        } else {
-            $this->addError($attribute, Module::t('module', 'Not all fields are filled in correctly.'));
-        }
-    }
-
-    /**
-     * @param string $attribute
-     */
-    protected function processValidatePassword($attribute)
-    {
-        if ($attribute) {
-            if (!$this->validatePassword($this->$attribute))
-                $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
-        } else {
-            $this->addError($attribute, Module::t('module', 'Enter your current password.'));
-        }
     }
 
     /**
@@ -179,9 +131,6 @@ class User extends ActiveRecord implements IdentityInterface
             'first_name' => Module::t('module', 'First Name'),
             'last_name' => Module::t('module', 'Last Name'),
             'registration_type' => Module::t('module', 'Registration Type'),
-            'currentPassword' => Module::t('module', 'Current Password'),
-            'newPassword' => Module::t('module', 'New Password'),
-            'newPasswordRepeat' => Module::t('module', 'Repeat Password'),
         ];
     }
 
@@ -413,16 +362,12 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @param bool $insert
      * @return bool
-     * @throws \yii\base\Exception
      */
     public function beforeSave($insert)
     {
         if (parent::beforeSave($insert)) {
             if ($insert) {
                 $this->generateAuthKey();
-            }
-            if (!empty($this->newPassword)) {
-                $this->setPassword($this->newPassword);
             }
             return true;
         }

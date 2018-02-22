@@ -95,4 +95,6 @@ return [
     'Error! Password changed not successfully.' => 'Error! Password changed not successfully.',
 
     'The requested page does not exist.' => 'The requested page does not exist.',
+
+    'Please fill in the following fields to sign up' => 'Please fill in the following fields to sign up',
 ];

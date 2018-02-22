@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'email')->textInput(['autofocus' => true, 'placeholder' => true]) ?>
+    <?= $form->field($model, 'email')->textInput(['autofocus' => false, 'placeholder' => true]) ?>
 
     <?= $form->field($model, 'password')->passwordInput(['placeholder' => true])->hint(Module::t('module', 'If you have forgotten your password, use {:Link}', [':Link' => Html::a(Module::t('module', 'form of password reset'), ['default/request-password-reset'])]) . '.') ?>
 

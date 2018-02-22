@@ -52,7 +52,7 @@ return [
     'Access recovery' => 'Восстановление доступа',
     'Hello {username}' => 'Привет {username}',
     'You or someone else indicated your email address in the form of a password reset on the {:Website}. If you did not then just ignore this email.' => 'Вы или кто то другой указал адрес Вашей электронной почты в форме сброса пароля на сайте {:Website}. Если Вы этого не делали, то просто проигнорируйте данное письмо.',
-    'To reset your password follow the link below, or copy it to your browser.' => 'Для сброса пароля пройдите по ссылке ниже, или скопируйте её в адресную строку браузера.',
+    'To reset your password follow the link below, or copy it to your browser.' => 'Для сброса пароля, пройдите по ссылке ниже, или скопируйте её в адресную строку браузера.',
     'The letter was sent by the robot and you do not need to respond to it.' => 'Письмо отправлено роботом и отвечать на него не нужно.',
     'Sincerely, website administration {:Website}' => 'С уважением, администрация сайта {:Website}',
 
@@ -67,7 +67,7 @@ return [
     'Hello!' => 'Здравствуйте!',
     'When registering on the site {:Website} you or someone else has indicated the address of your email.' => 'При регистрации на сайте {:Website} Вы или кто то другой указал адрес Вашей электронной почты.',
     'If you did not do this, then just ignore this letter.' => 'Если Вы этого не делали, то просто проигнорируйте данное письмо.',
-    'To activate your account, please follow the link below or copy it to your browser.' => 'Для активации аккаунта пройдите по ссылке ниже или скопируйте её в адресную строку браузера.',
+    'To activate your account, please follow the link below or copy it to your browser.' => 'Для активации аккаунта. пройдите по ссылке ниже, или скопируйте её в адресную строку браузера.',
 
     'This username already exists.' => 'Такое имя пользователя уже существует.',
     'This email already exists.' => 'Такой адрес электронной почты уже существует.',
@@ -95,4 +95,7 @@ return [
     'Error! Password changed not successfully.' => 'Ошибка! Не удалось сохранить новый пароль.',
 
     'The requested page does not exist.' => 'Запрошенная страницы не существует.',
+
+    'Please fill in the following fields to sign up' => 'Для регистрации, пожалуйста заполните следующие поля',
+    'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.' => 'Если у Вас есть вопросы или деловое предложение, пожалуйста, свяжитесь с нами. Спасибо!',
 ];

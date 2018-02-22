@@ -38,8 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php else: ?>
 
         <p>
-            If you have business inquiries or other questions, please fill out the following form to contact us.
-            Thank you.
+            <?= Module::t('module', 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.') ?>
         </p>
 
         <div class="row">
@@ -48,7 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 
                 <?php if ($model->scenario === $model::SCENARIO_GUEST) : ?>
-                    <?= $form->field($model, 'name')->textInput(['autofocus' => true, 'placeholder' => true]) ?>
+                    <?= $form->field($model, 'name')->textInput(['autofocus' => false, 'placeholder' => true]) ?>
 
                     <?= $form->field($model, 'email')->textInput(['placeholder' => true]) ?>
                 <?php endif; ?>
