@@ -48,9 +48,6 @@ return [
         ],
         'urlManager' => [
             'class' => 'codemix\localeurls\UrlManager',
-            'languages' => ['en-US', 'en', 'ru-RU', 'ru'],
-            'enableDefaultLanguageUrlCode' => false,
-            'enableLanguagePersistence' => false,
             'showScriptName' => true,
         ],
         'user' => [

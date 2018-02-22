@@ -57,12 +57,6 @@ $config = [
                 ],
             ],
         ],
-        'urlManager' => [
-            'class' => 'codemix\localeurls\UrlManager',
-            'languages' => ['en-US', 'en', 'ru-RU', 'ru'],
-            'enableDefaultLanguageUrlCode' => false,
-            'enableLanguagePersistence' => false,
-        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
             'traceLine' => '<a href="ide://open?url={file}&line={line}">{html}</a>',
