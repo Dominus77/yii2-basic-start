@@ -48,10 +48,6 @@ class EmailConfirmForm extends Model
         $user->status = User::STATUS_ACTIVE;
         $user->removeEmailConfirmToken();
         if ($user->save()) {
-            // Даём роль по умолчанию
-            //$authManager = Yii::$app->getAuthManager();
-            //$role = $authManager->getRole(\modules\rbac\models\Role::ROLE_DEFAULT);
-            //return $authManager->assign($role, $user->id);
             return true;
         }
         return false;

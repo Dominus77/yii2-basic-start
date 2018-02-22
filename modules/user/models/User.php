@@ -8,6 +8,7 @@ use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
+use modules\user\models\query\UserQuery;
 use modules\user\traits\ModuleTrait;
 use modules\user\Module;
 
@@ -135,9 +136,18 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @return object|\yii\db\ActiveQuery
+     * @throws \yii\base\InvalidConfigException
+     */
+    public static function find()
+    {
+        return Yii::createObject(UserQuery::class, [get_called_class()]);
+    }
+
+    /**
      * @inheritdoc
      * @param int|string $id
-     * @return IdentityInterface
+     * @return IdentityInterface|ActiveRecord
      */
     public static function findIdentity($id)
     {
@@ -150,7 +160,7 @@ class User extends ActiveRecord implements IdentityInterface
      * @inheritdoc
      * @param mixed $token
      * @param mixed $type
-     * @return IdentityInterface|null
+     * @return IdentityInterface|ActiveRecord|null
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {

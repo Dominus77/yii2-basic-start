@@ -104,7 +104,7 @@ class ProfileController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
         } else {
-            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Profile not changed.') . $model->errors);
+            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Profile not changed.'));
         }
         return $this->redirect(['update', 'tab' => 'profile']);
     }
