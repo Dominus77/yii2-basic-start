@@ -145,8 +145,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @param int|string $id
-     * @return null|IdentityInterface|static
+     * @inheritdoc
      */
     public static function findIdentity($id)
     {
@@ -156,7 +155,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @param mixed $token
      * @param null $type
-     * @return null|IdentityInterface|static
+     * @return null|static
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
@@ -167,42 +166,37 @@ class User extends ActiveRecord implements IdentityInterface
      * Finds user by username
      *
      * @param string $username
-     * @return static|null|ActiveRecord
+     * @return static|null
      */
     public static function findByUsername($username)
     {
-        if ($result = static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]))
-            return $result;
-        return null;
+        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
      * Finds user by email
      *
      * @param string $email
-     * @return array|null|ActiveRecord
+     * @return static|null
      */
     public static function findByUsernameEmail($email)
     {
-        if ($result = static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]))
-            return $result;
-        return null;
+        return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
      * Finds user by username or email
      *
      * @param string $string
-     * @return array|null|ActiveRecord
+     * @return static|null
+     * @throws \yii\base\InvalidConfigException
      */
     public static function findByUsernameOrEmail($string)
     {
-        if ($result = static::find()
+        return static::find()
             ->where(['or', ['username' => $string], ['email' => $string]])
             ->andWhere(['status' => self::STATUS_ACTIVE])
-            ->one())
-            return $result;
-        return null;
+            ->one();
     }
 
     /**
