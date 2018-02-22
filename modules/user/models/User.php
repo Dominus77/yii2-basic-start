@@ -147,12 +147,13 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      * @param int|string $id
-     * @return null|ActiveRecord|IdentityInterface
+     * @return null|static|IdentityInterface
      */
     public static function findIdentity($id)
     {
-        $result = static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
-        return $result;
+        if ($result = static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]))
+            return $result;
+        return null;
     }
 
     /**
