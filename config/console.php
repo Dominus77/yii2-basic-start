@@ -8,7 +8,7 @@ $params = ArrayHelper::merge(
 
 return [
     'id' => 'app-console',
-    'language' => 'en',
+    'language' => 'en-US',
     'controllerNamespace' => 'app\commands',
     'controllerMap' => [
         'migrate' => [

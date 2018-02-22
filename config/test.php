@@ -12,7 +12,7 @@ $params = ArrayHelper::merge(
  */
 return [
     'id' => 'basic-tests',
-    'language' => 'en',
+    'language' => 'en-US',
     'basePath' => dirname(__DIR__),
     'defaultRoute' => 'main/default/index',
     'aliases' => [
@@ -47,6 +47,10 @@ return [
             'basePath' => __DIR__ . '/../web/assets',
         ],
         'urlManager' => [
+            'class' => 'codemix\localeurls\UrlManager',
+            'languages' => ['en-US', 'en', 'ru-RU', 'ru'],
+            'enableDefaultLanguageUrlCode' => false,
+            'enableLanguagePersistence' => false,
             'showScriptName' => true,
         ],
         'user' => [

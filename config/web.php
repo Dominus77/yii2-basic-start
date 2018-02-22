@@ -36,7 +36,7 @@ $css_theme = 'default';
 $config = [
     'id' => 'app',
     'name' => 'Yii2-basic-start',
-    'language' => 'ru',
+    'language' => 'ru-RU',
     'components' => [
         'request' => [
             'baseUrl' => '',
@@ -55,6 +55,12 @@ $config = [
                     ]
                 ],
             ],
+        ],
+        'urlManager' => [
+            'class' => 'codemix\localeurls\UrlManager',
+            'languages' => ['en-US', 'en', 'ru-RU', 'ru'],
+            'enableDefaultLanguageUrlCode' => false,
+            'enableLanguagePersistence' => false,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

@@ -5,7 +5,9 @@
 /* @var $content string */
 
 use app\widgets\Alert;
+use app\widgets\LanguageDropdown;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
@@ -33,7 +35,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => Html::img('@web/images/logo.png', ['alt' => Yii::$app->name, 'class' => 'yii-logo']) . Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandUrl' => Url::to(['/main/default/index']),
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -57,6 +59,10 @@ AppAsset::register($this);
             ],
         ];
     }
+    $menuItems[] = [
+        'label' => Yii::t('app', 'Language'),
+        'items' => LanguageDropdown::widget(),
+    ];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'activateParents' => true,
@@ -68,6 +74,10 @@ AppAsset::register($this);
 
     <div class="container">
         <?= Breadcrumbs::widget([
+            'homeLink' => [
+                'label' => MainModule::t('module', 'Home'),
+                'url' => ['/main/default/index']
+            ],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
