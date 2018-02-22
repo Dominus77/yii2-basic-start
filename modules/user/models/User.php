@@ -150,7 +150,9 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentity($id)
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        /** @var  IdentityInterface $result */
+        $result = static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+        return $result;
     }
 
     /**
@@ -160,7 +162,9 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        return static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
+        /** @var  IdentityInterface $result */
+        $result = static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
+        return $result;
     }
 
     /**
