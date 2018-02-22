@@ -135,25 +135,57 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
+    /**
+     * @return object|\yii\db\ActiveQuery
+     * @throws \yii\base\InvalidConfigException
+     */
     public static function find()
     {
         return Yii::createObject(UserQuery::class, [get_called_class()]);
     }
 
+    /**
+     * @param int|string $id
+     * @return IdentityInterface
+     */
     public static function findIdentity($id)
     {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
     }
 
     /**
-     * @inheritdoc
      * @param mixed $token
      * @param null|mixed $type
-     * @return null|IdentityInterface|static
+     * @return IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
         return static::findOne(['auth_key' => $token, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * @return string|integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string current user auth key
+     */
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    /**
+     * @param string|mixed $authKey
+     * @return boolean if auth key is valid for current user
+     */
+    public function validateAuthKey($authKey)
+    {
+        return $this->getAuthKey() === $authKey;
     }
 
     /**
@@ -271,31 +303,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function generateEmailConfirmToken()
     {
         $this->email_confirm_token = Yii::$app->security->generateRandomString();
-    }
-
-    /**
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string current user auth key
-     */
-    public function getAuthKey()
-    {
-        return $this->auth_key;
-    }
-
-    /**
-     * @param string|mixed $authKey
-     * @return bool if auth key is valid for current user
-     */
-    public function validateAuthKey($authKey)
-    {
-        return $this->getAuthKey() === $authKey;
     }
 
     /**
