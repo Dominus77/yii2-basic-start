@@ -146,6 +146,8 @@ class User extends ActiveRecord implements IdentityInterface
 
     /**
      * @inheritdoc
+     * @param int|string $id
+     * @return null|IdentityInterface|static
      */
     public static function findIdentity($id)
     {
@@ -153,9 +155,10 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @inheritdoc
      * @param mixed $token
      * @param null|mixed $type
-     * @return null|static
+     * @return null|IdentityInterface|static
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
