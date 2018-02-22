@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'body')->textarea(['rows' => 6, 'placeholder' => true]) ?>
 
                 <?php if ($model->scenario === $model::SCENARIO_GUEST) : ?>
-                    <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+                    <?= $form->field($model, 'verifyCode')->widget(Captcha::class, [
                         'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
                         'captchaAction' => Url::to('/main/default/captcha'),
                         'options' => [
