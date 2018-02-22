@@ -135,20 +135,11 @@ class User extends ActiveRecord implements IdentityInterface
         ];
     }
 
-    /**
-     * @return object|\yii\db\ActiveQuery
-     * @throws \yii\base\InvalidConfigException
-     */
     public static function find()
     {
         return Yii::createObject(UserQuery::class, [get_called_class()]);
     }
 
-    /**
-     * @inheritdoc
-     * @param int|string $id
-     * @return null|IdentityInterface|static
-     */
     public static function findIdentity($id)
     {
         return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
