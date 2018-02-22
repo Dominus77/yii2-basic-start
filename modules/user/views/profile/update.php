@@ -1,10 +1,12 @@
 <?php
 
+/**
+ * @var $this yii\web\View
+ * @var $model modules\user\models\User
+ */
+
 use yii\bootstrap\Tabs;
 use modules\user\Module;
-
-/* @var $this yii\web\View */
-/* @var $model modules\user\models\User */
 
 $this->title = Module::t('module', 'Update');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Profile'), 'url' => ['index']];

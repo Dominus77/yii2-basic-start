@@ -1,12 +1,15 @@
 <?php
 
+/**
+ * @var $this yii\web\View
+ * @var $model modules\user\models\User
+ */
+
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use modules\user\widgets\AvatarWidget;
 use modules\user\Module;
 
-/* @var $this yii\web\View */
-/* @var $model modules\user\models\User */
 ?>
 
 <div class="row">

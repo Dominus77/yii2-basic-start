@@ -1,13 +1,13 @@
 <?php
 
-/* @var $this \yii\web\View */
-
-/* @var $content string */
+/**
+ * @var $this \yii\web\View
+ * @var $content string
+ */
 
 use app\widgets\Alert;
 use app\widgets\LanguageDropdown;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;

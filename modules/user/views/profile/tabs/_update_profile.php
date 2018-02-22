@@ -1,13 +1,16 @@
 <?php
 
+/**
+ * @var $this yii\web\View
+ * @var $model modules\user\models\Profile
+ * @var $form yii\widgets\ActiveForm
+ */
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use modules\user\Module;
 
-/* @var $this yii\web\View */
-/* @var $model modules\user\models\Profile */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="user-profile-tabs-_update_profile">

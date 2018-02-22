@@ -1,11 +1,13 @@
 <?php
 
+/**
+ * @var $this yii\web\View
+ * @var $model modules\user\models\User
+ */
+
 use yii\helpers\Html;
 use yii\bootstrap\Tabs;
 use modules\user\Module;
-
-/* @var $this yii\web\View */
-/* @var $model modules\user\models\User */
 
 $this->title = Module::t('module', 'Profile');
 $this->params['breadcrumbs'][] = $this->title;

@@ -1,12 +1,14 @@
 <?php
 
+/**
+ * @var $this yii\web\View
+ * @var $model modules\user\models\User
+ * @var $url string
+ */
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use modules\user\Module;
-
-/* @var $this yii\web\View */
-/* @var $model modules\user\models\User */
-/* @var $url string */
 
 $this->registerJs(new yii\web\JsExpression("
     $(function () {

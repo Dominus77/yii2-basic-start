@@ -1,8 +1,10 @@
 <?php
 
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \modules\main\models\ContactForm */
+/**
+ * @var $this yii\web\View
+ * @var $form yii\bootstrap\ActiveForm
+ * @var $model \modules\main\models\ContactForm
+ */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -20,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
 
         <div class="alert alert-success">
-            <?= Module::t('module','Thank you for contacting us. We will respond to you as soon as possible.') ?>
+            <?= Module::t('module', 'Thank you for contacting us. We will respond to you as soon as possible.') ?>
         </div>
 
         <p>
