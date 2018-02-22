@@ -1,7 +1,7 @@
 {
     "name": "dominus77/yii2-basic-start",
-    "description": "Basic start template on Yii2",
-    "keywords": ["yii2", "framework", "basic", "project template"],
+    "description": "Yii2 Start Project Basic Template",
+    "keywords": ["Dominus77", "yii2", "framework", "basic", "project template"],
     "homepage": "http://dominus77.github.io/yii2-basic-start",
     "type": "project",
     "license": "BSD-3-Clause",
@@ -11,7 +11,7 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.5.0",
         "yiisoft/yii2": "~2.0.13",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
@@ -29,10 +29,7 @@
         "codeception/specify": "~0.4.3"
     },
     "config": {
-        "process-timeout": 1800,
-        "fxp-asset": {
-            "enabled": false
-        }
+        "process-timeout": 1800
     },
     "repositories": [
         {
