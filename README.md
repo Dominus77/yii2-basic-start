@@ -78,7 +78,6 @@ php yii user/user/create
 - Username: set username;
 - Email: set email username;
 - Password: set password username (min 6 symbol);
-- Roles: set roles username (user, moder, admin, ? - Help);
 - Status: set status username (0 - blocked, 1 - active, 2 - wait, ? - Help);
 
 You can then access the application through the following URL:
