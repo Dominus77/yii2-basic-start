@@ -66,14 +66,7 @@ class SignupForm extends Model
     public function signup()
     {
         if ($this->validate()) {
-            $user = new User();
-            $user->username = $this->username;
-            $user->email = $this->email;
-            $user->setPassword($this->password);
-            $user->status = User::STATUS_WAIT;
-            $user->generateAuthKey();
-            $user->generateEmailConfirmToken();
-
+            $user = $this->processLoadModel();
             if ($user->save()) {
                 Yii::$app->mailer->compose(
                     ['html' => '@modules/user/mail/emailConfirm-html', 'text' => '@modules/user/mail/emailConfirm-text'],
@@ -87,5 +80,21 @@ class SignupForm extends Model
             }
         }
         return null;
+    }
+
+    /**
+     * @return User
+     * @throws \yii\base\Exception
+     */
+    protected function processLoadModel()
+    {
+        $user = new User();
+        $user->username = $this->username;
+        $user->email = $this->email;
+        $user->setPassword($this->password);
+        $user->status = User::STATUS_WAIT;
+        $user->generateAuthKey();
+        $user->generateEmailConfirmToken();
+        return $user;
     }
 }
