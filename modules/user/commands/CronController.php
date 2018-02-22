@@ -25,7 +25,7 @@ class CronController extends Controller
         foreach (User::find()->overdue($this->module->emailConfirmTokenExpire)->each() as $user) {
             /** @var User $user */
             $this->stdout($user->username);
-            if ($user->delete()) {
+            if ($user->delete() !== false) {
                 Yii::info('Remove expired user ' . $user->username);
                 $this->stdout(' OK', Console::FG_GREEN, Console::BOLD);
             } else {
