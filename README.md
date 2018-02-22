@@ -1,22 +1,18 @@
-Basic start template on Yii2
-============================
+# Yii2 Start Project Basic Template
 
-Source code of yii2-basic-start module structure.
+The application is built using basic pattern and has a modular structure.
 
-- [Web page](http://dominus77.github.io/yii2-basic-start)
-- [github.com](https://github.com/Dominus77/yii2-basic-start)
-
-Base components
-------
+## Base components
 
 Pages
 - Home
+- About
 - Contact
-- Sign Up
+- Check in
 - Login
+- Profile
 
 Modules
-- admin
 - main
 - user
 
@@ -24,62 +20,60 @@ Functional
 - Reset password
 - Confirmation by email
 - Last visit
-
-System
-- RBAC (php file)
-- Manage users
+- Switch i18n
 - Console commands
-- i18n
 
-Requirements
-------
+## CSS Themes Bootstrap
+
+The template includes the of the CSS Theme Bootstrap
+
+Switching the theme occurs in the `app/config/web.php`
+
+## Requirements
 
 The minimum requirement by this project template that your Web server supports PHP 5.4.0.
 
-Installation
-------
+## INSTALLATION
 
 Create a project:
 
-~~~
-composer global require "fxp/composer-asset-plugin:^1.4.2"
+```
 composer create-project --prefer-dist --stability=dev dominus77/yii2-basic-start basic-project
-~~~
+```
 
 or clone the repository for `pull` command availability:
 
-~~~
+```
 git clone https://github.com/Dominus77/yii2-basic-start.git basic-project
 cd basic-project
-composer global require "fxp/composer-asset-plugin:^1.4.2"
 composer install
-~~~
+```
 
 Init an environment:
 
-~~~
+```
 php init
-~~~
+```
 
-Create a database, default configure: yii2-basic-start
+Create a database, default configure: yii2basic_start
 
 Apply migration:
 
-~~~
+```
 php yii migrate
-~~~
+```
 
 See all available commands:
 
-~~~
+```
 php yii
-~~~
+```
 
 Create user, enter the command and follow the instructions:
 
-~~~
-php yii user/users/create
-~~~
+```
+php yii user/user/create
+```
 
 - Username: set username;
 - Email: set email username;
@@ -87,21 +81,15 @@ php yii user/users/create
 - Roles: set roles username (user, moder, admin, ? - Help);
 - Status: set status username (0 - blocked, 1 - active, 2 - wait, ? - Help);
 
-Init an RBAC
-
-~~~
-php yii user/rbac/init
-~~~
-
 You can then access the application through the following URL:
 
-~~~
+```
 http://localhost/basic-project/web/
-~~~
+```
 
 Create .htaccess file or add folder \web
 
-~~~
+```
 AddDefaultCharset utf-8
 # Mod_Autoindex
 <IfModule mod_autoindex.c>
@@ -122,4 +110,35 @@ AddDefaultCharset utf-8
   # Otherwise forward the request to index.php
   RewriteRule . index.php
 </IfModule>
-~~~
+```
+
+## TESTING
+
+Create a database, default configure yii2basic_start_test in app\config\test-local.php
+
+```
+//...
+'components' => [
+    'db' => [
+        'dsn' => 'mysql:host=localhost;dbname=yii2basic_start_test',
+    ],
+]
+//...
+```
+
+Apply migration:
+
+```
+php yii_test migrate/up
+```
+
+Run in console for Windows system:
+```
+vendor\bin\codecept build
+vendor\bin\codecept run
+```
+Other:
+```
+vendor/bin/codecept build
+vendor/bin/codecept run
+```
