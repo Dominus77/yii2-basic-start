@@ -1,5 +1,7 @@
 # Yii2 Start Project Basic Template
 
+[![Build Status](https://travis-ci.org/Dominus77/yii2-basic-start.svg?branch=master)](https://travis-ci.org/Dominus77/yii2-basic-start)
+
 The application is built using basic pattern and has a modular structure.
 
 ## Base components
