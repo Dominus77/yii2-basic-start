@@ -37,6 +37,7 @@ $config = [
     'id' => 'app',
     'name' => 'Yii2-basic-start',
     'language' => 'ru-RU',
+    'homeUrl' => ['/main/default/index'],
     'components' => [
         'request' => [
             'baseUrl' => '',

@@ -35,7 +35,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => Html::img('@web/images/logo.png', ['alt' => Yii::$app->name, 'class' => 'yii-logo']) . Yii::$app->name,
-        'brandUrl' => Url::to(['/main/default/index']),
+        'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -74,10 +74,6 @@ AppAsset::register($this);
 
     <div class="container">
         <?= Breadcrumbs::widget([
-            'homeLink' => [
-                'label' => MainModule::t('module', 'Home'),
-                'url' => ['/main/default/index']
-            ],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
