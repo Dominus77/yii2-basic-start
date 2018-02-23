@@ -14,7 +14,7 @@ function info {
 
 #== Provision script ==
 
-info "Provision-script user: `whoami`"
+info "Provision-script users: `whoami`"
 
 info "Configure composer"
 composer config --global github-oauth.github.com ${github_token}
@@ -24,7 +24,7 @@ info "Install project dependencies"
 cd /app
 composer --no-progress --prefer-dist install
 
-info "Create bash-alias 'app' for vagrant user"
+info "Create bash-alias 'app' for vagrant users"
 echo 'alias app="cd /app"' | tee /home/vagrant/.bash_aliases
 
 info "Enabling colorized prompt for guest console"

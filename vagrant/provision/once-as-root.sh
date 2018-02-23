@@ -14,7 +14,7 @@ function info {
 
 #== Provision script ==
 
-info "Provision-script user: `whoami`"
+info "Provision-script users: `whoami`"
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -42,7 +42,7 @@ mysql -uroot <<< "FLUSH PRIVILEGES"
 echo "Done!"
 
 info "Configure PHP-FPM"
-sed -i 's/user = www-data/user = vagrant/g' /etc/php/7.0/fpm/pool.d/www.conf
+sed -i 's/users = www-data/users = vagrant/g' /etc/php/7.0/fpm/pool.d/www.conf
 sed -i 's/group = www-data/group = vagrant/g' /etc/php/7.0/fpm/pool.d/www.conf
 sed -i 's/owner = www-data/owner = vagrant/g' /etc/php/7.0/fpm/pool.d/www.conf
 cat << EOF > /etc/php/7.0/mods-available/xdebug.ini
@@ -55,7 +55,7 @@ EOF
 echo "Done!"
 
 info "Configure NGINX"
-sed -i 's/user www-data/user vagrant/g' /etc/nginx/nginx.conf
+sed -i 's/users www-data/users vagrant/g' /etc/nginx/nginx.conf
 echo "Done!"
 
 info "Enabling site configuration"

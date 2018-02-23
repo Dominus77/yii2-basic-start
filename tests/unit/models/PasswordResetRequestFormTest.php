@@ -3,9 +3,9 @@
 namespace tests\models;
 
 use Yii;
-use modules\user\models\PasswordResetRequestForm;
+use modules\users\models\PasswordResetRequestForm;
 use app\fixtures\User as UserFixture;
-use modules\user\models\User;
+use modules\users\models\User;
 
 /**
  * Class PasswordResetRequestFormTest
@@ -24,7 +24,7 @@ class PasswordResetRequestFormTest extends \Codeception\Test\Unit
     public function _before()
     {
         $this->tester->haveFixtures([
-            'user' => [
+            'users' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'user.php'
             ]
@@ -46,7 +46,7 @@ class PasswordResetRequestFormTest extends \Codeception\Test\Unit
      */
     public function testNotSendEmailsToInactiveUser()
     {
-        $user = $this->tester->grabFixture('user', 1);
+        $user = $this->tester->grabFixture('users', 1);
         $model = new PasswordResetRequestForm();
         $model->email = $user['email'];
         expect_not($model->sendEmail());
@@ -57,7 +57,7 @@ class PasswordResetRequestFormTest extends \Codeception\Test\Unit
      */
     public function testSendEmailSuccessfully()
     {
-        $userFixture = $this->tester->grabFixture('user', 2);
+        $userFixture = $this->tester->grabFixture('users', 2);
 
         $model = new PasswordResetRequestForm();
         $model->email = $userFixture['email'];

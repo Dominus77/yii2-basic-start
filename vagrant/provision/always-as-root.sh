@@ -10,7 +10,7 @@ function info {
 
 #== Provision script ==
 
-info "Provision-script user: `whoami`"
+info "Provision-script users: `whoami`"
 
 info "Restart web-stack"
 service php7.0-fpm restart

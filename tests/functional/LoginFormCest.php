@@ -14,12 +14,12 @@ class LoginFormCest
     public function _before(\FunctionalTester $I)
     {
         $I->haveFixtures([
-            'user' => [
+            'users' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'login_data.php'
             ]
         ]);
-        $I->amOnRoute('/user/default/login');
+        $I->amOnRoute('/users/default/login');
     }
 
     /**

@@ -13,7 +13,7 @@ class LoginCest
      */
     public function ensureThatLoginWorks(AcceptanceTester $I)
     {
-        $I->amOnPage(Url::toRoute('/user/default/login'));
+        $I->amOnPage(Url::toRoute('/users/default/login'));
         $I->see('Login', 'h1');
 
         $I->amGoingTo('try to login with correct credentials');
@@ -22,7 +22,7 @@ class LoginCest
         $I->click('login-button');
         $I->wait(2); // wait for button to be clicked
 
-        $I->expectTo('see user info');
+        $I->expectTo('see users info');
         $I->see('Logout');
     }
 }

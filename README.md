@@ -22,7 +22,7 @@ Pages
 
 Modules
 - main
-- user
+- users
 
 Functional
 - Reset password
@@ -77,10 +77,10 @@ See all available commands:
 php yii
 ```
 
-Create user, enter the command and follow the instructions:
+Create users, enter the command and follow the instructions:
 
 ```
-php yii user/user/create
+php yii users/user/create
 ```
 
 - Username: set username;

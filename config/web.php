@@ -43,9 +43,9 @@ $config = [
             'baseUrl' => '',
         ],
         'user' => [
-            'identityClass' => 'modules\user\models\User',
+            'identityClass' => 'modules\users\models\User',
             'enableAutoLogin' => true,
-            'loginUrl' => ['user/default/login'],
+            'loginUrl' => ['users/default/login'],
         ],
         'assetManager' => [
             'bundles' => [
@@ -66,7 +66,7 @@ $config = [
         ],
     ],
     'as afterAction' => [
-        'class' => '\modules\user\behavior\LastVisitBehavior',
+        'class' => '\modules\users\behavior\LastVisitBehavior',
     ],
     'params' => $params,
 ];

@@ -16,7 +16,7 @@ class SignupCest
      */
     public function _before(FunctionalTester $I)
     {
-        $I->amOnRoute('/user/default/signup');
+        $I->amOnRoute('/users/default/signup');
     }
 
     /**

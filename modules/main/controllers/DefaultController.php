@@ -46,7 +46,7 @@ class DefaultController extends Controller
             $model->scenario = $model::SCENARIO_GUEST;
         } else {
             $user = Yii::$app->user;
-            /** @var \modules\user\models\User $identity */
+            /** @var \modules\users\models\User $identity */
             $identity = $user->identity;
             $model->name = $identity->username;
             $model->email = $identity->email;

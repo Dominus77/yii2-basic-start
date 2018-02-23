@@ -3,7 +3,7 @@
 namespace tests\models;
 
 use Yii;
-use modules\user\models\LoginForm;
+use modules\users\models\LoginForm;
 use app\fixtures\User as UserFixture;
 
 /**
@@ -23,7 +23,7 @@ class LoginFormTest extends \Codeception\Test\Unit
     public function _before()
     {
         $this->tester->haveFixtures([
-            'user' => [
+            'users' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'user.php'
             ]
@@ -40,8 +40,8 @@ class LoginFormTest extends \Codeception\Test\Unit
             'password' => 'not_existing_password',
         ]);
 
-        expect('model should not login user', $model->login())->false();
-        expect('user should not be logged in', Yii::$app->user->isGuest)->true();
+        expect('model should not login users', $model->login())->false();
+        expect('users should not be logged in', Yii::$app->user->isGuest)->true();
     }
 
     /**
@@ -55,9 +55,9 @@ class LoginFormTest extends \Codeception\Test\Unit
             'password' => 'wrong_password',
         ]);
 
-        expect('model should not login user', $model->login())->false();
+        expect('model should not login users', $model->login())->false();
         expect('error message should be set', $model->errors)->hasKey('password');
-        expect('user should not be logged in', Yii::$app->user->isGuest)->true();
+        expect('users should not be logged in', Yii::$app->user->isGuest)->true();
     }
 
     /**
@@ -71,8 +71,8 @@ class LoginFormTest extends \Codeception\Test\Unit
             'password' => 'password_0',
         ]);
 
-        expect('model should login user', $model->login())->true();
+        expect('model should login users', $model->login())->true();
         expect('error message should not be set', $model->errors)->hasntKey('password_hash');
-        expect('user should be logged in', Yii::$app->user->isGuest)->false();
+        expect('users should be logged in', Yii::$app->user->isGuest)->false();
     }
 }

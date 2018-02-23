@@ -3,7 +3,7 @@
 namespace tests\models;
 
 use app\fixtures\User as UserFixture;
-use modules\user\models\User;
+use modules\users\models\User;
 
 /**
  * Class UserTest
@@ -23,7 +23,7 @@ class UserTest extends \Codeception\Test\Unit
     public function _before()
     {
         $this->tester->haveFixtures([
-            'user' => [
+            'users' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'user.php'
             ]
@@ -35,7 +35,7 @@ class UserTest extends \Codeception\Test\Unit
      */
     public function testFindUserById()
     {
-        /** @var $user \modules\user\models\User */
+        /** @var $user \modules\users\models\User */
         expect_that($user = User::findIdentity(3));
         expect($user->username)->equals('imtester');
 
@@ -47,7 +47,7 @@ class UserTest extends \Codeception\Test\Unit
      */
     public function testFindUserByAccessToken()
     {
-        /** @var $user \modules\user\models\User */
+        /** @var $user \modules\users\models\User */
         expect_that($user = User::findIdentityByAccessToken('iwTNae9t34OmnK6l4vT4IeaTk-YWI2Rv'));
         expect($user->username)->equals('imtester');
 

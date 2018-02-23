@@ -18,14 +18,14 @@ return [
     'bootstrap' => [
         'log',
         'modules\main\Bootstrap',
-        'modules\user\Bootstrap',
+        'modules\users\Bootstrap',
     ],
     'modules' => [
         'main' => [
             'class' => 'modules\main\Module',
         ],
-        'user' => [
-            'class' => 'modules\user\Module',
+        'users' => [
+            'class' => 'modules\users\Module',
         ],
     ],
     'components' => [

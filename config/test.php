@@ -21,14 +21,14 @@ return ArrayHelper::merge([
     ],
     'bootstrap' => [
         'modules\main\Bootstrap',
-        'modules\user\Bootstrap',
+        'modules\users\Bootstrap',
     ],
     'modules' => [
         'main' => [
             'class' => 'modules\main\Module',
         ],
-        'user' => [
-            'class' => 'modules\user\Module',
+        'users' => [
+            'class' => 'modules\users\Module',
         ],
     ],
     'components' => [
@@ -50,7 +50,7 @@ return ArrayHelper::merge([
             'showScriptName' => true,
         ],
         'user' => [
-            'identityClass' => 'modules\user\models\User',
+            'identityClass' => 'modules\users\models\User',
         ],
         'request' => [
             'cookieValidationKey' => 'test',

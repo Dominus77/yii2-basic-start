@@ -3,7 +3,7 @@ filter:
         - "tests/*"
         - "environments/*"
         - "vagrant/*"
-        - "modules/user/migrations/*"
+        - "modules/users/migrations/*"
 checks:
     php:
         code_rating: true

@@ -3,7 +3,7 @@
 namespace tests\models;
 
 use app\fixtures\User as UserFixture;
-use modules\user\models\Profile;
+use modules\users\models\Profile;
 
 /**
  * Class ProfileTest
@@ -23,7 +23,7 @@ class ProfileTest extends \Codeception\Test\Unit
     public function _before()
     {
         $this->tester->haveFixtures([
-            'user' => [
+            'users' => [
                 'class' => UserFixture::className(),
                 'dataFile' => codecept_data_dir() . 'user.php'
             ]
