@@ -61,14 +61,19 @@ class LanguageDropdown extends Dropdown
     public function renderLanguageItems()
     {
         $appLanguage = Yii::$app->language;
-        foreach (Yii::$app->urlManager->languages as $language) {
+        $urlManager = Yii::$app->urlManager;
+        foreach ($urlManager->languages as $language) {
             $isWildcard = substr($language, -2) === '-*';
-            if ($language === $appLanguage || $isWildcard && substr($appLanguage, 0, 2) === substr($language, 0, 2)) {
+
+            if ($language === $appLanguage ||
+                $isWildcard && substr($appLanguage, 0, 2) === substr($language, 0, 2)) {
                 continue; // Exclude the current language
             }
+
             if ($isWildcard) {
                 $language = substr($language, 0, 2);
             }
+
             $params['language'] = $language;
             $this->items[] = [
                 'label' => self::label($language),
