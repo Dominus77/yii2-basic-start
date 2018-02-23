@@ -12,7 +12,7 @@ use modules\users\Module;
  * Class User
  * @package modules\users\models
  *
- * This is the model class for table "{{%user}}".
+ * This is the model class extends BaseUser.
  *
  * @property int $id ID
  * @property string $username Username

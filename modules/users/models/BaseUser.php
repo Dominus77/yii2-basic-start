@@ -15,7 +15,7 @@ use modules\users\Module;
  * Class BaseUser
  * @package modules\users\models
  *
- * This is the model class for table "{{%user}}".
+ * This is the model class for table "{{%users}}".
  *
  * @property int $id ID
  * @property string $username Username
@@ -69,7 +69,7 @@ class BaseUser extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return '{{%users}}';
     }
 
     /**
