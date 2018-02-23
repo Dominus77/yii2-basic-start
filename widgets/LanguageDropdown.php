@@ -65,9 +65,8 @@ class LanguageDropdown extends Dropdown
         foreach ($urlManager->languages as $language) {
             $isWildcard = substr($language, -2) === '-*';
 
-            if ($language === $appLanguage ||
-                $isWildcard && substr($appLanguage, 0, 2) === substr($language, 0, 2)) {
-                continue; // Exclude the current language
+            if ($this->isCheck($language, $appLanguage, $isWildcard)) {
+                continue;
             }
 
             if ($isWildcard) {
@@ -80,5 +79,17 @@ class LanguageDropdown extends Dropdown
                 'url' => $params,
             ];
         }
+    }
+
+    /**
+     * @param string $language
+     * @param string $appLanguage
+     * @param string $isWildcard
+     * @return bool
+     */
+    protected function isCheck($language, $appLanguage, $isWildcard)
+    {
+        return ($language === $appLanguage ||
+            $isWildcard && substr($appLanguage, 0, 2) === substr($language, 0, 2));
     }
 }
