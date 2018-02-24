@@ -13,6 +13,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use modules\main\Module as MainModule;
 use modules\users\Module as UserModule;
+use modules\admin\Module as AdminModule;
 
 AppAsset::register($this);
 ?>
@@ -53,7 +54,8 @@ AppAsset::register($this);
         $menuItems[] = [
             'label' => UserModule::t('module', 'My Menu'),
             'items' => [
-                ['label' => '<i class="glyphicon glyphicon-user"></i> ' . UserModule::t('module', 'Profile') . ' (' . $identity->username . ')', 'url' => ['/users/profile/index']],
+                ['label' => '<i class="glyphicon glyphicon-queen"></i> ' . AdminModule::t('module', 'Administration'), 'url' => ['/admin/default/index']],
+                ['label' => '<i class="glyphicon glyphicon-eye-open"></i> ' . UserModule::t('module', 'Profile') . ' (' . $identity->username . ')', 'url' => ['/users/profile/index']],
                 ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . UserModule::t('module', 'Sign Out'), 'url' => ['/users/default/logout'], 'linkOptions' => ['data-method' => 'post']],
             ],
         ];
