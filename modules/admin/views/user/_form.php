@@ -16,6 +16,7 @@ use modules\admin\Module;
     <?= $form->field($model, 'username')->textInput([
         'maxlength' => true,
         'placeholder' => true,
+        'disabled' => !$model->isSuperAdmin(),
     ]) ?>
 
     <?= $form->field($model, 'email')->textInput([
@@ -40,6 +41,7 @@ use modules\admin\Module;
 
     <?= $form->field($model, 'status')->dropDownList($model->statusesArray, [
         'class' => 'form-control',
+        'disabled' => !$model->isSuperAdmin(),
     ]) ?>
 
     <div class="form-group">

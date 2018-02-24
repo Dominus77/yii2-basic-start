@@ -37,6 +37,8 @@ class User extends BaseUser
 {
     use ModuleTrait;
 
+    const SUPER_ADMIN = 1;
+
     /**
      * @return object|\yii\db\ActiveQuery
      * @throws \yii\base\InvalidConfigException
@@ -195,11 +197,13 @@ class User extends BaseUser
     }
 
     /**
+     * @param int|string $id Super admin id=1
      * @return bool
      */
-    public function isSuperAdmin()
+    public function isSuperAdmin($id = '')
     {
-        return $this->id === 1; // Super admin id=1
+        $id = $id ? $id : self::SUPER_ADMIN;
+        return Yii::$app->user->id === $id;
     }
 
     /**
