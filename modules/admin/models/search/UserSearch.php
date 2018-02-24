@@ -70,7 +70,7 @@ class UserSearch extends Model
     /**
      * @return array
      */
-    public static function getStatusesArray()
+    public function getStatusesArray()
     {
         return User::getStatusesArray();
     }
