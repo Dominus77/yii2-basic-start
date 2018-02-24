@@ -22,6 +22,7 @@ return ArrayHelper::merge([
     'bootstrap' => [
         'modules\main\Bootstrap',
         'modules\users\Bootstrap',
+        'modules\admin\Bootstrap',
     ],
     'modules' => [
         'main' => [
@@ -29,6 +30,9 @@ return ArrayHelper::merge([
         ],
         'users' => [
             'class' => 'modules\users\Module',
+        ],
+        'admin' => [
+            'class' => 'modules\admin\Module',
         ],
     ],
     'components' => [
