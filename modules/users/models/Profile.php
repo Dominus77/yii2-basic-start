@@ -65,7 +65,7 @@ class Profile extends User
             ['last_name', 'string', 'max' => 45],
 
             [['currentPassword', 'newPassword', 'newPasswordRepeat'], 'required', 'on' => [self::SCENARIO_PASSWORD_UPDATE]],
-            ['newPassword', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'on' => [self::SCENARIO_PASSWORD_UPDATE]],
+            ['newPassword', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX],
             ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword', 'on' => [self::SCENARIO_PASSWORD_UPDATE]],
             ['currentPassword', 'validateCurrentPassword', 'skipOnEmpty' => false, 'skipOnError' => false, 'on' => [self::SCENARIO_PASSWORD_UPDATE]],
         ];
@@ -79,7 +79,7 @@ class Profile extends User
         if (!empty($this->newPassword) && !empty($this->newPasswordRepeat) && !$this->hasErrors()) {
             $this->processValidatePassword($attribute);
         } else {
-           $this->addError($attribute, Module::t('module', 'Not all fields are filled in correctly.'));
+            $this->addError($attribute, Module::t('module', 'Not all fields are filled in correctly.'));
         }
     }
 

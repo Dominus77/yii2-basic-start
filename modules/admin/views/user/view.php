@@ -39,17 +39,41 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status',
                 'format' => 'raw',
                 'value' => function ($model) {
+                    $view = Yii::$app->controller->view;
+                    /** @var object $identity */
+                    $identity = Yii::$app->user->identity;
+                    /** @var $model modules\admin\models\User */
+                    if ($model->id != $identity->id && !$model->isSuperAdmin()) {
+                        $view->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
+                        return Html::a($model->statusLabelName, ['status', 'id' => $model->id], [
+                            'id' => 'status_link_' . $model->id,
+                            'title' => Module::t('users', 'Click to change the status'),
+                            'data' => [
+                                'toggle' => 'tooltip',
+                            ],
+                        ]);
+                    }
                     return $model->statusLabelName;
                 },
             ],
             'last_visit:datetime',
-            'auth_key',
+            [
+                'attribute' => 'auth_key',
+                'format' => 'raw',
+                'value' => $this->render('_auth_key', ['model' => $model]),
+            ],
             'password_hash',
             'password_reset_token',
             'email_confirm_token:email',
             'created_at:datetime',
             'updated_at:datetime',
-            'registration_type',
+            [
+                'attribute' => 'registration_type',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return $model->registrationType;
+                },
+            ],
         ],
     ]) ?>
 

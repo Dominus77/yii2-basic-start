@@ -17,6 +17,9 @@ return [
     'Current Password' => 'Current Password',
     'New Password' => 'New Password',
     'Repeat Password' => 'Repeat Password',
+    'Email Confirm Token' => 'Email Confirm Token',
+    'Password Reset Token' => 'Password Reset Token',
+    'Password Hash' => 'Password Hash',
 
     'Blocked' => 'Blocked',
     'Active' => 'Active',

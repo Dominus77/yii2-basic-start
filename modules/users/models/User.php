@@ -197,6 +197,14 @@ class User extends BaseUser
     /**
      * @return bool
      */
+    public function isSuperAdmin()
+    {
+        return $this->id === 1; // Super admin id=1
+    }
+
+    /**
+     * @return bool
+     */
     public function isDeleted()
     {
         return $this->status === self::STATUS_DELETED;
@@ -217,5 +225,24 @@ class User extends BaseUser
         $parts = explode('_', $token);
         $timestamp = (int)end($parts);
         return $timestamp + $expire >= time();
+    }
+
+    /**
+     * Set Status
+     * @return int|string
+     */
+    public function setStatus()
+    {
+        switch ($this->status) {
+            case self::STATUS_ACTIVE:
+                $this->status = self::STATUS_BLOCKED;
+                break;
+            case self::STATUS_DELETED:
+                $this->status = self::STATUS_WAIT;
+                break;
+            default:
+                $this->status = self::STATUS_ACTIVE;
+        }
+        return $this->status;
     }
 }

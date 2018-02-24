@@ -4,9 +4,11 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use modules\admin\Module;
 
-/* @var $this yii\web\View */
-/* @var $searchModel modules\admin\models\search\UserSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/**
+ * @var $this yii\web\View
+ * @var $searchModel modules\admin\models\search\UserSearch
+ * @var $dataProvider yii\data\ActiveDataProvider
+ */
 
 $this->title = Module::t('users', 'Users');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Administration'), 'url' => ['default/index']];
@@ -40,6 +42,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]),
                 'format' => 'raw',
                 'value' => function ($model) {
+                    $view = Yii::$app->controller->view;
+                    /** @var object $identity */
+                    $identity = Yii::$app->user->identity;
+                    /** @var $model modules\admin\models\User */
+                    if ($model->id != $identity->id && !$model->isSuperAdmin()) {
+                        $view->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
+                        return Html::a($model->statusLabelName, ['status', 'id' => $model->id], [
+                            'id' => 'status_link_' . $model->id,
+                            'title' => Module::t('users', 'Click to change the status'),
+                            'data' => [
+                                'toggle' => 'tooltip',
+                            ],
+                        ]);
+                    }
                     return $model->statusLabelName;
                 },
             ],

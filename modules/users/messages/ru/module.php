@@ -17,6 +17,9 @@ return [
     'Current Password' => 'Текущий пароль',
     'New Password' => 'Новый пароль',
     'Repeat Password' => 'Повторить пароль',
+    'Email Confirm Token' => 'Ключ подтверждения email',
+    'Password Reset Token' => 'Ключ сброса пароля',
+    'Password Hash' => 'Хэш пароля',
 
     'Blocked' => 'Заблокирован',
     'Active' => 'Активирован',

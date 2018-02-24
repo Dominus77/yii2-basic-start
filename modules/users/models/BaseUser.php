@@ -131,6 +131,9 @@ class BaseUser extends ActiveRecord implements IdentityInterface
             'first_name' => Module::t('module', 'First Name'),
             'last_name' => Module::t('module', 'Last Name'),
             'registration_type' => Module::t('module', 'Registration Type'),
+            'email_confirm_token' => Module::t('module', 'Email Confirm Token'),
+            'password_reset_token' => Module::t('module', 'Password Reset Token'),
+            'password_hash' => Module::t('module', 'Password Hash'),
         ];
     }
 
@@ -259,6 +262,45 @@ class BaseUser extends ActiveRecord implements IdentityInterface
             self::STATUS_ACTIVE => 'success',
             self::STATUS_WAIT => 'warning',
             self::STATUS_DELETED => 'danger',
+        ];
+    }
+
+    /**
+     * Type of registration
+     * How the user is created
+     * If the system registration type is registered by itself,
+     * if it is created from the admin area,
+     * then the login type that created the account
+     *
+     * @return mixed|string
+     */
+    public function getRegistrationType()
+    {
+        if ($this->registration_type > 0) {
+            if (($model = User::findOne($this->registration_type)) !== null) {
+                return $model->username;
+            }
+        }
+        return $this->getRegistrationTypeName();
+    }
+
+    /**
+     * Returns the registration type string
+     * @return mixed
+     */
+    public function getRegistrationTypeName()
+    {
+        return ArrayHelper::getValue(self::getRegistrationTypesArray(), $this->registration_type);
+    }
+
+    /**
+     * Returns an array of log types
+     * @return array
+     */
+    public static function getRegistrationTypesArray()
+    {
+        return [
+            self::TYPE_REGISTRATION_SYSTEM => Module::t('module', 'System'),
         ];
     }
 }

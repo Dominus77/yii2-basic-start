@@ -3,7 +3,6 @@
 namespace modules\users\controllers;
 
 use Yii;
-use yii\helpers\VarDumper;
 use yii\web\Controller;
 use modules\users\models\Profile;
 use yii\filters\AccessControl;

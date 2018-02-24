@@ -9,12 +9,16 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\Response;
 
 /**
  * UserController implements the CRUD actions for User model.
  */
 class UserController extends Controller
 {
+    /** @var  string|bool $jsFile */
+    protected $jsFile;
+
     /**
      * @inheritdoc
      */
@@ -37,6 +41,29 @@ class UserController extends Controller
                 ],
             ],
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+        $this->processRegisterJs();
+    }
+
+    /**
+     * Publish and register the required JS file
+     */
+    protected function processRegisterJs()
+    {
+        $this->jsFile = '@modules/users/views/ajax/ajax.js';
+        $assetManager = Yii::$app->assetManager;
+        $assetManager->publish($this->jsFile);
+        $url = $assetManager->getPublishedUrl($this->jsFile);
+        $this->view->registerJsFile($url,
+            ['depends' => 'yii\web\JqueryAsset',] // depends
+        );
     }
 
     /**
@@ -75,6 +102,7 @@ class UserController extends Controller
     public function actionCreate()
     {
         $model = new User();
+        $model->scenario = $model::SCENARIO_ADMIN_CREATE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -109,14 +137,90 @@ class UserController extends Controller
      * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws \Exception
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        if (!$model->isSuperAdmin())
+            $model->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * Action Generate new auth key
+     * @param int|string $id
+     * @return array|Response
+     * @throws NotFoundHttpException
+     */
+    public function actionGenerateAuthKey($id)
+    {
+        $model = $this->processGenerateAuthKey($id);
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return [
+                'body' => $this->renderAjax('_auth_key', ['model' => $model]),
+                'success' => true,
+            ];
+        }
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Generate new auth key
+     * @param int|string $id
+     * @return User
+     * @throws NotFoundHttpException
+     */
+    private function processGenerateAuthKey($id)
+    {
+        $model = $this->findModel($id);
+        $model->generateAuthKey();
+        $model->save();
+        return $model;
+    }
+
+    /**
+     * Change Status
+     * @param int|string $id
+     * @return array|\yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionStatus($id)
+    {
+        if ($model = $this->processChangeStatus($id)) {
+            if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                return [
+                    'body' => $model->getStatusLabelName(),
+                    'success' => true,
+                ];
+            }
+        }
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * @param int|string $id
+     * @return bool|User|null
+     * @throws NotFoundHttpException
+     */
+    private function processChangeStatus($id)
+    {
+        $model = $this->findModel($id);
+        /** @var object $identity */
+        $identity = Yii::$app->user->identity;
+        if ($model->id !== $identity->id && !$model->isSuperAdmin()) {
+            $model->setStatus();
+            $model->save(false);
+            return $model;
+        }
+        return false;
     }
 
     /**
