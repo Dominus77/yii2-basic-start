@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'email:email',
             [
                 'attribute' => 'status',
-                'filter' => Html::activeDropDownList($searchModel, 'status', $searchModel->statusesArray, [
+                'filter' => Html::activeDropDownList($searchModel, 'status', $searchModel->getStatusesArray(), [
                     'class' => 'form-control',
                     'prompt' => Module::t('users', '- all -'),
                     'data' => [

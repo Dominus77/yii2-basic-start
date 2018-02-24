@@ -21,7 +21,6 @@ use modules\admin\Module;
  * @property string $first_name First Name
  * @property string $last_name Last Name
  * @property int $registration_type Type Registration
- * @property array $statusesArray Array statuses
  */
 class UserSearch extends Model
 {
