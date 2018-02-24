@@ -84,8 +84,6 @@ class UserSearch extends Model
     {
         $query = User::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -93,9 +91,20 @@ class UserSearch extends Model
         $this->load($params);
 
         if (!$this->validate()) {
+            $query->where('0=1');
             return $dataProvider;
         }
 
+        $this->processFilter($query);
+
+        return $dataProvider;
+    }
+
+    /**
+     * @param $query \yii\db\QueryInterface
+     */
+    protected function processFilter($query)
+    {
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -110,7 +119,5 @@ class UserSearch extends Model
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'first_name', $this->first_name])
             ->andFilterWhere(['like', 'last_name', $this->last_name]);
-
-        return $dataProvider;
     }
 }
