@@ -23,6 +23,7 @@ Pages
 Modules
 - main
 - users
+- admin
 
 Functional
 - Reset password
