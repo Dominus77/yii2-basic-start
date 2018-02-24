@@ -6,7 +6,6 @@
  */
 
 use app\widgets\Alert;
-use app\widgets\LanguageDropdown;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
