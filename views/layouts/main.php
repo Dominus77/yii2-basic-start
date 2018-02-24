@@ -59,10 +59,6 @@ AppAsset::register($this);
             ],
         ];
     }
-    $menuItems[] = [
-        'label' => Yii::t('app', 'Language'),
-        'items' => LanguageDropdown::widget(),
-    ];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'activateParents' => true,

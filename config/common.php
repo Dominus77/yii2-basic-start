@@ -34,10 +34,7 @@ return [
             'charset' => 'utf8',
         ],
         'urlManager' => [
-            'class' => 'codemix\localeurls\UrlManager',
-            'languages' => ['en-US', 'en', 'ru-RU', 'ru'],
-            'enableDefaultLanguageUrlCode' => false,
-            'enableLanguagePersistence' => false,
+            'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [

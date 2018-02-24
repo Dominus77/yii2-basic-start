@@ -28,7 +28,6 @@ Functional
 - Reset password
 - Confirmation by email
 - Last visit
-- Switch i18n
 - Console commands
 
 ## CSS Themes Bootstrap
