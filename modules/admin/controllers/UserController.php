@@ -3,16 +3,18 @@
 namespace modules\admin\controllers;
 
 use Yii;
-use modules\admin\models\User;
-use modules\admin\models\search\UserSearch;
+use yii\web\Response;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use yii\web\Response;
+use modules\admin\models\search\UserSearch;
+use modules\admin\models\User;
+use modules\admin\Module;
 
 /**
- * UserController implements the CRUD actions for User model.
+ * Class UserController
+ * @package modules\admin\controllers
  */
 class UserController extends Controller
 {
@@ -68,7 +70,8 @@ class UserController extends Controller
 
     /**
      * Lists all User models.
-     * @return mixed
+     * @return string
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionIndex()
     {
@@ -195,7 +198,7 @@ class UserController extends Controller
     {
         if ($model = $this->processChangeStatus($id)) {
             if (Yii::$app->request->isAjax) {
-                Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+                Yii::$app->response->format = Response::FORMAT_JSON;
                 return [
                     'body' => $model->getStatusLabelName(),
                     'success' => true,
@@ -236,6 +239,6 @@ class UserController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+        throw new NotFoundHttpException(Module::t('users', 'The requested page does not exist.'));
     }
 }

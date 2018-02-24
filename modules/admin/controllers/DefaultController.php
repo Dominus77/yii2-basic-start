@@ -4,8 +4,7 @@ namespace modules\admin\controllers;
 
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use modules\main\Module;
-
+use modules\admin\Module;
 
 /**
  * Class DefaultController
