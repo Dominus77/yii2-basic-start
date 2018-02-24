@@ -2,16 +2,28 @@
 
 namespace modules\admin\models\search;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use modules\admin\models\User;
+use modules\admin\Module;
 
 /**
- * UserSearch represents the model behind the search form of `modules\admin\models\User`.
+ * Class UserSearch
+ * @package modules\admin\models\search
  */
-class UserSearch extends User
+class UserSearch extends Model
 {
+    public $id;
+    public $username;
+    public $email;
+    public $status;
+    public $last_visit;
+    public $created_at;
+    public $updated_at;
+    public $registration_type;
+    public $first_name;
+    public $last_name;
+
     /**
      * @inheritdoc
      */
@@ -19,25 +31,43 @@ class UserSearch extends User
     {
         return [
             [['id', 'status', 'last_visit', 'created_at', 'updated_at', 'registration_type'], 'integer'],
-            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email_confirm_token', 'email', 'first_name', 'last_name'], 'safe'],
+            [['username', 'email', 'first_name', 'last_name'], 'safe'],
         ];
     }
 
     /**
      * @inheritdoc
+     * @return array
      */
-    public function scenarios()
+    public function attributeLabels()
     {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
+        return [
+            'id' => 'ID',
+            'created_at' => Module::t('users', 'Created'),
+            'updated_at' => Module::t('users', 'Updated'),
+            'last_visit' => Module::t('users', 'Last Visit'),
+            'username' => Module::t('users', 'Username'),
+            'email' => Module::t('users', 'Email'),
+            'status' => Module::t('users', 'Status'),
+            'first_name' => Module::t('users', 'First Name'),
+            'last_name' => Module::t('users', 'Last Name'),
+            'registration_type' => Module::t('users', 'Registration Type'),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public static function getStatusesArray()
+    {
+        return User::getStatusesArray();
     }
 
     /**
      * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
+     * @param $params
      * @return ActiveDataProvider
+     * @throws \yii\base\InvalidConfigException
      */
     public function search($params)
     {
@@ -68,10 +98,6 @@ class UserSearch extends User
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
-            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
-            ->andFilterWhere(['like', 'email_confirm_token', $this->email_confirm_token])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'first_name', $this->first_name])
             ->andFilterWhere(['like', 'last_name', $this->last_name]);
