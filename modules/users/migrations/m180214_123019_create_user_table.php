@@ -35,7 +35,7 @@ class m180214_123019_create_user_table extends Migration
             'updated_at' => $this->integer()->notNull()->comment('Updated'),
             'first_name' => $this->string(45)->comment('First Name'),
             'last_name' => $this->string(45)->comment('Last Name'),
-            'registration_type' => $this->integer()->defaultValue(0)->comment('Type Registration'),
+            'registration_type' => $this->string()->defaultValue(0)->comment('Type Registration'),
         ], $tableOptions);
     }
 
