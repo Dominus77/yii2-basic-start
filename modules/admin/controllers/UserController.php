@@ -218,7 +218,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
         /** @var object $identity */
         $identity = Yii::$app->user->identity;
-        if ($model->id !== $identity->id && !$model->isSuperAdmin()) {
+        if ($model->id !== $identity->id && $model->isSuperAdmin()) {
             $model->setStatus();
             $model->save(false);
             return $model;
