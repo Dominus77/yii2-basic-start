@@ -10,6 +10,18 @@ use modules\admin\Module;
 /**
  * Class UserSearch
  * @package modules\admin\models\search
+ *
+ * @property int $id ID
+ * @property string $username Username
+ * @property string $email Email
+ * @property int|string $status Status
+ * @property int $last_visit Last Visit
+ * @property int $created_at Created
+ * @property int $updated_at Updated
+ * @property string $first_name First Name
+ * @property string $last_name Last Name
+ * @property int $registration_type Type Registration
+ * @property array statusesArray Array statuses
  */
 class UserSearch extends Model
 {
