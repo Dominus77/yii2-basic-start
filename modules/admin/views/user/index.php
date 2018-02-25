@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     /** @var object $identity */
                     $identity = Yii::$app->user->identity;
                     /** @var $model modules\admin\models\User */
-                    if ($model->id != $identity->id && $model->isSuperAdmin()) {
+                    if ($model->id != $identity->id && !$model->isSuperAdmin($model->id)) {
                         $view->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
                         return Html::a($model->statusLabelName, ['status', 'id' => $model->id], [
                             'id' => 'status_link_' . $model->id,

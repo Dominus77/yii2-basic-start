@@ -126,7 +126,6 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -149,7 +148,9 @@ class UserController extends Controller
     public function actionDelete($id)
     {
         $model = $this->findModel($id);
-        if (!$model->isSuperAdmin())
+        /** @var object $identity */
+        $identity = Yii::$app->user->identity;
+        if ($model->id !== $identity->id || $model->isSuperAdmin($model->id))
             $model->delete();
 
         return $this->redirect(['index']);
@@ -218,7 +219,7 @@ class UserController extends Controller
         $model = $this->findModel($id);
         /** @var object $identity */
         $identity = Yii::$app->user->identity;
-        if ($model->id !== $identity->id && $model->isSuperAdmin()) {
+        if ($model->id !== $identity->id || $model->isSuperAdmin($model->id)) {
             $model->setStatus();
             $model->save(false);
             return $model;
