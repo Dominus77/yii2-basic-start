@@ -26,21 +26,25 @@ $identity = Yii::$app->user->identity;
     <?= $form->field($model, 'email')->textInput([
         'maxlength' => true,
         'placeholder' => true,
+        'disabled' => $model->isSuperAdmin($model->id),
     ]) ?>
 
     <?= $form->field($model, 'password')->passwordInput([
         'maxlength' => true,
         'placeholder' => true,
+        'disabled' => $model->isSuperAdmin($model->id),
     ]) ?>
 
     <?= $form->field($model, 'first_name')->textInput([
         'maxlength' => true,
         'placeholder' => true,
+        'disabled' => $model->isSuperAdmin($model->id),
     ]) ?>
 
     <?= $form->field($model, 'last_name')->textInput([
         'maxlength' => true,
         'placeholder' => true,
+        'disabled' => $model->isSuperAdmin($model->id),
     ]) ?>
 
     <?= $form->field($model, 'status')->dropDownList($model->statusesArray, [
