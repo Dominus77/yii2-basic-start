@@ -17,17 +17,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <div class="pull-right">
-        <p>
-            <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('users', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('users', 'Delete'), ['delete', 'id' => $model->id], [
-                'class' => 'btn btn-danger',
-                'data' => [
-                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                    'method' => 'post',
-                ],
-            ]) ?>
-        </p>
+    <div class="row">
+        <div class="col-sm-12">
+            <p class="pull-right">
+                <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('users', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('users', 'Delete'), ['delete', 'id' => $model->id], [
+                    'class' => 'btn btn-danger',
+                    'data' => [
+                        'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                        'method' => 'post',
+                    ],
+                ]) ?>
+            </p>
+        </div>
     </div>
     <div class="row">
         <div class="col-sm-2">
