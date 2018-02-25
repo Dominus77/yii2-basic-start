@@ -3,6 +3,7 @@
 namespace modules\admin;
 
 use Yii;
+use yii\filters\AccessControl;
 
 /**
  * Class Module
@@ -10,6 +11,24 @@ use Yii;
  */
 class Module extends \yii\base\Module
 {
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['viewAdminPage'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */

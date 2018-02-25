@@ -9,7 +9,7 @@ $params = ArrayHelper::merge(
 
 return [
     'name' => 'Yii2-basic-start',
-    'language' => 'en',
+    'language' => 'ru',
     'basePath' => dirname(__DIR__),
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -19,6 +19,7 @@ return [
         'log',
         'modules\main\Bootstrap',
         'modules\users\Bootstrap',
+        'modules\rbac\Bootstrap',
         'modules\admin\Bootstrap',
     ],
     'modules' => [
@@ -27,6 +28,12 @@ return [
         ],
         'users' => [
             'class' => 'modules\users\Module',
+        ],
+        'rbac' => [
+            'class' => 'modules\rbac\Module',
+            'params' => [
+                'userClass' => 'modules\users\models\User',
+            ]
         ],
         'admin' => [
             'class' => 'modules\admin\Module',
@@ -42,8 +49,11 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-               '<_a:(error)>' => 'site/<a>',
+                '<_a:(error)>' => 'site/<a>',
             ],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
