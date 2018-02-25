@@ -24,12 +24,14 @@ Modules
 - main
 - users
 - admin
+- rbac (manage web interface)
 
 Functional
 - Reset password
 - Confirmation by email
 - Last visit
 - Console commands
+- RBAC
 
 ## CSS Themes Bootstrap
 
