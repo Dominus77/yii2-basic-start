@@ -20,6 +20,7 @@ return [
     'Email Confirm Token' => 'Ключ подтверждения email',
     'Password Reset Token' => 'Ключ сброса пароля',
     'Password Hash' => 'Хэш пароля',
+    'Role' => 'Роль',
 
     'Blocked' => 'Заблокирован',
     'Active' => 'Активирован',

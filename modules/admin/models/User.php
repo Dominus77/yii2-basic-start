@@ -10,16 +10,13 @@ use modules\admin\Module;
  * Class User
  * @package modules\admin\models
  *
- * @property $password string
+ * @property string $password Password
  */
 class User extends \modules\users\models\User
 {
-    /**
-     * @var string
-     */
-    public $password;
-
     const SCENARIO_ADMIN_CREATE = 'adminCreate';
+
+    public $password;
 
     /**
      * @return array

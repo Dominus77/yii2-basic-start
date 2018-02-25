@@ -32,11 +32,24 @@ use modules\users\Module;
  * @property array statusesArray Array statuses
  * @property string statusName Name status
  * @property int|string registrationType Type registered
+ * @property string $role User Role Name
  */
 class User extends BaseUser
 {
     use ModuleTrait;
 
+    public $role;
+
+    /**
+     * @inheritdoc
+     * @return array
+     */
+    public function attributeLabels()
+    {
+        return ArrayHelper::merge(parent::attributeLabels(), [
+            'role' => Module::t('module', 'Role'),
+        ]);
+    }
     /**
      * @return object|\yii\db\ActiveQuery
      * @throws \yii\base\InvalidConfigException

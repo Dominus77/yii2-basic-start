@@ -21,6 +21,9 @@ use modules\admin\Module;
  * @property string $first_name First Name
  * @property string $last_name Last Name
  * @property int $registration_type Type Registration
+ * @property string $role User Role Name
+ * @property string $date_from Date From
+ * @property string $date_to Date To
  */
 class UserSearch extends Model
 {
@@ -34,6 +37,9 @@ class UserSearch extends Model
     public $registration_type;
     public $first_name;
     public $last_name;
+    public $role;
+    public $date_from;
+    public $date_to;
 
     /**
      * @inheritdoc
@@ -41,8 +47,8 @@ class UserSearch extends Model
     public function rules()
     {
         return [
-            [['id', 'status', 'last_visit', 'created_at', 'updated_at', 'registration_type'], 'integer'],
-            [['username', 'email', 'first_name', 'last_name'], 'safe'],
+            [['id', 'status'], 'integer'],
+            [['username', 'email', 'first_name', 'last_name', 'role', 'date_from', 'date_to'], 'safe'],
         ];
     }
 
@@ -63,6 +69,7 @@ class UserSearch extends Model
             'first_name' => Module::t('users', 'First Name'),
             'last_name' => Module::t('users', 'Last Name'),
             'registration_type' => Module::t('users', 'Registration Type'),
+            'role' => Module::t('users', 'Role'),
         ];
     }
 
@@ -75,18 +82,51 @@ class UserSearch extends Model
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * @return object|\yii\db\ActiveQuery
+     * @throws \yii\base\InvalidConfigException
+     */
+    protected function getQuery()
+    {
+        $query = User::find();
+        $query->leftJoin('{{%auth_assignment}}', '{{%auth_assignment}}.user_id = {{%users}}.id');
+        return $query;
+    }
+
+    /**
+     * @param \yii\db\ActiveQuery $query
+     * @return ActiveDataProvider
+     */
+    protected function getDataProvider($query)
+    {
+        return new ActiveDataProvider([
+            'query' => $query,
+            'sort' => [
+                'defaultOrder' => ['id' => SORT_ASC],
+                'attributes' => [
+                    'id',
+                    'username',
+                    'email',
+                    'status',
+                    'role' => [
+                        'asc' => ['item_name' => SORT_ASC],
+                        'desc' => ['item_name' => SORT_DESC],
+                        'default' => SORT_ASC,
+                    ],
+                    'last_visit'
+                ]
+            ],
+        ]);
+    }
+
+    /**
      * @param $params
      * @return ActiveDataProvider
      * @throws \yii\base\InvalidConfigException
      */
     public function search($params)
     {
-        $query = User::find();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
+        $query = $this->getQuery();
+        $dataProvider = $this->getDataProvider($query);
 
         $this->load($params);
 
@@ -109,15 +149,14 @@ class UserSearch extends Model
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-            'last_visit' => $this->last_visit,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'registration_type' => $this->registration_type,
+            'item_name' => $this->role,
         ]);
 
         $query->andFilterWhere(['like', 'username', $this->username])
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'first_name', $this->first_name])
-            ->andFilterWhere(['like', 'last_name', $this->last_name]);
+            ->andFilterWhere(['like', 'last_name', $this->last_name])
+            ->andFilterWhere(['>=', 'last_visit', $this->date_from ? strtotime($this->date_from . ' 00:00:00') : null])
+            ->andFilterWhere(['<=', 'last_visit', $this->date_from ? strtotime($this->date_from . ' 23:59:59') : null]);
     }
 }

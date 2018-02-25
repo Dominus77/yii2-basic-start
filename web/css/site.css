@@ -134,3 +134,8 @@ div.required label:after {
     float: left;
     padding-right: 10px;
 }
+
+.profile-user-img {
+    margin-left: auto;
+    margin-right: auto;
+}

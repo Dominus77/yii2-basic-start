@@ -26,6 +26,14 @@ use modules\users\Module;
                 'last_name',
                 'email:email',
                 [
+                    'attribute' => 'role',
+                    'format' => 'raw',
+                    'value' => function ($model) {
+                        $assignModel = new \modules\rbac\models\Assignment();
+                        return $assignModel->getRoleName($model->id);
+                    },
+                ],
+                [
                     'attribute' => 'status',
                     'format' => 'raw',
                     'value' => $model->statusLabelName,

@@ -20,6 +20,7 @@ return [
     'Email Confirm Token' => 'Email Confirm Token',
     'Password Reset Token' => 'Password Reset Token',
     'Password Hash' => 'Password Hash',
+    'Role' => 'Role',
 
     'Blocked' => 'Blocked',
     'Active' => 'Active',

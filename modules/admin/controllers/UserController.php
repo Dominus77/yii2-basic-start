@@ -77,10 +77,11 @@ class UserController extends Controller
     {
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $assignModel = new \modules\rbac\models\Assignment();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'assignModel' => $assignModel,
         ]);
     }
 

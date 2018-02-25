@@ -2,13 +2,40 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\web\JsExpression;
+use app\assets\DatePickerAsset;
 use modules\admin\Module;
 
 /**
  * @var $this yii\web\View
  * @var $searchModel modules\admin\models\search\UserSearch
  * @var $dataProvider yii\data\ActiveDataProvider
+ * @var $assignModel \modules\rbac\models\Assignment
  */
+
+$language = substr(\Yii::$app->language, 0, 2);
+DatePickerAsset::$language = $language;
+DatePickerAsset::register($this);
+
+$js = new JsExpression("
+    initDatePicker();
+    $(document).on('ready pjax:success', function() {
+       initDatePicker();
+    });
+
+    function initDatePicker()
+    {
+        /** @see http://bootstrap-datepicker.readthedocs.io/en/latest/index.html */
+        $('#datepicker').datepicker({
+            language: '{$language}',
+            autoclose: true,
+            format: 'dd.mm.yyyy',
+            zIndexOffset: 1001,
+            orientation: 'bottom'
+        });
+    }
+");
+$this->registerJs($js, \yii\web\View::POS_END);
 
 $this->title = Module::t('users', 'Users');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Administration'), 'url' => ['default/index']];
@@ -26,10 +53,43 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'username',
-            'email:email',
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'headerOptions' => [
+                    'style' => 'width:30px',
+                ],
+            ],
+            [
+                'attribute' => 'username',
+                'filter' => Html::activeInput('text', $searchModel, 'username', [
+                    'class' => 'form-control',
+                    'placeholder' => Module::t('users', '- text -'),
+                    'data' => [
+                        'pjax' => true,
+                    ],
+                ]),
+                'label' => Module::t('users', 'Users'),
+                'format' => 'raw',
+                'value' => function ($data) {
+                    $view = Yii::$app->controller->view;
+                    return $view->render('_avatar_column', ['model' => $data]);
+                },
+                'headerOptions' => ['width' => '120'],
+            ],
+            [
+                'attribute' => 'email',
+                'filter' => Html::activeInput('text', $searchModel, 'email', [
+                    'class' => 'form-control',
+                    'placeholder' => Module::t('users', '- text -'),
+                    'data' => [
+                        'pjax' => true,
+                    ],
+                ]),
+                'format' => 'email',
+                'contentOptions' => [
+                    'style' => 'width:150px',
+                ],
+            ],
             [
                 'attribute' => 'status',
                 'filter' => Html::activeDropDownList($searchModel, 'status', $searchModel->getStatusesArray(), [
@@ -57,10 +117,52 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     return $model->statusLabelName;
                 },
+                'contentOptions' => [
+                    'style' => 'width:150px',
+                ],
             ],
-            'last_visit:datetime',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'role',
+                'filter' => Html::activeDropDownList($searchModel, 'role', $assignModel->getRolesArray(), [
+                    'class' => 'form-control',
+                    'prompt' => Module::t('users', '- all -'),
+                    'data' => [
+                        'pjax' => true,
+                    ],
+                ]),
+                'format' => 'raw',
+                'value' => function ($data) use ($assignModel) {
+                    return $assignModel->getUserRoleName($data->id);
+                },
+                'contentOptions' => [
+                    'style' => 'width:200px',
+                ],
+            ],
+            [
+                'attribute' => 'last_visit',
+                'filter' => '<div class="form-group"><div class="input-group date"><div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>'
+                    . Html::activeInput('text', $searchModel, 'date_from', [
+                        'id' => 'datepicker',
+                        'class' => 'form-control',
+                        'placeholder' => Module::t('module', '- select -'),
+                        'data' => [
+                            'pjax' => true,
+                        ],
+                    ]) . '</div></div>',
+                'format' => 'datetime',
+                'headerOptions' => [
+                    'style' => 'width: 165px;'
+                ]
+            ],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'headerOptions' => [
+                    'style' => 'width:80px',
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center',
+                ],
+            ],
         ],
     ]); ?>
 </div>

@@ -18,6 +18,8 @@ return ArrayHelper::merge($langFile, [
     'Delete' => 'Удалить',
 
     '- all -' => '- все -',
+    '- select -' => '- выбрать -',
+    '- text -' => '- текст -',
 
     'This username is already taken.' => 'Такое имя пользователя уже существует.',
     'This email is already taken.' => 'Такой email уже существует.',
