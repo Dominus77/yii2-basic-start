@@ -17,7 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $menuItems = [
                 [
                     'label' => '<span class="glyphicon glyphicon-user"></span> ' . Module::t('users', 'Users'),
-                    'url' => ['/admin/user/index']
+                    'url' => ['/admin/user/index'],
+                    'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS),
                 ],
             ];
             echo Nav::widget([

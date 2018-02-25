@@ -19,8 +19,8 @@ return [
         'log',
         'modules\main\Bootstrap',
         'modules\users\Bootstrap',
-        'modules\rbac\Bootstrap',
         'modules\admin\Bootstrap',
+        'modules\rbac\Bootstrap',
     ],
     'modules' => [
         'main' => [

@@ -41,22 +41,52 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => MainModule::t('module', 'Home'), 'url' => ['/main/default/index']],
-        ['label' => MainModule::t('module', 'About'), 'url' => ['/main/default/about']],
-        ['label' => MainModule::t('module', 'Contact'), 'url' => ['/main/default/contact']],
+        [
+            'label' => MainModule::t('module', 'Home'),
+            'url' => ['/main/default/index']
+        ],
+        [
+            'label' => MainModule::t('module', 'About'),
+            'url' => ['/main/default/about']
+        ],
+        [
+            'label' => MainModule::t('module', 'Contact'),
+            'url' => ['/main/default/contact']
+        ],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => UserModule::t('module', 'Check in'), 'url' => ['/users/default/signup']];
-        $menuItems[] = ['label' => UserModule::t('module', 'Login'), 'url' => ['/users/default/login']];
+        $menuItems[] = [
+            'label' => UserModule::t('module', 'Login'),
+            'url' => ['/users/default/login']
+        ];
     } else {
         /** @var modules\users\models\User $identity */
         $identity = Yii::$app->user->identity;
         $menuItems[] = [
             'label' => UserModule::t('module', 'My Menu'),
             'items' => [
-                ['label' => '<i class="glyphicon glyphicon-queen"></i> ' . AdminModule::t('module', 'Administration'), 'url' => ['/admin/default/index']],
-                ['label' => '<i class="glyphicon glyphicon-eye-open"></i> ' . UserModule::t('module', 'Profile') . ' (' . $identity->username . ')', 'url' => ['/users/profile/index']],
-                ['label' => '<i class="glyphicon glyphicon-log-out"></i> ' . UserModule::t('module', 'Sign Out'), 'url' => ['/users/default/logout'], 'linkOptions' => ['data-method' => 'post']],
+                [
+                    'label' => '<i class="glyphicon glyphicon-queen"></i> ' . AdminModule::t('module', 'Administration'),
+                    'url' => ['/admin/default/index'],
+                    'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_VIEW_ADMIN_PAGE),
+                ],
+                [
+                    'label' => '<i class="glyphicon glyphicon-lock"></i> ' . AdminModule::t('rbac', 'RBAC'),
+                    'url' => ['/rbac/default/index'],
+                    'visible' => Yii::$app->user->can(\modules\rbac\models\Permission::PERMISSION_MANAGER_RBAC),
+                ],
+                [
+                    'label' => '<i class="glyphicon glyphicon-eye-open"></i> ' . UserModule::t('module', 'Profile') . ' (' . $identity->username . ')',
+                    'url' => ['/users/profile/index'],
+                ],
+                [
+                    'label' => '<i class="glyphicon glyphicon-log-out"></i> ' . UserModule::t('module', 'Sign Out'),
+                    'url' => ['/users/default/logout'],
+                    'linkOptions' => [
+                        'data-method' => 'post'
+                    ]
+                ],
             ],
         ];
     }

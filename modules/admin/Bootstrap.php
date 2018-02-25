@@ -10,7 +10,19 @@ use Yii;
  */
 class Bootstrap
 {
+    /**
+     * Bootstrap constructor.
+     */
     public function __construct()
+    {
+        $this->registerTranslate();
+        $this->registerRules();
+    }
+
+    /**
+     * Translate
+     */
+    protected function registerTranslate()
     {
         $i18n = Yii::$app->i18n;
         $i18n->translations['modules/admin/*'] = [
@@ -19,20 +31,33 @@ class Bootstrap
             'fileMap' => [
                 'modules/admin/module' => 'module.php',
                 'modules/admin/users' => 'users.php',
+                'modules/admin/rbac' => 'rbac.php',
             ],
         ];
+    }
 
+    /**
+     * Rules
+     */
+    protected function registerRules()
+    {
         $urlManager = Yii::$app->urlManager;
-        $urlManager->addRules(
-            [
-                // Declaration of rules here
-                'admin/users' => 'admin/user/index',
-                'admin/user/<id:\d+>/<_a:[\w\-]+>' => 'admin/user/<_a>',
-                'admin/users/<_a:[\w\-]+>' => 'admin/user/<_a>',
+        $urlManager->addRules($this->rules());
+    }
 
-                'admin' => 'admin/default/index',
-                'admin/<_a:[\w\-]+>' => 'admin/default/<_a>',
-            ]
-        );
+    /**
+     * @return array
+     */
+    protected function rules()
+    {
+        $rules = [
+            'admin/users' => 'admin/user/index',
+            'admin/user/<id:\d+>/<_a:[\w\-]+>' => 'admin/user/<_a>',
+            'admin/users/<_a:[\w\-]+>' => 'admin/user/<_a>',
+
+            'admin' => 'admin/default/index',
+            'admin/<_a:[\w\-]+>' => 'admin/default/<_a>',
+        ];
+        return $rules;
     }
 }

@@ -32,7 +32,7 @@ class UserController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => [\modules\rbac\models\Permission::PERMISSION_MANAGER_USERS],
                     ],
                 ],
             ],

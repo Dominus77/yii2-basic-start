@@ -33,9 +33,9 @@ $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
             <div class="pull-right">
                 <?= Html::a('<span class="glyphicon glyphicon-repeat"></span>', Url::to(['init']), [
                     'class' => 'text-yellow',
+                    'title' => Module::t('module', 'Reset rbac'),
                     'data' => [
                         'toggle' => 'tooltip',
-                        'original-title' => Module::t('module', 'Reset rbac'),
                         'method' => 'post',
                         'confirm' => Module::t('module', 'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?'),
                     ]
