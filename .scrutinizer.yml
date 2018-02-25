@@ -4,6 +4,8 @@ filter:
         - "environments/*"
         - "vagrant/*"
         - "modules/users/migrations/*"
+        - "modules/rbac/tests/*"
+        - "modules/rbac/migrations/*"
 checks:
     php:
         code_rating: true
@@ -36,6 +38,7 @@ tools:
             - "vagrant"
             - "tests"
             - "runtime"
+            - "modules/rbac/tests"
     # disable copy paste detector and similarity analyzer as they have no real value
     # and a huge bunch of false-positives
     php_cpd: false

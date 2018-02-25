@@ -7,7 +7,7 @@ use yii\console\Controller;
 use yii\console\Exception;
 use yii\helpers\ArrayHelper;
 use modules\users\models\User;
-use console\components\helpers\Console;
+use app\components\helpers\Console;
 
 /**
  * Class RolesController
