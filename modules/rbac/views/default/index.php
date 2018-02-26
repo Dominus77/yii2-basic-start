@@ -13,11 +13,6 @@ $confirm = Module::t('module', 'Attention! All previously created permissions an
 
 <div class="rbac-default-index">
     <div class="row">
-        <div class="col-lg-offset-3 col-lg-9">
-            <h2><?= Module::t('module', 'RBAC') ?></h2>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-lg-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -29,6 +24,7 @@ $confirm = Module::t('module', 'Attention! All previously created permissions an
             </div>
         </div>
         <div class="col-lg-9">
+            <h2><?= Module::t('module', 'RBAC') ?></h2>
             <p class="lead">
                 <?= Module::t('module', 'Role Based Access Control') ?>
             </p>

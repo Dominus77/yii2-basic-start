@@ -18,11 +18,6 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
 
 <div class="rbac-assign-index">
     <div class="row">
-        <div class="col-lg-offset-3 col-lg-9">
-            <h2><?= Module::t('module', 'Assign') ?></h2>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-lg-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -34,6 +29,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
             </div>
         </div>
         <div class="col-lg-9">
+            <h2><?= Module::t('module', 'Assign') ?></h2>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'layout' => "{items}",

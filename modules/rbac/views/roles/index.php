@@ -15,11 +15,6 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Roles');
 
 <div class="rbac-roles-index">
     <div class="row">
-        <div class="col-lg-offset-3 col-lg-9">
-            <h2><?= Module::t('module', 'Roles') ?></h2>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-lg-3">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -31,6 +26,7 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Roles');
             </div>
         </div>
         <div class="col-lg-9">
+            <h2><?= Module::t('module', 'Roles') ?></h2>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'layout' => "{items}",
