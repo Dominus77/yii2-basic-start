@@ -49,14 +49,6 @@ class DefaultController extends \modules\rbac\console\InitController
     }
 
     /**
-     * @return string
-     */
-    public function actionOptions()
-    {
-        return $this->render('options');
-    }
-
-    /**
      * Переинициализация RBAC
      * с установкой настроек по умолчанию
      */
@@ -65,6 +57,6 @@ class DefaultController extends \modules\rbac\console\InitController
         if ($this->processInit()) {
             Yii::$app->session->setFlash('success', Module::t('module', 'The operation was successful!'));
         }
-        Yii::$app->getResponse()->redirect(Url::to(['options']));
+        Yii::$app->getResponse()->redirect(Url::to(['index']));
     }
 }

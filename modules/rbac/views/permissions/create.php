@@ -15,11 +15,22 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Create');
 
 <div class="rbac-permissions-create">
     <div class="row">
+        <div class="col-lg-offset-3 col-lg-9">
+            <h2><?= Module::t('module', 'New Permission') ?></h2>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-3">
-            <?= RbacMenu::widget() ?>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><?= Module::t('module', 'Menu') ?></h3>
+                </div>
+                <div class="panel-body">
+                    <?= RbacMenu::widget() ?>
+                </div>
+            </div>
         </div>
         <div class="col-lg-9">
-            <h1><?= Module::t('module', 'Create Permission') ?></h1>
             <?= $this->render('_form', [
                 'model' => $model,
             ]) ?>

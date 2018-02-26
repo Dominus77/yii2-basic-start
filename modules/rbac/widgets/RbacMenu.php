@@ -4,7 +4,6 @@ namespace modules\rbac\widgets;
 
 use yii\bootstrap\Widget;
 use yii\widgets\Menu;
-use yii\helpers\Html;
 use modules\rbac\Module;
 
 /**
@@ -49,7 +48,7 @@ class RbacMenu extends Widget
                 'url' => ['permissions/index'],
                 'items' => [
                     [
-                        'label' => Module::t('module', 'Create Permission'),
+                        'label' => Module::t('module', 'New Permission'),
                         'url' => ['permissions/create'],
                     ],
                 ],
@@ -59,7 +58,7 @@ class RbacMenu extends Widget
                 'url' => ['roles/index'],
                 'items' => [
                     [
-                        'label' => Module::t('module', 'Create Role'),
+                        'label' => Module::t('module', 'New Role'),
                         'url' => ['roles/create'],
                     ],
                 ],
@@ -67,18 +66,6 @@ class RbacMenu extends Widget
             [
                 'label' => Module::t('module', 'Assign rights'),
                 'url' => ['assign/index'],
-            ],
-            [
-                'label' => Module::t('module', 'Options'),
-                'url' => ['default/options'],
-                /*'linkOptions' => [
-                    'title' => Module::t('module', 'Reset rbac'),
-                    'data' => [
-                        'toggle' => 'tooltip',
-                        'method' => 'post',
-                        'confirm' => Module::t('module', 'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?'),
-                    ],
-                ],*/
             ],
         ];
     }

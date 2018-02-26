@@ -15,21 +15,22 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Roles');
 
 <div class="rbac-roles-index">
     <div class="row">
+        <div class="col-lg-offset-3 col-lg-9">
+            <h2><?= Module::t('module', 'Roles') ?></h2>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-3">
-            <?= RbacMenu::widget() ?>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><?= Module::t('module', 'Menu') ?></h3>
+                </div>
+                <div class="panel-body">
+                    <?= RbacMenu::widget() ?>
+                </div>
+            </div>
         </div>
         <div class="col-lg-9">
-            <h1><?= Module::t('module', 'Roles') ?></h1>
-            <p class="pull-right">
-                <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ', ['create'], [
-                    'class' => 'btn btn-success',
-                    'title' => Module::t('module', 'Create Role'),
-                    'data' => [
-                        'toggle' => 'tooltip',
-                        'placement' => 'left',
-                    ],
-                ]) ?>
-            </p>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'layout' => "{items}",
