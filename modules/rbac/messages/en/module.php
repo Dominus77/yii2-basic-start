@@ -16,6 +16,7 @@ return [
     'Update Permission' => 'Update Permission',
     'View Role' => 'View Role',
     'View Permission' => 'View Permission',
+    'Options' => 'Options',
 
     'Name' => 'Name',
     'Type' => 'Type',
@@ -24,6 +25,7 @@ return [
     'Data' => 'Data',
     'Created' => 'Created',
     'Updated' => 'Updated',
+    'Reset' => 'Reset',
 
     'Super Administrator' => 'Super Administrator',
     'Administrator' => 'Administrator',

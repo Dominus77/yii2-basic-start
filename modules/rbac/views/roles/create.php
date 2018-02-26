@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use modules\rbac\widgets\RbacMenu;
 use modules\rbac\Module;
 
 /* @var $this yii\web\View */
@@ -13,16 +14,15 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Create');
 ?>
 
 <div class="rbac-roles-create">
-    <div class="box box-primary">
-        <div class="box-header with-border">
-            <h3 class="box-title"><?= Module::t('module', 'Create Role') ?></h3>
+    <div class="row">
+        <div class="col-lg-3">
+            <?= RbacMenu::widget() ?>
         </div>
-        <div class="box-body">
+        <div class="col-lg-9">
+            <h1><?= Module::t('module', 'Create Role') ?></h1>
             <?= $this->render('_form', [
                 'model' => $model,
             ]) ?>
-        </div>
-        <div class="box-footer">
             <div class="form-group">
                 <?= Html::submitButton('<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> ' . Module::t('module', 'Create'), [
                     'class' => 'btn btn-success', 'form' => 'form-role'

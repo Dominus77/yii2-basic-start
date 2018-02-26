@@ -16,6 +16,7 @@ return [
     'Update Permission' => 'Редактирование разрешения',
     'View Role' => 'Просмотр роли',
     'View Permission' => 'Просмотр разрешения',
+    'Options' => 'Опции',
 
     'Name' => 'Название',
     'Type' => 'Тип',
@@ -24,6 +25,7 @@ return [
     'Data' => 'Параметры',
     'Created' => 'Дата создания',
     'Updated' => 'Дата изменения',
+    'Reset' => 'Сброс',
 
     'Super Administrator' => 'Супер Администратор',
     'Administrator' => 'Администратор',

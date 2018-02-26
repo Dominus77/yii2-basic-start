@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use modules\rbac\widgets\RbacMenu;
 use modules\rbac\Module;
 
 /* @var $this yii\web\View */
@@ -13,26 +14,22 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
 ?>
 
 <div class="rbac-permissions-index">
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title"><?= Module::t('module', 'Permissions') ?></h3>
-
-            <div class="box-tools pull-right"></div>
+    <div class="row">
+        <div class="col-lg-3">
+            <?= RbacMenu::widget() ?>
         </div>
-        <div class="box-body">
-            <div class="pull-left"></div>
-            <div class="pull-right">
-                <p>
-                    <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ', ['create'], [
-                        'class' => 'btn btn-block btn-success',
-                        'title' => Module::t('module', 'Create Permission'),
-                        'data' => [
-                            'toggle' => 'tooltip',
-                            'placement' => 'left',
-                        ],
-                    ]) ?>
-                </p>
-            </div>
+        <div class="col-lg-9">
+            <h1><?= Module::t('module', 'Permissions') ?></h1>
+            <p class="pull-right">
+                <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ', ['create'], [
+                    'class' => 'btn btn-success',
+                    'title' => Module::t('module', 'Create Permission'),
+                    'data' => [
+                        'toggle' => 'tooltip',
+                        'placement' => 'left',
+                    ],
+                ]) ?>
+            </p>
             <?= GridView::widget([
                 'id' => 'grid-rbac-permissions',
                 'dataProvider' => $dataProvider,
@@ -95,6 +92,5 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Permissions');
                 ],
             ]); ?>
         </div>
-        <div class="box-footer"></div>
     </div>
 </div>

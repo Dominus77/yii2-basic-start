@@ -1,0 +1,15 @@
+.rbac-menu li ul {
+    display: none;
+}
+
+.rbac-menu li.active ul {
+    display: block;
+}
+
+.rbac-menu ul.sub-menu li a {
+    padding-left: 20px;
+}
+
+.rbac-menu ul.sub-menu li.active {
+    font-weight: bold;
+}

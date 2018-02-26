@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use yii\grid\GridView;
+use modules\rbac\widgets\RbacMenu;
 use modules\rbac\Module;
 
 /* @var $this yii\web\View */
@@ -16,15 +17,12 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
 ?>
 
 <div class="rbac-assign-index">
-    <div class="box">
-        <div class="box-header with-border">
-            <h3 class="box-title"><?= Module::t('module', 'Assign') ?></h3>
-
-            <div class="box-tools pull-right"></div>
+    <div class="row">
+        <div class="col-lg-3">
+            <?= RbacMenu::widget() ?>
         </div>
-        <div class="box-body">
-            <div class="pull-left"></div>
-            <div class="pull-right"></div>
+        <div class="col-lg-9">
+            <h1><?= Module::t('module', 'Assign') ?></h1>
             <?= GridView::widget([
                 'dataProvider' => $dataProvider,
                 'layout' => "{items}",
@@ -94,6 +92,5 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Assign');
                 ],
             ]); ?>
         </div>
-        <div class="box-footer"></div>
     </div>
 </div>
