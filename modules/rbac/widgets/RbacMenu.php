@@ -44,21 +44,21 @@ class RbacMenu extends Widget
     {
         return [
             [
-                'label' => Module::t('module', 'Permissions'),
+                'label' => Module::t('module', 'Permissions') . '<span class="caret"></span>',
                 'url' => ['permissions/index'],
                 'items' => [
                     [
-                        'label' => Module::t('module', 'New Permission'),
+                        'label' => '+ ' . Module::t('module', 'New Permission'),
                         'url' => ['permissions/create'],
                     ],
                 ],
             ],
             [
-                'label' => Module::t('module', 'Roles'),
+                'label' => Module::t('module', 'Roles') . '<span class="caret"></span>',
                 'url' => ['roles/index'],
                 'items' => [
                     [
-                        'label' => Module::t('module', 'New Role'),
+                        'label' => '+ ' . Module::t('module', 'New Role'),
                         'url' => ['roles/create'],
                     ],
                 ],

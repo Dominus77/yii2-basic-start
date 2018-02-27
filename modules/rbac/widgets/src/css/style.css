@@ -2,12 +2,20 @@
     display: none;
 }
 
+.rbac-menu li.active {
+    font-weight: bold;
+}
+
 .rbac-menu li.active ul {
     display: block;
 }
 
 .rbac-menu ul.sub-menu li a {
-    padding-left: 20px;
+    padding-left: 30px
+}
+
+.rbac-menu ul.sub-menu li {
+    font-weight: normal;
 }
 
 .rbac-menu ul.sub-menu li.active {

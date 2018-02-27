@@ -12,20 +12,24 @@ use modules\rbac\Module;
 
 <div class="rbac-roles-form">
 
-    <?php $form = ActiveForm::begin([
-        'id' => 'form-role',
-        'enableAjaxValidation' => true,
-        'validationUrl' => ['ajax-validate-form'],
-    ]); ?>
+    <div class="row">
+        <div class="col-md-5">
+            <?php $form = ActiveForm::begin([
+                'id' => 'form-role',
+                'enableAjaxValidation' => true,
+                'validationUrl' => ['ajax-validate-form'],
+            ]); ?>
 
-    <?= $form->field($model, 'name')->textInput([
-        'maxlength' => true,
-        'disabled' => ($model->scenario === $model::SCENARIO_UPDATE) ? true : false,
-    ])->hint(Module::t('module', 'Example: moderator')) ?>
+            <?= $form->field($model, 'name')->textInput([
+                'maxlength' => true,
+                'disabled' => ($model->scenario === $model::SCENARIO_UPDATE) ? true : false,
+            ])->hint(Module::t('module', 'Example: moderator')) ?>
 
-    <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
-    <?php ActiveForm::end(); ?>
+            <?php ActiveForm::end(); ?>
+        </div>
+    </div>
 
     <?php if ($model->scenario == $model::SCENARIO_UPDATE) : ?>
         <div id="assign-container-roles">
