@@ -1,11 +1,11 @@
 # Yii2 Start Project Basic Template
 
 [![Latest Stable Version](https://poser.pugx.org/dominus77/yii2-basic-start/v/stable)](https://packagist.org/packages/dominus77/yii2-basic-start)
-[![Latest Unstable Version](https://poser.pugx.org/dominus77/yii2-basic-start/v/unstable)](https://packagist.org/packages/dominus77/yii2-basic-start)
 [![License](https://poser.pugx.org/dominus77/yii2-basic-start/license)](https://packagist.org/packages/dominus77/yii2-basic-start)
 [![Build Status](https://travis-ci.org/Dominus77/yii2-basic-start.svg?branch=master)](https://travis-ci.org/Dominus77/yii2-basic-start)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Dominus77/yii2-basic-start/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Dominus77/yii2-basic-start/?branch=master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/Dominus77/yii2-basic-start/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
+[![PayPal donate button](https://img.shields.io/badge/paypal-donate-yellow.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XR3VKHSUN9D88 "Donate once-off to this project using Paypal")
 [![Total Downloads](https://poser.pugx.org/dominus77/yii2-basic-start/downloads)](https://packagist.org/packages/dominus77/yii2-basic-start)
 
 The application is built using basic pattern and has a modular structure.
