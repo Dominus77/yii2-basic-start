@@ -49,9 +49,23 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Module::t('users', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+    <div class="row">
+        <div class="col-md-1 pull-right">
+            <?= app\widgets\PageSize::widget([
+                'label' => '',
+                'defaultPageSize' => 25,
+                'sizes' => [2 => 2, 5 => 5, 10 => 10, 15 => 15, 20 => 20, 25 => 25, 50 => 50, 100 => 100, 200 => 200],
+                'options' => [
+                    'class' => 'form-control'
+                ]
+            ]); ?>
+        </div>
+    </div>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'filterSelector' => 'select[name="per-page"]',
         'columns' => [
             [
                 'class' => 'yii\grid\SerialColumn',
