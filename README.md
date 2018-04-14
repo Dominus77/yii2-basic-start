@@ -90,7 +90,7 @@ php yii users/user/create
 - Password: set password username (min 6 symbol);
 - Status: set status username (0 - blocked, 1 - active, 2 - wait, ? - Help);
 
-###Initialize RBAC
+### Initialize RBAC
 
 When initialized, the user with ID:1 is assigned the SuperAdmin role.
 
