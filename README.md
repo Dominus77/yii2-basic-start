@@ -65,7 +65,7 @@ Init an environment:
 php init
 ```
 
-Create a database, default configure: yii2basic_start
+Create a database, default configure: yii2_basic_start
 
 Apply migration:
 
@@ -89,6 +89,23 @@ php yii users/user/create
 - Email: set email username;
 - Password: set password username (min 6 symbol);
 - Status: set status username (0 - blocked, 1 - active, 2 - wait, ? - Help);
+
+###Initialize RBAC
+
+When initialized, the user with ID:1 is assigned the SuperAdmin role.
+
+```
+php yii rbac/init
+```
+A command to assign roles to other users:
+
+```
+php yii rbac/roles/assign
+```
+To untie:
+```
+php yii rbac/roles/revoke
+```
 
 You can then access the application through the following URL:
 
@@ -123,13 +140,13 @@ AddDefaultCharset utf-8
 
 ## TESTING
 
-Create a database, default configure yii2basic_start_test in app\config\test-local.php
+Create a database, default configure yii2_basic_start_test in app\config\test-local.php
 
 ```
 //...
 'components' => [
     'db' => [
-        'dsn' => 'mysql:host=localhost;dbname=yii2basic_start_test',
+        'dsn' => 'mysql:host=localhost;dbname=yii2_basic_start_test',
     ],
 ]
 //...
