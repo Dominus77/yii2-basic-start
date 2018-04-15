@@ -30,6 +30,6 @@ install:
 
 script:
   - php init --env=Development --overwrite=n
-  - mysql -e 'CREATE DATABASE yii2basic_start_test;'
+  - mysql -e 'CREATE DATABASE yii2_basic_start_test;'
   - php yii_test migrate --interactive=0
   - vendor/bin/codecept run
