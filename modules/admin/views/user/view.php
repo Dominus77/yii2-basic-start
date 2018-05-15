@@ -12,6 +12,12 @@ $this->title = $model->username;
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Administration'), 'url' => ['default/index']];
 $this->params['breadcrumbs'][] = ['label' => Module::t('users', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerJs(new yii\web\JsExpression("
+    $(function () {
+        $('[data-toggle=\"tooltip\"]').tooltip();        
+    });
+"), yii\web\View::POS_END);
 ?>
 <div class="admin-user-view">
 
@@ -33,7 +39,13 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="row">
         <div class="col-sm-2">
-            <?= AvatarWidget::widget() ?>
+            <?= AvatarWidget::widget([
+                'email' => $model->email,
+                'imageOptions' => [
+                    'class' => 'profile-user-img img-responsive img-circle',
+                    'style' => 'width:100px',
+                    'alt' => 'avatar_' . $model->username,
+                ]]) ?>
         </div>
         <div class="col-sm-10">
             <?= DetailView::widget([
@@ -77,7 +89,30 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'attribute' => 'auth_key',
                         'format' => 'raw',
-                        'value' => $this->render('_auth_key', ['model' => $model]),
+                        'value' => function ($model) {
+                            $key = Html::tag('code', $model->auth_key, ['id' => 'authKey']);
+                            $link = Html::a(Module::t('module', 'Generate'), ['generate-auth-key', 'id' => $model->id], [
+                                'class' => 'btn btn-sm btn-default',
+                                'title' => Module::t('module', 'Generate new key'),
+                                'data' => [
+                                    'toggle' => 'tooltip',
+                                ],
+                                'onclick' => "                                
+                                $.ajax({
+                                    type: 'POST',
+                                    cache: false,
+                                    url: this.href,
+                                    success: function(response) {                                       
+                                        if(response.success) {
+                                            $('#authKey').html(response.success);
+                                        }
+                                    }
+                                });
+                                return false;
+                            ",
+                            ]);
+                            return $key . ' ' . $link;
+                        }
                     ],
                     'password_hash',
                     'password_reset_token',
