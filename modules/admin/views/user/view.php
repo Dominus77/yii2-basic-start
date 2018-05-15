@@ -91,9 +91,9 @@ $this->registerJs(new yii\web\JsExpression("
                         'format' => 'raw',
                         'value' => function ($model) {
                             $key = Html::tag('code', $model->auth_key, ['id' => 'authKey']);
-                            $link = Html::a(Module::t('module', 'Generate'), ['generate-auth-key', 'id' => $model->id], [
+                            $link = Html::a(Module::t('users', 'Generate'), ['generate-auth-key', 'id' => $model->id], [
                                 'class' => 'btn btn-sm btn-default',
-                                'title' => Module::t('module', 'Generate new key'),
+                                'title' => Module::t('users', 'Generate new key'),
                                 'data' => [
                                     'toggle' => 'tooltip',
                                 ],

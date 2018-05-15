@@ -45,20 +45,21 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Module::t('users', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <div class="row">
-        <div class="col-md-1 pull-right">
-            <?= app\widgets\PageSize::widget([
-                'label' => '',
-                'defaultPageSize' => 25,
-                'sizes' => [2 => 2, 5 => 5, 10 => 10, 15 => 15, 20 => 20, 25 => 25, 50 => 50, 100 => 100, 200 => 200],
-                'options' => [
-                    'class' => 'form-control'
-                ]
-            ]); ?>
+        <div class="col-md-12">
+            <div class="pull-right">
+                <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Module::t('users', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
+            </div>
+            <div class="col-md-1">
+                <?= app\widgets\PageSize::widget([
+                    'label' => '',
+                    'defaultPageSize' => 25,
+                    'sizes' => [2 => 2, 5 => 5, 10 => 10, 15 => 15, 20 => 20, 25 => 25, 50 => 50, 100 => 100, 200 => 200],
+                    'options' => [
+                        'class' => 'form-control'
+                    ]
+                ]); ?>
+            </div>
         </div>
     </div>
 

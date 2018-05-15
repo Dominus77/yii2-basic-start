@@ -19,7 +19,7 @@ use modules\admin\Module;
 class UserController extends Controller
 {
     /** @var  string|bool $jsFile */
-    //protected $jsFile;
+    protected $jsFile;
 
     /**
      * @inheritdoc
@@ -51,13 +51,13 @@ class UserController extends Controller
     public function init()
     {
         parent::init();
-        //$this->processRegisterJs();
+        $this->processRegisterJs();
     }
 
     /**
      * Publish and register the required JS file
      */
-    /*protected function processRegisterJs()
+    protected function processRegisterJs()
     {
         $this->jsFile = '@modules/users/views/ajax/ajax.js';
         $assetManager = Yii::$app->assetManager;
@@ -66,7 +66,7 @@ class UserController extends Controller
         $this->view->registerJsFile($url,
             ['depends' => 'yii\web\JqueryAsset',] // depends
         );
-    }*/
+    }
 
     /**
      * Lists all User models.
@@ -185,7 +185,7 @@ class UserController extends Controller
     {
         $model = $this->findModel($id);
         $model->generateAuthKey();
-        $model->save();
+        $model->save(false);
         return $model;
     }
 
