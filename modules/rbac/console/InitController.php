@@ -45,8 +45,9 @@ class InitController extends Controller
         $roles = $this->processCreate($auth, $this->getRoles(), self::TYPE_ROLE);
         $permissions = $this->processCreate($auth, $this->getPermissions(), self::TYPE_PERMISSION);
         $this->processAddPermissionToRoles($auth, $roles, $permissions);
-        $this->processAddChildRoles($auth, $roles);
+        //$this->processAddChildRoles($auth, $roles); // Inheritance of roles - If you uncomment, the roles are inherited
 
+        // Assign a super administrator role to the user from id 1
         $role = ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN);
         return $this->processAssignUserToRole($auth, $role, 1);
     }
@@ -66,7 +67,7 @@ class InitController extends Controller
     /**
      * Create Roles and Permissions
      *
-     * @param $auth yii\rbac\ManagerInterface|yii\rbac\BaseManager|yii\rbac\DbManager|yii\rbac\PhpManager
+     * @param object $auth
      * @param array $array
      * @param string $type
      * @return array
@@ -91,7 +92,7 @@ class InitController extends Controller
     /**
      * Add Permissions for Roles
      *
-     * @param yii\rbac\BaseManager|yii\rbac\DbManager|yii\rbac\PhpManager $auth
+     * @param object $auth
      * @param array $roles
      * @param array $permissions
      */
@@ -131,7 +132,7 @@ class InitController extends Controller
     /**
      * Add Child role for Roles
      *
-     * @param yii\rbac\BaseManager|yii\rbac\DbManager|yii\rbac\PhpManager $auth
+     * @param object $auth
      * @param array $roles
      */
     protected function processAddChildRoles($auth, $roles = [])
@@ -151,7 +152,7 @@ class InitController extends Controller
 
     /**
      * Assign Role to User
-     * @param yii\rbac\BaseManager|yii\rbac\DbManager|yii\rbac\PhpManager $auth
+     * @param object $auth
      * @param array $role
      * @param int $userId
      * @return bool
