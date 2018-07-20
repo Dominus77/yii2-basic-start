@@ -6,13 +6,11 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
 use modules\users\traits\ModuleTrait;
 use modules\users\Module;
 
 /**
- * Class BaseUser
+ * Class IdentityUser
  * @package modules\users\models
  *
  * This is the model class for table "{{%users}}".
@@ -31,12 +29,9 @@ use modules\users\Module;
  * @property string $first_name First Name
  * @property string $last_name Last Name
  * @property int $registration_type Type Registration
- * @property string statusLabelName Status name in label
  * @property array statusesArray Array statuses
- * @property string statusName Name status
- * @property int|string registrationType Type registered
  */
-class BaseUser extends ActiveRecord implements IdentityInterface
+class IdentityUser extends ActiveRecord implements IdentityInterface
 {
     use ModuleTrait;
 
@@ -186,42 +181,6 @@ class BaseUser extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds users by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * Generates "remember me" authentication key
-     */
-    public function generateAuthKey()
-    {
-        $this->auth_key = Yii::$app->security->generateRandomString();
-    }
-
-    /**
-     * Actions before saving
-     *
-     * @param bool $insert
-     * @return bool
-     */
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            if ($insert) {
-                $this->generateAuthKey();
-            }
-            return true;
-        }
-        return false;
-    }
-
-    /**
      * @return array
      */
     public static function getStatusesArray()
@@ -231,76 +190,6 @@ class BaseUser extends ActiveRecord implements IdentityInterface
             self::STATUS_ACTIVE => Module::t('module', 'Active'),
             self::STATUS_WAIT => Module::t('module', 'Wait'),
             self::STATUS_DELETED => Module::t('module', 'Deleted'),
-        ];
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStatusName()
-    {
-        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
-    }
-
-    /**
-     * Return <span class="label label-success">Active</span>
-     * @return string
-     */
-    public function getStatusLabelName()
-    {
-        $name = ArrayHelper::getValue(self::getLabelsArray(), $this->status);
-        return Html::tag('span', $this->getStatusName(), ['class' => 'label label-' . $name]);
-    }
-
-    /**
-     * @return array
-     */
-    public static function getLabelsArray()
-    {
-        return [
-            self::STATUS_BLOCKED => 'default',
-            self::STATUS_ACTIVE => 'success',
-            self::STATUS_WAIT => 'warning',
-            self::STATUS_DELETED => 'danger',
-        ];
-    }
-
-    /**
-     * Type of registration
-     * How the user is created
-     * If the system registration type is registered by itself,
-     * if it is created from the admin area,
-     * then the login type that created the account
-     *
-     * @return mixed|string
-     */
-    public function getRegistrationType()
-    {
-        if ($this->registration_type > 0) {
-            if (($model = User::findOne($this->registration_type)) !== null) {
-                return $model->username;
-            }
-        }
-        return $this->getRegistrationTypeName();
-    }
-
-    /**
-     * Returns the registration type string
-     * @return mixed
-     */
-    public function getRegistrationTypeName()
-    {
-        return ArrayHelper::getValue(self::getRegistrationTypesArray(), $this->registration_type);
-    }
-
-    /**
-     * Returns an array of log types
-     * @return array
-     */
-    public static function getRegistrationTypesArray()
-    {
-        return [
-            self::TYPE_REGISTRATION_SYSTEM => Module::t('module', 'System'),
         ];
     }
 }

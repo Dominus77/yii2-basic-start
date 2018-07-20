@@ -63,7 +63,6 @@ class DefaultController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             return $this->goBack();
         }
-
         $model->password = '';
         return $this->render('login', [
             'model' => $model,
@@ -114,13 +113,14 @@ class DefaultController extends Controller
         }
         return $this->goHome();
     }
-
+    
     /**
      * Resets password.
      *
      * @param string $token
-     * @return string|\yii\web\Response
+     * @return string|Response
      * @throws BadRequestHttpException
+     * @throws \yii\base\Exception
      */
     public function actionResetPassword($token)
     {
@@ -140,9 +140,9 @@ class DefaultController extends Controller
     }
 
     /**
-     * @inheritdoc
-     * @param $model ResetPasswordForm
+     * @param ResetPasswordForm $model
      * @return bool
+     * @throws \yii\base\Exception
      */
     public function processResetPassword($model)
     {

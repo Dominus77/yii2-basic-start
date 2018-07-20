@@ -43,7 +43,7 @@ $config = [
             'baseUrl' => '',
         ],
         'user' => [
-            'identityClass' => 'modules\users\models\User',
+            'identityClass' => 'modules\users\models\IdentityUser',
             'enableAutoLogin' => true,
             'loginUrl' => ['users/default/login'],
         ],

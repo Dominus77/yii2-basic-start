@@ -3,16 +3,16 @@
 namespace modules\users\models;
 
 use Yii;
+use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use modules\users\models\query\UserQuery;
-use modules\users\traits\ModuleTrait;
 use modules\users\Module;
 
 /**
  * Class User
  * @package modules\users\models
  *
- * This is the model class extends BaseUser.
+ * This is the model class extends IdentityUser.
  *
  * @property int $id ID
  * @property string $username Username
@@ -34,11 +34,40 @@ use modules\users\Module;
  * @property int|string registrationType Type registered
  * @property string $role User Role Name
  */
-class User extends BaseUser
+class User extends IdentityUser
 {
-    use ModuleTrait;
-
     public $role;
+
+    /**
+     * @return mixed
+     */
+    public function getStatusName()
+    {
+        return ArrayHelper::getValue(self::getStatusesArray(), $this->status);
+    }
+
+    /**
+     * Return <span class="label label-success">Active</span>
+     * @return string
+     */
+    public function getStatusLabelName()
+    {
+        $name = ArrayHelper::getValue(self::getLabelsArray(), $this->status);
+        return Html::tag('span', $this->getStatusName(), ['class' => 'label label-' . $name]);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getLabelsArray()
+    {
+        return [
+            self::STATUS_BLOCKED => 'default',
+            self::STATUS_ACTIVE => 'success',
+            self::STATUS_WAIT => 'warning',
+            self::STATUS_DELETED => 'danger',
+        ];
+    }
 
     /**
      * @inheritdoc
