@@ -179,6 +179,25 @@ class User extends IdentityUser
     }
 
     /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null|yii\db\ActiveRecord
+     */
+    public static function findByUsername($username)
+    {
+        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    }
+
+    /**
+     * Generates "remember me" authentication key
+     */
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    /**
      * Generates email confirmation token
      */
     public function generateEmailConfirmToken()
