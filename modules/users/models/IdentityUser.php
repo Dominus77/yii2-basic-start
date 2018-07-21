@@ -54,17 +54,12 @@ class IdentityUser extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 3;
 
     /**
-     * Type of registration
-     */
-    const TYPE_REGISTRATION_SYSTEM = 0;
-
-    /**
      * @inheritdoc
      * @return string
      */
     public static function tableName()
     {
-        return '{{%users}}';
+        return '{{%user}}';
     }
 
     /**
@@ -100,8 +95,6 @@ class IdentityUser extends ActiveRecord implements IdentityInterface
             ['first_name', 'string', 'max' => 45],
             ['last_name', 'string', 'max' => 45],
 
-            ['registration_type', 'safe'],
-
             ['status', 'integer'],
             ['status', 'default', 'value' => self::STATUS_WAIT],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
@@ -125,7 +118,6 @@ class IdentityUser extends ActiveRecord implements IdentityInterface
             'status' => Module::t('module', 'Status'),
             'first_name' => Module::t('module', 'First Name'),
             'last_name' => Module::t('module', 'Last Name'),
-            'registration_type' => Module::t('module', 'Registration Type'),
             'email_confirm_token' => Module::t('module', 'Email Confirm Token'),
             'password_reset_token' => Module::t('module', 'Password Reset Token'),
             'password_hash' => Module::t('module', 'Password Hash'),

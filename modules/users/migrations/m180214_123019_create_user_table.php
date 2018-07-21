@@ -21,7 +21,7 @@ class m180214_123019_create_user_table extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%users}}', [
+        $this->createTable('{{%user}}', [
             'id' => $this->primaryKey()->comment('ID'),
             'username' => $this->string()->notNull()->unique()->comment('Username'),
             'auth_key' => $this->string(32)->notNull()->comment('Authorization Key'),
@@ -35,8 +35,17 @@ class m180214_123019_create_user_table extends Migration
             'updated_at' => $this->integer()->notNull()->comment('Updated'),
             'first_name' => $this->string(45)->comment('First Name'),
             'last_name' => $this->string(45)->comment('Last Name'),
-            'registration_type' => $this->string()->defaultValue(0)->comment('Type Registration'),
         ], $tableOptions);
+
+        // OAuth https://github.com/yiisoft/yii2-authclient
+        $this->createTable('{{%auth}}', [
+            'id' => $this->primaryKey()->comment('ID'),
+            'user_id' => $this->integer()->notNull()->comment('User ID'),
+            'source' => $this->string()->notNull()->comment('Source'),
+            'source_id' => $this->string()->notNull()->comment('Source ID'),
+        ], $tableOptions);
+
+        $this->addForeignKey('FK-auth-user_id-user-id', '{{%auth}}', 'user_id', '{{%user}}', 'id', 'CASCADE', 'CASCADE');
     }
 
     /**
@@ -44,6 +53,7 @@ class m180214_123019_create_user_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%users}}');
+        $this->dropTable('{{%auth}}');
+        $this->dropTable('{{%user}}');
     }
 }

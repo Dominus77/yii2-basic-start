@@ -217,45 +217,6 @@ class User extends IdentityUser
     }
 
     /**
-     * Type of registration
-     * How the user is created
-     * If the system registration type is registered by itself,
-     * if it is created from the admin area,
-     * then the login type that created the account
-     *
-     * @return mixed|string
-     */
-    public function getRegistrationType()
-    {
-        if ($this->registration_type > 0) {
-            if (($model = User::findOne($this->registration_type)) !== null) {
-                return $model->username;
-            }
-        }
-        return $this->getRegistrationTypeName();
-    }
-
-    /**
-     * Returns the registration type string
-     * @return mixed
-     */
-    public function getRegistrationTypeName()
-    {
-        return ArrayHelper::getValue(self::getRegistrationTypesArray(), $this->registration_type);
-    }
-
-    /**
-     * Returns an array of log types
-     * @return array
-     */
-    public static function getRegistrationTypesArray()
-    {
-        return [
-            self::TYPE_REGISTRATION_SYSTEM => Module::t('module', 'System'),
-        ];
-    }
-
-    /**
      * @param string|integer $id
      * @return bool
      */

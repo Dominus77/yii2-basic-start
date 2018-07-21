@@ -119,13 +119,6 @@ $this->registerJs(new yii\web\JsExpression("
                     'email_confirm_token:email',
                     'created_at:datetime',
                     'updated_at:datetime',
-                    [
-                        'attribute' => 'registration_type',
-                        'format' => 'raw',
-                        'value' => function ($model) {
-                            return $model->registrationType;
-                        },
-                    ],
                 ],
             ]) ?>
         </div>
