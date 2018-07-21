@@ -27,11 +27,9 @@ use modules\users\Module;
  * @property int $updated_at Updated
  * @property string $first_name First Name
  * @property string $last_name Last Name
- * @property int|string $registration_type Type Registration
  * @property string statusLabelName Status name in label
  * @property array statusesArray Array statuses
  * @property string statusName Name status
- * @property int|string registrationType Type registered
  * @property string $role User Role Name
  */
 class User extends IdentityUser

@@ -34,7 +34,6 @@ class UserSearch extends Model
     public $last_visit;
     public $created_at;
     public $updated_at;
-    public $registration_type;
     public $first_name;
     public $last_name;
     public $role;
@@ -68,7 +67,6 @@ class UserSearch extends Model
             'status' => Module::t('users', 'Status'),
             'first_name' => Module::t('users', 'First Name'),
             'last_name' => Module::t('users', 'Last Name'),
-            'registration_type' => Module::t('users', 'Registration Type'),
             'role' => Module::t('users', 'Role'),
         ];
     }

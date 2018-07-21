@@ -102,4 +102,17 @@ return [
 
     'Please fill in the following fields to sign up' => 'Для регистрации, пожалуйста заполните следующие поля',
     'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.' => 'Если у Вас есть вопросы или деловое предложение, пожалуйста, свяжитесь с нами. Спасибо!',
+
+    'Remove expired users {:Username}' => 'Удалены истекшие пользователи {:Username}',
+    'Cannot remove expired users {:Username}' => 'Не удалось удалить истекших пользователей {:Username}',
+    'Fail!' => 'Не удачно!',
+    'Done!' => 'Готово!',
+
+    'Password:' => 'Пароль:',
+    'More than 6 symbols' => 'Не менее 6 символов',
+    'Status:' => 'Статус:',
+    'New password:' => 'Новый пароль:',
+    'User "{:Username}" not found' => 'Пользователь "{:Username}" не найден',
+    'Success!' => 'Успешно!',
+    'Error!' => 'Ошибка!',
 ];

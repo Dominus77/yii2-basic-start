@@ -7,6 +7,7 @@ use modules\users\models\User;
 use yii\console\Controller;
 use yii\console\Exception;
 use app\components\helpers\Console;
+use modules\users\Module;
 
 /**
  * Class UsersController
@@ -33,14 +34,14 @@ class UserController extends Controller
         $model = new User();
         $this->readValue($model, 'username');
         $this->readValue($model, 'email');
-        $model->setPassword($this->prompt(Console::convertEncoding(Yii::t('app', 'Password:')), [
+        $model->setPassword($this->prompt(Console::convertEncoding(Module::t('module', 'Password:')), [
             'required' => true,
             'pattern' => '#^.{6,255}$#i',
-            'error' => Console::convertEncoding(Yii::t('app', 'More than 6 symbols')),
+            'error' => Console::convertEncoding(Module::t('module', 'More than 6 symbols')),
         ]));
         $model->generateAuthKey();
         if (($select = Console::convertEncoding(User::getStatusesArray())) && is_array($select)) {
-            $model->status = $this->select(Console::convertEncoding(Yii::t('app', 'Status:')), $select);
+            $model->status = $this->select(Console::convertEncoding(Module::t('module', 'Status:')), $select);
             $this->log($model->save());
         } else {
             $this->log();
@@ -54,7 +55,7 @@ class UserController extends Controller
      */
     public function actionRemove()
     {
-        $username = $this->prompt(Console::convertEncoding(Yii::t('app', 'Username:')), ['required' => true]);
+        $username = $this->prompt(Console::convertEncoding(Module::t('module', 'Username:')), ['required' => true]);
         $model = $this->findModel($username);
         if ($model->delete() !== false) {
             $this->log(true);
@@ -68,7 +69,7 @@ class UserController extends Controller
      */
     public function actionActivate()
     {
-        $username = $this->prompt(Console::convertEncoding(Yii::t('app', 'Username:')), ['required' => true]);
+        $username = $this->prompt(Console::convertEncoding(Module::t('module', 'Username:')), ['required' => true]);
         $model = $this->findModel($username);
         $model->status = User::STATUS_ACTIVE;
         $model->removeEmailConfirmToken();
@@ -81,12 +82,12 @@ class UserController extends Controller
      */
     public function actionChangePassword()
     {
-        $username = $this->prompt(Console::convertEncoding(Yii::t('app', 'Username:')), ['required' => true]);
+        $username = $this->prompt(Console::convertEncoding(Module::t('module', 'Username:')), ['required' => true]);
         $model = $this->findModel($username);
-        $model->setPassword($this->prompt(Console::convertEncoding(Yii::t('app', 'New password:')), [
+        $model->setPassword($this->prompt(Console::convertEncoding(Module::t('module', 'New password:')), [
             'required' => true,
             'pattern' => '#^.{6,255}$#i',
-            'error' => Console::convertEncoding(Yii::t('app', 'More than 6 symbols')),
+            'error' => Console::convertEncoding(Module::t('module', 'More than 6 symbols')),
         ]));
         $this->log($model->save());
     }
@@ -101,7 +102,7 @@ class UserController extends Controller
         if (!$model = User::findOne(['username' => $username])) {
             throw new Exception(
                 Console::convertEncoding(
-                    Yii::t('app', 'User "{:Username}" not found', [':Username' => $username])
+                    Module::t('module', 'User "{:Username}" not found', [':Username' => $username])
                 )
             );
         }
@@ -114,7 +115,7 @@ class UserController extends Controller
      */
     private function readValue($model = null, $attribute = '')
     {
-        $model->$attribute = $this->prompt(Console::convertEncoding(Yii::t('app', mb_convert_case($attribute, MB_CASE_TITLE, 'UTF-8') . ':')), [
+        $model->$attribute = $this->prompt(Console::convertEncoding(Module::t('module', mb_convert_case($attribute, MB_CASE_TITLE, 'UTF-8') . ':')), [
             'validator' => function ($input, &$error) use ($model, $attribute) {
                 /** @var string $input */
                 $model->$attribute = $input;
@@ -135,9 +136,9 @@ class UserController extends Controller
     private function log($success = false)
     {
         if ($success === true || $success !== 0) {
-            $this->stdout(Console::convertEncoding(Yii::t('app', 'Success!')), Console::FG_GREEN, Console::BOLD);
+            $this->stdout(Console::convertEncoding(Module::t('module', 'Success!')), Console::FG_GREEN, Console::BOLD);
         } else {
-            $this->stderr(Console::convertEncoding(Yii::t('app', 'Error!')), Console::FG_RED, Console::BOLD);
+            $this->stderr(Console::convertEncoding(Module::t('module', 'Error!')), Console::FG_RED, Console::BOLD);
         }
         echo PHP_EOL;
     }

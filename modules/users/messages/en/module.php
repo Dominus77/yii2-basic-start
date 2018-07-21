@@ -101,4 +101,17 @@ return [
     'The requested page does not exist.' => 'The requested page does not exist.',
 
     'Please fill in the following fields to sign up' => 'Please fill in the following fields to sign up',
+
+    'Remove expired users {:Username}' => 'Remove expired users {:Username}',
+    'Cannot remove expired users {:Username}' => 'Cannot remove expired users {:Username}',
+    'Fail!' => 'Fail!',
+    'Done!' => 'Done!',
+
+    'Password:' => 'Password:',
+    'More than 6 symbols' => 'More than 6 symbols',
+    'Status:' => 'Status:',
+    'New password:' => 'New password:',
+    'User "{:Username}" not found' => 'User "{:Username}" not found',
+    'Success!' => 'Success!',
+    'Error!' => 'Error!',
 ];

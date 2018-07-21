@@ -41,7 +41,6 @@ class User extends \modules\users\models\User
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
 
             ['password', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX],
-            ['registration_type', 'safe'],
         ];
     }
 
@@ -68,7 +67,6 @@ class User extends \modules\users\models\User
         if (parent::beforeSave($insert)) {
             if (!empty($this->password)) {
                 $this->setPassword($this->password);
-                $this->registration_type = Yii::$app->user->id;
             }
             return true;
         }
