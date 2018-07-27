@@ -28,7 +28,6 @@ use modules\users\Module;
  * @property int $updated_at Updated
  * @property string $first_name First Name
  * @property string $last_name Last Name
- * @property int $registration_type Type Registration
  * @property array statusesArray Array statuses
  */
 class IdentityUser extends ActiveRecord implements IdentityInterface
