@@ -49,7 +49,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
                         'captchaAction' => Url::to('/main/default/captcha'),
                         'options' => [
-                            'placeholder' => true
+                            'placeholder' => true,
+                            'class' => 'form-control',
                         ]
                     ]) ?>
                 <?php endif; ?>
