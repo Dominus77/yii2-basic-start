@@ -31,10 +31,7 @@
     "config": {
         "process-timeout": 1800
     },
-    "repositories": [
-        {
-            "packagist": true
-        },
+    "repositories": [        
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
