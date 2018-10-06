@@ -1,5 +1,3 @@
-It is released under the terms of the following BSD License.
-
 Copyright © 2018 by Dominus77 (https://github.com/Dominus77)
 All rights reserved.
 
@@ -13,7 +11,7 @@ are met:
    notice, this list of conditions and the following disclaimer in
    the documentation and/or other materials provided with the
    distribution.
- * Neither the name of Yii Software LLC nor the names of its
+ * Neither the name of Dominus77 nor the names of its
    contributors may be used to endorse or promote products derived
    from this software without specific prior written permission.
 
