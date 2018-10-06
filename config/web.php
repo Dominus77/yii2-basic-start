@@ -37,7 +37,7 @@ $config = [
     'id' => 'app',
     'name' => 'Yii2-basic-start',
     'language' => 'ru',
-    'homeUrl' => '/',
+    'homeUrl' => '/',       
     'components' => [
         'request' => [
             'baseUrl' => '',
@@ -48,6 +48,7 @@ $config = [
             'loginUrl' => ['users/default/login'],
         ],
         'assetManager' => [
+            'appendTimestamp' => true,
             'bundles' => [
                 'yii\bootstrap\BootstrapAsset' => [
                     'sourcePath' => '@app/assets/bootstrap',

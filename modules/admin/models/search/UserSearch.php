@@ -85,7 +85,7 @@ class UserSearch extends Model
     protected function getQuery()
     {
         $query = User::find();
-        $query->leftJoin('{{%auth_assignment}}', '{{%auth_assignment}}.user_id = {{%users}}.id');
+        $query->leftJoin('{{%auth_assignment}}', '{{%auth_assignment}}.user_id = {{%user}}.id');
         return $query;
     }
 

@@ -31,11 +31,10 @@ use modules\users\Module;
  * @property array statusesArray Array statuses
  * @property string statusName Name status
  * @property string $role User Role Name
+ * @property string $password
  */
 class User extends IdentityUser
 {
-    public $role;
-
     /**
      * @return mixed
      */
@@ -215,6 +214,32 @@ class User extends IdentityUser
     }
 
     /**
+     * User role
+     */
+    public function getRole()
+    {
+        return ($role = $this->getUserRoleValue($this->id)) ? Yii::t('app', $role->description) : Yii::t('app', 'Not assigned');
+    }
+
+    /**
+     * @param string|int $user_id
+     * @return mixed|null
+     */
+    protected function getUserRoleValue($user_id)
+    {
+        $authManager = Yii::$app->authManager;
+        if ($role = $authManager->getRolesByUser($user_id)) {
+            return ArrayHelper::getValue($role, function ($role) {
+                foreach ($role as $key => $value) {
+                    return $value;
+                }
+                return null;
+            });
+        }
+        return null;
+    }
+
+    /**
      * @param string|integer $id
      * @return bool
      */
@@ -272,5 +297,23 @@ class User extends IdentityUser
                 $this->status = self::STATUS_ACTIVE;
         }
         return $this->status;
+    }
+
+    /**
+     * Actions before delete
+     *
+     * @return bool
+     */
+    public function beforeDelete()
+    {
+        if (parent::beforeDelete()) {
+            // Отвязываем от ролей
+            $authManager = Yii::$app->getAuthManager();
+            if ($authManager->getRolesByUser($this->id)) {
+                $authManager->revokeAll($this->id);
+            }
+            return true;
+        }
+        return false;
     }
 }

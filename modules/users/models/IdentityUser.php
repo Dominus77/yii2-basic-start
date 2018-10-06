@@ -29,6 +29,7 @@ use modules\users\Module;
  * @property string $first_name First Name
  * @property string $last_name Last Name
  * @property array statusesArray Array statuses
+ * @property string $authKey
  */
 class IdentityUser extends ActiveRecord implements IdentityInterface
 {

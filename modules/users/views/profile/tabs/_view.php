@@ -34,8 +34,7 @@ $this->registerJs(new yii\web\JsExpression("
                     'attribute' => 'role',
                     'format' => 'raw',
                     'value' => function ($model) {
-                        $assignModel = new \modules\rbac\models\Assignment();
-                        return $assignModel->getRoleName($model->id);
+                        return $model->role;
                     },
                 ],
                 [
