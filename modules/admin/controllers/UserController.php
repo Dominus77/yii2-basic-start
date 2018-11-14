@@ -108,8 +108,11 @@ class UserController extends Controller
         $model = new User();
         $model->scenario = $model::SCENARIO_ADMIN_CREATE;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->generateAuthKey();
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('create', [
