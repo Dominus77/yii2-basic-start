@@ -2,13 +2,19 @@
 
 namespace tests\models;
 
+use modules\main\models\ContactForm;
+
 /**
  * Class ContactFormTest
  * @package tests\models
  */
 class ContactFormTest extends \Codeception\Test\Unit
 {
+    /**
+     * @var ContactForm
+     */
     private $model;
+
     /**
      * @var \UnitTester
      */
@@ -19,9 +25,8 @@ class ContactFormTest extends \Codeception\Test\Unit
      */
     public function testEmailIsSentOnContact()
     {
-        /** @var \modules\main\models\ContactForm $model */
         $this->model = $this->getMockBuilder('modules\main\models\ContactForm')
-            ->setMethods(['validate'])
+            ->onlyMethods(['validate'])
             ->getMock();
 
         $this->model->expects($this->once())
@@ -45,6 +50,6 @@ class ContactFormTest extends \Codeception\Test\Unit
         expect($emailMessage->getTo())->hasKey('admin@example.com');
         expect($emailMessage->getFrom())->hasKey('tester@example.com');
         expect($emailMessage->getSubject())->equals('very important letter subject');
-        expect($emailMessage->toString())->contains('body of current message');
+        expect($emailMessage->toString())->stringContainsString('body of current message');
     }
 }
