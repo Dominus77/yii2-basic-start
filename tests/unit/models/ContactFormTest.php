@@ -2,51 +2,40 @@
 
 namespace tests\models;
 
+use Codeception\Test\Unit;
 use modules\main\models\ContactForm;
+use yii\mail\MessageInterface;
 
 /**
  * Class ContactFormTest
  * @package tests\models
  */
-class ContactFormTest extends \Codeception\Test\Unit
+class ContactFormTest extends Unit
 {
-    /**
-     * @var ContactForm
-     */
-    private $model;
-
     /**
      * @var \UnitTester
      */
-    public $tester;
+    protected $tester;
 
-    /**
-     * @inheritdoc
-     */
-    public function testEmailIsSentOnContact()
+    public function testSendEmail()
     {
-        $this->model = $this->getMockBuilder('modules\main\models\ContactForm')
-            ->onlyMethods(['validate'])
-            ->getMock();
+        $model = new ContactForm();
 
-        $this->model->expects($this->once())
-            ->method('validate')
-            ->will($this->returnValue(true));
-
-        $this->model->attributes = [
+        $model->attributes = [
             'name' => 'Tester',
             'email' => 'tester@example.com',
             'subject' => 'very important letter subject',
             'body' => 'body of current message',
         ];
 
-        expect_that($this->model->contact('admin@example.com'));
+        expect_that($model->contact('admin@example.com'));
 
         // using Yii2 module actions to check email was sent
         $this->tester->seeEmailIsSent();
 
         $emailMessage = $this->tester->grabLastSentEmail();
-        expect('valid email is sent', $emailMessage)->isInstanceOf('yii\mail\MessageInterface');
+
+        expect('valid email is sent', $emailMessage)->isInstanceOf(MessageInterface::class);
         expect($emailMessage->getTo())->hasKey('admin@example.com');
         expect($emailMessage->getFrom())->hasKey('tester@example.com');
         expect($emailMessage->getSubject())->equals('very important letter subject');
