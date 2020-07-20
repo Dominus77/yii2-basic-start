@@ -36,7 +36,8 @@ use modules\users\Module;
 class User extends IdentityUser
 {
     /**
-     * @return mixed
+     * @return mixed|null
+     * @throws \Exception
      */
     public function getStatusName()
     {
@@ -45,7 +46,9 @@ class User extends IdentityUser
 
     /**
      * Return <span class="label label-success">Active</span>
+     *
      * @return string
+     * @throws \Exception
      */
     public function getStatusLabelName()
     {
@@ -99,8 +102,8 @@ class User extends IdentityUser
     /**
      * Finds user by username or email
      *
-     * @param string $string
-     * @return static|null
+     * @param $string
+     * @return array|\yii\db\ActiveRecord|null
      * @throws \yii\base\InvalidConfigException
      */
     public static function findByUsernameOrEmail($string)
