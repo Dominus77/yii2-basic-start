@@ -37,12 +37,13 @@ $config = [
     'id' => 'app',
     'name' => 'Yii2-basic-start',
     'language' => 'ru',
-    'homeUrl' => '/',       
+    'homeUrl' => '/',
     'components' => [
         'request' => [
             'baseUrl' => '',
         ],
         'user' => [
+            'class' => 'modules\users\components\WebUser',
             'identityClass' => 'modules\users\models\IdentityUser',
             'enableAutoLogin' => true,
             'loginUrl' => ['users/default/login'],

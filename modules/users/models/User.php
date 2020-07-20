@@ -79,6 +79,7 @@ class User extends IdentityUser
             'role' => Module::t('module', 'Role'),
         ]);
     }
+
     /**
      * @return object|\yii\db\ActiveQuery
      * @throws \yii\base\InvalidConfigException
@@ -218,6 +219,7 @@ class User extends IdentityUser
 
     /**
      * User role
+     * @throws \Exception
      */
     public function getRole()
     {
@@ -227,6 +229,7 @@ class User extends IdentityUser
     /**
      * @param string|int $user_id
      * @return mixed|null
+     * @throws \Exception
      */
     protected function getUserRoleValue($user_id)
     {

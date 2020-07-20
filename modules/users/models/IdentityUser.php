@@ -2,7 +2,6 @@
 
 namespace modules\users\models;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
@@ -34,6 +33,7 @@ use modules\users\Module;
 class IdentityUser extends ActiveRecord implements IdentityInterface
 {
     use ModuleTrait;
+    private $roles;
 
     /**
      * Length password symbols min
