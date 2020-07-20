@@ -1,13 +1,13 @@
 <?php
 
-namespace tests\models;
+namespace unit\models;
 
 use app\fixtures\User as UserFixture;
 use modules\users\models\SignupForm;
 
 /**
  * Class SignupFormTest
- * @package tests\models
+ * @package unit\models
  */
 class SignupFormTest extends \Codeception\Test\Unit
 {

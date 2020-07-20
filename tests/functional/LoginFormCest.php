@@ -1,14 +1,17 @@
 <?php
 
+namespace functional;
+
+use FunctionalTester;
 use app\fixtures\User as UserFixture;
 
 /**
  * Class LoginFormCest
+ * @package functional
  */
 class LoginFormCest
 {
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function _before(\FunctionalTester $I)
@@ -23,9 +26,8 @@ class LoginFormCest
     }
 
     /**
-     * @inheritdoc
-     * @param $email
-     * @param $password
+     * @param $email string
+     * @param $password string
      * @return array
      */
     protected function formParams($email, $password)
@@ -37,7 +39,6 @@ class LoginFormCest
     }
 
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function checkEmpty(\FunctionalTester $I)
@@ -48,7 +49,6 @@ class LoginFormCest
     }
 
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function checkWrongPassword(\FunctionalTester $I)
@@ -58,7 +58,6 @@ class LoginFormCest
     }
 
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function checkValidLogin(\FunctionalTester $I)

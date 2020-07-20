@@ -1,12 +1,17 @@
 <?php
 
+namespace functional;
+
+use Yii;
+use FunctionalTester;
+
 /**
  * Class HomeCest
+ * @package functional
  */
 class HomeCest
 {
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function checkOpen(FunctionalTester $I)

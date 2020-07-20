@@ -1,16 +1,17 @@
 <?php
 
-namespace tests\models;
+namespace unit\models;
 
 use Yii;
+use Codeception\Test\Unit;
 use modules\users\models\LoginForm;
 use app\fixtures\User as UserFixture;
 
 /**
  * Class LoginFormTest
- * @package tests\models
+ * @package unit\models
  */
-class LoginFormTest extends \Codeception\Test\Unit
+class LoginFormTest extends Unit
 {
     /**
      * @var \_generated\UnitTesterActions

@@ -1,12 +1,16 @@
 <?php
 
+namespace functional;
+
+use FunctionalTester;
+
 /**
  * Class ContactFormCest
+ * @package functional
  */
 class ContactFormCest 
 {
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function _before(\FunctionalTester $I)
@@ -15,7 +19,6 @@ class ContactFormCest
     }
 
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function openContactPage(\FunctionalTester $I)
@@ -24,7 +27,6 @@ class ContactFormCest
     }
 
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function submitEmptyForm(\FunctionalTester $I)
@@ -40,7 +42,6 @@ class ContactFormCest
     }
 
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function submitFormWithIncorrectEmail(\FunctionalTester $I)
@@ -61,9 +62,7 @@ class ContactFormCest
     }
 
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
-     * @throws \_generated\ModuleException
      */
     public function submitFormSuccessfully(\FunctionalTester $I)
     {

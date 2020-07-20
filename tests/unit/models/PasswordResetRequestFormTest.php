@@ -1,17 +1,18 @@
 <?php
 
-namespace tests\models;
+namespace unit\models;
 
 use Yii;
+use Codeception\Test\Unit;
 use modules\users\models\PasswordResetRequestForm;
 use app\fixtures\User as UserFixture;
 use modules\users\models\User;
 
 /**
  * Class PasswordResetRequestFormTest
- * @package tests\models
+ * @package unit\models
  */
-class PasswordResetRequestFormTest extends \Codeception\Test\Unit
+class PasswordResetRequestFormTest extends Unit
 {
     /**
      * @var \_generated\UnitTesterActions

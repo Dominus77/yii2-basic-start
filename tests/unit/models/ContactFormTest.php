@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\models;
+namespace unit\models;
 
 use Codeception\Test\Unit;
 use modules\main\models\ContactForm;
@@ -8,7 +8,7 @@ use yii\mail\MessageInterface;
 
 /**
  * Class ContactFormTest
- * @package tests\models
+ * @package unit\models
  */
 class ContactFormTest extends Unit
 {

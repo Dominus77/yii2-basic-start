@@ -1,12 +1,16 @@
 <?php
 
+namespace functional;
+
+use FunctionalTester;
+
 /**
  * Class AboutCest
+ * @package functional
  */
 class AboutCest
 {
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function checkAbout(FunctionalTester $I)

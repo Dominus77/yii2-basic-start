@@ -1,13 +1,13 @@
 <?php
 
-namespace tests\models;
+namespace unit\models;
 
 use app\fixtures\User as UserFixture;
 use modules\users\models\ResetPasswordForm;
 
 /**
  * Class ResetPasswordFormTest
- * @package tests\models
+ * @package unit\models
  */
 class ResetPasswordFormTest extends \Codeception\Test\Unit
 {

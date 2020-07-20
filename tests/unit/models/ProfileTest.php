@@ -1,15 +1,16 @@
 <?php
 
-namespace tests\models;
+namespace unit\models;
 
 use app\fixtures\User as UserFixture;
+use Codeception\Test\Unit;
 use modules\users\models\Profile;
 
 /**
  * Class ProfileTest
- * @package tests\models
+ * @package unit\models
  */
-class ProfileTest extends \Codeception\Test\Unit
+class ProfileTest extends Unit
 {
 
     /**

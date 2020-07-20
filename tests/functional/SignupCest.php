@@ -1,7 +1,12 @@
 <?php
 
+namespace functional;
+
+use FunctionalTester;
+
 /**
  * Class SignupCest
+ * @package functional
  */
 class SignupCest
 {
@@ -11,7 +16,6 @@ class SignupCest
     protected $formId = '#form-signup';
 
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function _before(FunctionalTester $I)
@@ -20,7 +24,6 @@ class SignupCest
     }
 
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function signupWithEmptyFields(FunctionalTester $I)
@@ -35,7 +38,6 @@ class SignupCest
     }
 
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function signupWithWrongEmail(FunctionalTester $I)
@@ -53,7 +55,6 @@ class SignupCest
     }
 
     /**
-     * @inheritdoc
      * @param FunctionalTester $I
      */
     public function signupSuccessfully(FunctionalTester $I)
