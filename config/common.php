@@ -57,6 +57,18 @@ return [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'messageConfig' => [
+                'charset' => 'UTF-8'
+            ],
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.ru',
+                'username' => '',
+                'password' => '',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
