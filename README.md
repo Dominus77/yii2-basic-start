@@ -136,8 +136,8 @@ You can then access the application through the following URL:
 http://localhost/basic-project/web/
 ```
 
-Create .htaccess file or add folder \web
-
+Create `.htaccess` file or add folder `app/web`
+`
 ```apache
 AddDefaultCharset utf-8
 # Mod_Autoindex
