@@ -8,7 +8,10 @@ use modules\rbac\Module;
 
 $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = Module::t('module', 'RBAC');
-$confirm = Module::t('module', 'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?');
+$confirm = Module::t(
+    'module',
+    'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?' // phpcs:ignore
+);
 ?>
 
 <div class="rbac-default-index">

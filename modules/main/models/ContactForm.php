@@ -33,7 +33,12 @@ class ContactForm extends Model
             ['email', 'email'],
             // verifyCode needs to be entered correctly
             ['verifyCode', 'required', 'on' => self::SCENARIO_GUEST],
-            ['verifyCode', 'captcha', 'captchaAction' => Url::to('/main/default/captcha'), 'on' => self::SCENARIO_GUEST],
+            [
+                'verifyCode',
+                'captcha',
+                'captchaAction' => Url::to('/main/default/captcha'),
+                'on' => self::SCENARIO_GUEST
+            ],
         ];
     }
 

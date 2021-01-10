@@ -1,6 +1,8 @@
 <?php
 
+use modules\rbac\models\Assignment;
 use yii\helpers\Html;
+use yii\web\View;
 use yii\widgets\DetailView;
 use modules\users\widgets\AvatarWidget;
 use modules\admin\Module;
@@ -9,7 +11,10 @@ use modules\admin\Module;
 /* @var $model modules\admin\models\User */
 
 $this->title = $model->username;
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Administration'), 'url' => ['default/index']];
+$this->params['breadcrumbs'][] = [
+    'label' => Module::t('module', 'Administration'),
+    'url' => ['default/index']
+];
 $this->params['breadcrumbs'][] = ['label' => Module::t('users', 'Users'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -26,14 +31,28 @@ $this->registerJs(new yii\web\JsExpression("
     <div class="row">
         <div class="col-sm-12">
             <p class="pull-right">
-                <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('users', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('users', 'Delete'), ['delete', 'id' => $model->id], [
+                <?= Html::a(
+                    '<span class="glyphicon glyphicon-pencil"></span> ' . Module::t(
+                        'users',
+                        'Update'
+                    ),
+                    ['update', 'id' => $model->id],
+                    ['class' => 'btn btn-primary']
+                ) ?>
+                <?= Html::a(
+                    '<span class="glyphicon glyphicon-pencil"></span> ' . Module::t(
+                        'users',
+                        'Delete'
+                    ),
+                    ['delete', 'id' => $model->id],
+                    [
                     'class' => 'btn btn-danger',
                     'data' => [
                         'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                         'method' => 'post',
                     ],
-                ]) ?>
+                    ]
+                ) ?>
             </p>
         </div>
     </div>
@@ -60,7 +79,7 @@ $this->registerJs(new yii\web\JsExpression("
                         'attribute' => 'role',
                         'format' => 'raw',
                         'value' => function ($model) {
-                            $assignModel = new \modules\rbac\models\Assignment();
+                            $assignModel = new Assignment();
                             return $assignModel->getRoleName($model->id);
                         },
                     ],
@@ -73,7 +92,10 @@ $this->registerJs(new yii\web\JsExpression("
                             $identity = Yii::$app->user->identity;
                             /** @var $model modules\admin\models\User */
                             if ($model->id != $identity->id && !$model->isSuperAdmin($model->id)) {
-                                $view->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
+                                $view->registerJs(
+                                    "$('#status_link_" . $model->id . "').click(handleAjaxLink);",
+                                    View::POS_READY
+                                );
                                 return Html::a($model->statusLabelName, ['status', 'id' => $model->id], [
                                     'id' => 'status_link_' . $model->id,
                                     'title' => Module::t('users', 'Click to change the status'),
@@ -91,7 +113,10 @@ $this->registerJs(new yii\web\JsExpression("
                         'format' => 'raw',
                         'value' => function ($model) {
                             $key = Html::tag('code', $model->auth_key, ['id' => 'authKey']);
-                            $link = Html::a(Module::t('users', 'Generate'), ['generate-auth-key', 'id' => $model->id], [
+                            $link = Html::a(Module::t(
+                                'users',
+                                'Generate'
+                            ), ['generate-auth-key', 'id' => $model->id], [
                                 'class' => 'btn btn-sm btn-default',
                                 'title' => Module::t('users', 'Generate new key'),
                                 'data' => [

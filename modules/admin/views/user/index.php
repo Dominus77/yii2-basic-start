@@ -1,19 +1,21 @@
 <?php
 
+use modules\rbac\models\Assignment;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\web\JsExpression;
 use app\assets\DatePickerAsset;
 use modules\admin\Module;
+use yii\web\View;
 
 /**
  * @var $this yii\web\View
  * @var $searchModel modules\admin\models\search\UserSearch
  * @var $dataProvider yii\data\ActiveDataProvider
- * @var $assignModel \modules\rbac\models\Assignment
+ * @var $assignModel Assignment
  */
 
-$language = substr(\Yii::$app->language, 0, 2);
+$language = substr(Yii::$app->language, 0, 2);
 DatePickerAsset::$language = $language;
 DatePickerAsset::register($this);
 
@@ -35,10 +37,15 @@ $js = new JsExpression("
         });
     }
 ");
-$this->registerJs($js, \yii\web\View::POS_END);
+$this->registerJs($js, View::POS_END);
 
 $this->title = Module::t('users', 'Users');
-$this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Administration'), 'url' => ['default/index']];
+$this->params['breadcrumbs'][] = [
+    'label' => Module::t(
+        'module',
+        'Administration'
+    ), 'url' => ['default/index']
+];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-user-index">
@@ -48,13 +55,22 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-md-12">
             <div class="pull-right">
-                <?= Html::a('<span class="glyphicon glyphicon-plus"></span> ' . Module::t('users', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a(
+                    '<span class="glyphicon glyphicon-plus"></span> ' . Module::t(
+                        'users',
+                        'Create'
+                    ),
+                    ['create'],
+                    ['class' => 'btn btn-success']
+                ) ?>
             </div>
             <div class="col-md-1">
                 <?= app\widgets\PageSize::widget([
                     'label' => '',
                     'defaultPageSize' => 25,
-                    'sizes' => [2 => 2, 5 => 5, 10 => 10, 15 => 15, 20 => 20, 25 => 25, 50 => 50, 100 => 100, 200 => 200],
+                    'sizes' => [
+                        2 => 2, 5 => 5, 10 => 10, 15 => 15, 20 => 20, 25 => 25, 50 => 50, 100 => 100, 200 => 200
+                    ],
                     'options' => [
                         'class' => 'form-control'
                     ]
@@ -107,13 +123,18 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'status',
-                'filter' => Html::activeDropDownList($searchModel, 'status', $searchModel->getStatusesArray(), [
-                    'class' => 'form-control',
-                    'prompt' => Module::t('users', '- all -'),
-                    'data' => [
-                        'pjax' => true,
-                    ],
-                ]),
+                'filter' => Html::activeDropDownList(
+                    $searchModel,
+                    'status',
+                    $searchModel->getStatusesArray(),
+                    [
+                        'class' => 'form-control',
+                        'prompt' => Module::t('users', '- all -'),
+                        'data' => [
+                            'pjax' => true,
+                        ],
+                    ]
+                ),
                 'format' => 'raw',
                 'value' => function ($model) {
                     $view = Yii::$app->controller->view;
@@ -121,7 +142,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     $identity = Yii::$app->user->identity;
                     /** @var $model modules\admin\models\User */
                     if ($model->id != $identity->id && !$model->isSuperAdmin($model->id)) {
-                        $view->registerJs("$('#status_link_" . $model->id . "').click(handleAjaxLink);", \yii\web\View::POS_READY);
+                        $view->registerJs(
+                            "$('#status_link_" . $model->id . "').click(handleAjaxLink);",
+                            View::POS_READY
+                        );
                         return Html::a($model->statusLabelName, ['status', 'id' => $model->id], [
                             'id' => 'status_link_' . $model->id,
                             'title' => Module::t('users', 'Click to change the status'),
@@ -155,7 +179,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'last_visit',
-                'filter' => '<div class="form-group"><div class="input-group date"><div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>'
+                'filter' => '<div class="form-group"><div class="input-group date"><div class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></div>' // phpcs:ignore
                     . Html::activeInput('text', $searchModel, 'date_from', [
                         'id' => 'datepicker',
                         'class' => 'form-control',

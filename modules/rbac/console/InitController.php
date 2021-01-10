@@ -2,6 +2,7 @@
 
 namespace modules\rbac\console;
 
+use modules\rbac\components\AuthorRule;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\console\Controller;
@@ -55,7 +56,8 @@ class InitController extends Controller
         $roles = $this->processCreate($auth, $this->getRoles(), self::TYPE_ROLE);
         $permissions = $this->processCreate($auth, $this->getPermissions(), self::TYPE_PERMISSION);
         $this->processAddPermissionToRoles($auth, $roles, $permissions);
-        //$this->processAddChildRoles($auth, $roles); // Inheritance of roles - If you uncomment, the roles are inherited
+        // Inheritance of roles - If you uncomment, the roles are inherited
+        //$this->processAddChildRoles($auth, $roles);
 
         // Assign a super administrator role to the user from id 1
         $role = ArrayHelper::getValue($roles, Role::ROLE_SUPER_ADMIN);
@@ -90,7 +92,7 @@ class InitController extends Controller
             $result[$key]->description = Module::t('module', $value);
             // Add rules
             if ($key == Permission::PERMISSION_UPDATE_OWN_POST) {
-                $authorRule = new \modules\rbac\components\AuthorRule;
+                $authorRule = new AuthorRule;
                 $auth->add($authorRule);
                 $result[$key]->ruleName = $authorRule->name;
             }

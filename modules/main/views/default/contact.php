@@ -21,11 +21,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')) : ?>
         <div class="alert alert-success">
-            <?= Module::t('module', 'Thank you for contacting us. We will respond to you as soon as possible.') ?>
+            <?= Module::t(
+                'module',
+                'Thank you for contacting us. We will respond to you as soon as possible.'
+            ) ?>
         </div>
     <?php else : ?>
         <p>
-            <?= Module::t('module', 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.') ?>
+            <?= Module::t(
+                'module',
+                'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.' // phpcs:ignore
+            ) ?>
         </p>
 
         <div class="row">
@@ -34,7 +40,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 
                 <?php if ($model->scenario === $model::SCENARIO_GUEST) : ?>
-                    <?= $form->field($model, 'name')->textInput(['autofocus' => false, 'placeholder' => true]) ?>
+                    <?= $form->field($model, 'name')
+                        ->textInput(['autofocus' => false, 'placeholder' => true]) ?>
 
                     <?= $form->field($model, 'email')->textInput(['placeholder' => true]) ?>
                 <?php endif; ?>
@@ -44,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?php if ($model->scenario === $model::SCENARIO_GUEST) : ?>
                     <?= $form->field($model, 'verifyCode')->widget(Captcha::class, [
-                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+                        'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>', // phpcs:ignore
                         'captchaAction' => Url::to('/main/default/captcha'),
                         'options' => [
                             'placeholder' => true,
@@ -54,7 +61,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?php endif; ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('<span class="glyphicon glyphicon-send" aria-hidden="true"></span> ' . Module::t('module', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                    <?= Html::submitButton(
+                        '<span class="glyphicon glyphicon-send" aria-hidden="true"></span> ' . Module::t(
+                            'module',
+                            'Submit'
+                        ),
+                        ['class' => 'btn btn-primary', 'name' => 'contact-button']
+                    ) ?>
                 </div>
 
                 <?php ActiveForm::end(); ?>

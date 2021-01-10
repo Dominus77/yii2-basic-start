@@ -2,7 +2,6 @@
 
 namespace modules\admin\models;
 
-use Yii;
 use yii\helpers\ArrayHelper;
 use modules\admin\Module;
 
@@ -28,11 +27,22 @@ class User extends \modules\users\models\User
             [['password'], 'required', 'on' => [self::SCENARIO_ADMIN_CREATE]],
 
             ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
-            ['username', 'unique', 'targetClass' => self::class, 'message' => Module::t('users', 'This username is already taken.'), 'on' => [self::SCENARIO_ADMIN_CREATE]],
+            [
+                'username', 'unique',
+                'targetClass' => self::class,
+                'message' => Module::t('users', 'This username is already taken.'),
+                'on' => [self::SCENARIO_ADMIN_CREATE]
+            ],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => self::class, 'message' => Module::t('users', 'This email is already taken.'), 'on' => [self::SCENARIO_ADMIN_CREATE]],
+            [
+                'email',
+                'unique',
+                'targetClass' => self::class,
+                'message' => Module::t('users', 'This email is already taken.'),
+                'on' => [self::SCENARIO_ADMIN_CREATE]
+            ],
             ['email', 'string', 'max' => 255],
 
             [['first_name', 'last_name'], 'string', 'max' => 45],
@@ -40,7 +50,12 @@ class User extends \modules\users\models\User
             ['status', 'default', 'value' => self::STATUS_WAIT],
             ['status', 'in', 'range' => array_keys(self::getStatusesArray())],
 
-            ['password', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX],
+            [
+                'password',
+                'string',
+                'min' => self::LENGTH_STRING_PASSWORD_MIN,
+                'max' => self::LENGTH_STRING_PASSWORD_MAX
+            ],
         ];
     }
 

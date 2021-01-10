@@ -6,10 +6,19 @@ use Yii;
 use yii\base\Model;
 use modules\rbac\traits\ModuleTrait;
 use modules\rbac\Module;
+use yii\rbac\Item;
 
 /**
  * Class Role
  * @package modules\rbac\models
+ *
+ * @property-read \yii\rbac\Role[] $roleChild
+ * @property-read array $roleChildArray
+ * @property-read Item[] $children
+ * @property-read array $rolePermissions
+ * @property-read array|string[] $rolesArray
+ * @property-read array $roleItemsArray
+ * @property-read \yii\rbac\Role[] $roles
  */
 class Role extends Model
 {
@@ -58,11 +67,34 @@ class Role extends Model
         return [
             ['name', 'required', 'on' => self::SCENARIO_CREATE],
             ['name', 'string', 'max' => 64, 'on' => self::SCENARIO_CREATE],
-            ['name', 'match', 'pattern' => '#^[\w_-]+$#i', 'message' => Module::t('module', 'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)'), 'on' => self::SCENARIO_CREATE],
-            ['name', 'validateUniqueName', 'skipOnEmpty' => false, 'skipOnError' => false, 'on' => [self::SCENARIO_CREATE]],
+            [
+                'name',
+                'match',
+                'pattern' => '#^[\w_-]+$#i',
+                'message' => Module::t(
+                    'module',
+                    'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)'
+                ),
+                'on' => self::SCENARIO_CREATE
+            ],
+            [
+                'name',
+                'validateUniqueName',
+                'skipOnEmpty' => false,
+                'skipOnError' => false,
+                'on' => [self::SCENARIO_CREATE]
+            ],
 
             [['description'], 'string'],
-            [['rolesByRole', 'itemsRoles', 'permissionsByRole', 'itemsPermissions'], 'required', 'message' => Module::t('module', 'You must select in the field «{attribute}».'), 'on' => self::SCENARIO_UPDATE],
+            [
+                ['rolesByRole', 'itemsRoles', 'permissionsByRole', 'itemsPermissions'],
+                'required',
+                'message' => Module::t(
+                    'module',
+                    'You must select in the field «{attribute}».'
+                ),
+                'on' => self::SCENARIO_UPDATE
+            ],
         ];
     }
 
@@ -101,7 +133,9 @@ class Role extends Model
     {
         $scenarios = parent::scenarios();
         $scenarios[self::SCENARIO_CREATE] = ['name', 'description'];
-        $scenarios[self::SCENARIO_UPDATE] = ['name', 'description', 'rolesByRole', 'itemsRoles', 'permissionsByRole', 'itemsPermissions'];
+        $scenarios[self::SCENARIO_UPDATE] = [
+            'name', 'description', 'rolesByRole', 'itemsRoles', 'permissionsByRole', 'itemsPermissions'
+        ];
         return $scenarios;
     }
 
@@ -275,7 +309,7 @@ class Role extends Model
 
     /**
      * Все дети
-     * @return \yii\rbac\Item[]
+     * @return Item[]
      */
     public function getChildren()
     {
