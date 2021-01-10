@@ -41,6 +41,7 @@ $config = [
     'components' => [
         'request' => [
             'baseUrl' => '',
+            'cookieValidationKey' => '',
         ],
         'user' => [
             'class' => 'modules\users\components\WebUser',

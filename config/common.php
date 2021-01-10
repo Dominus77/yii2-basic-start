@@ -43,6 +43,8 @@ return [
         'db' => [
             'class' => 'yii\db\Connection',
             'charset' => 'utf8',
+            'username' => '',
+            'password' => '',
         ],
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
