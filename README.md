@@ -2,7 +2,7 @@
 
 [![Latest Stable Version](https://poser.pugx.org/dominus77/yii2-basic-start/v/stable)](https://packagist.org/packages/dominus77/yii2-basic-start)
 [![License](https://poser.pugx.org/dominus77/yii2-basic-start/license)](https://packagist.org/packages/dominus77/yii2-basic-start)
-[![Build Status](https://travis-ci.org/Dominus77/yii2-basic-start.svg?branch=master)](https://travis-ci.org/Dominus77/yii2-basic-start)
+[![build](https://github.com/Dominus77/yii2-basic-start/workflows/build/badge.svg?branch=master)](https://github.com/Dominus77/yii2-basic-start/actions?query=workflow%3Abuild)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Dominus77/yii2-basic-start/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Dominus77/yii2-basic-start/?branch=master)
 [![Code Intelligence Status](https://scrutinizer-ci.com/g/Dominus77/yii2-basic-start/badges/code-intelligence.svg?b=master)](https://scrutinizer-ci.com/code-intelligence)
 [![Total Downloads](https://poser.pugx.org/dominus77/yii2-basic-start/downloads)](https://packagist.org/packages/dominus77/yii2-basic-start)
