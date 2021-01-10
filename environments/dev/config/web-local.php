@@ -3,7 +3,7 @@
 return [
     'components' => [
         'request' => [
-            'cookieValidationKey' => 'Q2vjRFVbitk788zxKWeWX9GA31nTX-qg',
+            'cookieValidationKey' => '',
         ],
         'assetManager' => [
             'linkAssets' => false,
