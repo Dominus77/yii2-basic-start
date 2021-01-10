@@ -41,6 +41,7 @@ return ArrayHelper::merge([
             'dsn' => 'mysql:host=localhost;dbname=yii2basic_start_test',
             'username' => '',
             'password' => '',
+            'tablePrefix' => 'tbl_',
             'charset' => 'utf8',
         ],
         'mailer' => [
