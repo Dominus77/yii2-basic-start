@@ -10,6 +10,7 @@ use modules\users\Module;
  * Class PasswordResetRequestForm
  * @package modules\users\models
  *
+ * @property-read bool|User $user
  * @property string $email Email
  */
 class PasswordResetRequestForm extends Model
@@ -27,7 +28,7 @@ class PasswordResetRequestForm extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'exist',
-                'targetClass' => '\modules\users\models\User',
+                'targetClass' => User::class,
                 'filter' => ['status' => User::STATUS_ACTIVE],
                 'message' => Module::t('module', 'There is no users with this e-mail.'),
             ],
@@ -44,8 +45,12 @@ class PasswordResetRequestForm extends Model
 
         if ($user = $this->getUser()) {
             return Yii::$app->mailer->compose(
-                ['html' => '@modules/users/mail/passwordResetToken-html', 'text' => '@modules/users/mail/passwordResetToken-text'],
-                ['user' => $user])
+                [
+                    'html' => '@modules/users/mail/passwordResetToken-html',
+                    'text' => '@modules/users/mail/passwordResetToken-text'
+                ],
+                ['user' => $user]
+            )
                 ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
                 ->setTo($this->email)
                 ->setSubject(Yii::$app->name . ' | ' . Module::t('module', 'Access recovery'))
@@ -59,7 +64,7 @@ class PasswordResetRequestForm extends Model
      */
     private function getUser()
     {
-        /* @var $user \modules\users\models\User */
+        /* @var $user User */
         $user = User::findOne([
             'status' => User::STATUS_ACTIVE,
             'email' => $this->email,

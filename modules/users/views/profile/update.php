@@ -1,12 +1,12 @@
 <?php
 
+use yii\bootstrap\Tabs;
+use modules\users\Module;
+
 /**
  * @var $this yii\web\View
  * @var $model modules\users\models\User
  */
-
-use yii\bootstrap\Tabs;
-use modules\users\Module;
 
 $this->title = Module::t('module', 'Update');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'Profile'), 'url' => ['index']];
@@ -23,7 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'model' => $model,
                     ]),
                     'options' => ['id' => 'profile', 'role' => 'tabpanel'],
-                    'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,
+                    'active' => !Yii::$app->request->get('tab') ||
+                        (Yii::$app->request->get('tab') === 'profile'),
                 ],
                 [
                     'label' => Module::t('module', 'Password'),
@@ -31,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'model' => $model,
                     ]),
                     'options' => ['id' => 'password', 'role' => 'tabpanel'],
-                    'active' => (Yii::$app->request->get('tab') == 'password') ? true : false,
+                    'active' => Yii::$app->request->get('tab') === 'password',
                 ],
                 [
                     'label' => Module::t('module', 'Avatar'),
@@ -39,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'model' => $model,
                     ]),
                     'options' => ['id' => 'avatar', 'role' => 'tabpanel'],
-                    'active' => (Yii::$app->request->get('tab') == 'avatar') ? true : false,
+                    'active' => Yii::$app->request->get('tab') === 'avatar',
                 ],
             ]
         ]); ?>

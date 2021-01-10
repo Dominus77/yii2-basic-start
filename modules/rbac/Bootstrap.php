@@ -46,7 +46,13 @@ class Bootstrap
     protected function rules()
     {
         $rules = [];
-        array_push($rules, $this->rulesRoles(), $this->rulesPermissions(), $this->rulesAssign(), $this->rulesDefault());
+        array_push(
+            $rules,
+            $this->rulesRoles(),
+            $this->rulesPermissions(),
+            $this->rulesAssign(),
+            $this->rulesDefault()
+        );
         return $rules;
     }
 

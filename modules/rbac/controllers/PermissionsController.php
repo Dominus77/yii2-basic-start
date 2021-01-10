@@ -170,7 +170,11 @@ class PermissionsController extends Controller
                 if (!$result) {
                     $auth->addChild($permission, $add);
                 } else {
-                    Yii::$app->session->setFlash('error', Module::t('module', 'The permission of the "{:parent}" is the parent of the "{:permission}"!', [':parent' => $add->name, ':permission' => $permission->name]));
+                    Yii::$app->session->setFlash('error', Module::t(
+                        'module',
+                        'The permission of the "{:parent}" is the parent of the "{:permission}"!',
+                        [':parent' => $add->name, ':permission' => $permission->name]
+                    ));
                 }
             }
             return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
@@ -211,7 +215,11 @@ class PermissionsController extends Controller
         $auth = Yii::$app->authManager;
         $perm = $auth->getPermission($id);
         if ($auth->remove($perm)) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'The permission "{:name}" have been successfully deleted.', [':name' => $perm->name]));
+            Yii::$app->session->setFlash('success', Module::t(
+                'module',
+                'The permission "{:name}" have been successfully deleted.',
+                [':name' => $perm->name]
+            ));
         } else {
             Yii::$app->session->setFlash('error', Module::t('module', 'Error!'));
         }

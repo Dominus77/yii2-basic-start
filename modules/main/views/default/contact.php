@@ -12,7 +12,6 @@ use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
 use modules\main\Module;
 
-
 $this->title = Module::t('module', 'Contact');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -20,12 +19,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="main-default-contact">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')): ?>
+    <?php if (Yii::$app->session->hasFlash('contactFormSubmitted')) : ?>
         <div class="alert alert-success">
             <?= Module::t('module', 'Thank you for contacting us. We will respond to you as soon as possible.') ?>
         </div>
-    <?php else: ?>
-
+    <?php else : ?>
         <p>
             <?= Module::t('module', 'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.') ?>
         </p>

@@ -75,9 +75,15 @@ class ProfileController extends Controller
     {
         $model = $this->findModel();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'Profile successfully changed.'));
+            Yii::$app->session->setFlash(
+                'success',
+                Module::t('module', 'Profile successfully changed.')
+            );
         } else {
-            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Profile not changed.'));
+            Yii::$app->session->setFlash(
+                'error',
+                Module::t('module', 'Error! Profile not changed.')
+            );
         }
         return $this->redirect(['update', 'tab' => 'profile']);
     }
@@ -91,9 +97,15 @@ class ProfileController extends Controller
         $model = $this->findModel();
         $model->scenario = $model::SCENARIO_PASSWORD_UPDATE;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'Password changed successfully.'));
+            Yii::$app->session->setFlash(
+                'success',
+                Module::t('module', 'Password changed successfully.')
+            );
         } else {
-            Yii::$app->session->setFlash('error', Module::t('module', 'Error! Password changed not successfully.'));
+            Yii::$app->session->setFlash(
+                'error',
+                Module::t('module', 'Error! Password changed not successfully.')
+            );
         }
         return $this->redirect(['update', 'tab' => 'password']);
     }

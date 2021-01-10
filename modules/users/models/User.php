@@ -223,7 +223,8 @@ class User extends IdentityUser
      */
     public function getRole()
     {
-        return ($role = $this->getUserRoleValue($this->id)) ? Yii::t('app', $role->description) : Yii::t('app', 'Not assigned');
+        return ($role = $this->getUserRoleValue($this->id)) ?
+            Yii::t('app', $role->description) : Yii::t('app', 'Not assigned');
     }
 
     /**
@@ -255,8 +256,9 @@ class User extends IdentityUser
         $authManager = Yii::$app->authManager;
         $roles = $authManager->getRolesByUser($id);
         foreach ($roles as $role) {
-            if ($role->name == \modules\rbac\models\Role::ROLE_SUPER_ADMIN)
+            if ($role->name == \modules\rbac\models\Role::ROLE_SUPER_ADMIN) {
                 return true;
+            }
         }
         return false;
     }

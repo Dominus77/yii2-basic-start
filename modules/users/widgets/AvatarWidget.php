@@ -12,6 +12,7 @@ use yii\helpers\Html;
  *
  * @property array $imageOptions
  * @property string $email
+ * @property-read string $userEmail
  * @property string|int $size
  */
 class AvatarWidget extends Widget

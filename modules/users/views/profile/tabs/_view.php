@@ -47,13 +47,16 @@ $this->registerJs(new yii\web\JsExpression("
                     'format' => 'raw',
                     'value' => function ($model) {
                         $key = Html::tag('code', $model->auth_key, ['id' => 'authKey']);
-                        $link = Html::a(Module::t('module', 'Generate'), ['/profile/generate-auth-key'], [
-                            'class' => 'btn btn-sm btn-default',
-                            'title' => Module::t('module', 'Generate new key'),
-                            'data' => [
-                                'toggle' => 'tooltip',
-                            ],
-                            'onclick' => "                                
+                        $link = Html::a(
+                            Module::t('module', 'Generate'),
+                            ['/profile/generate-auth-key'],
+                            [
+                                'class' => 'btn btn-sm btn-default',
+                                'title' => Module::t('module', 'Generate new key'),
+                                'data' => [
+                                    'toggle' => 'tooltip',
+                                ],
+                                'onclick' => "                                
                                 $.ajax({
                                     type: 'POST',
                                     cache: false,
@@ -66,7 +69,8 @@ $this->registerJs(new yii\web\JsExpression("
                                 });
                                 return false;
                             ",
-                        ]);
+                            ]
+                        );
                         return $key . ' ' . $link;
                     }
                 ],
@@ -77,15 +81,29 @@ $this->registerJs(new yii\web\JsExpression("
         ]) ?>
     </div>
     <div class="col-sm-offset-2 col-sm-10">
-        <?= Html::a('<span class="glyphicon glyphicon-pencil"></span> ' . Module::t('module', 'Update'), ['update'], [
+        <?= Html::a(
+            '<span class="glyphicon glyphicon-pencil"></span> ' . Module::t(
+                'module',
+                'Update'
+            ),
+            ['update'],
+            [
             'class' => 'btn btn-primary'
-        ]) ?>
-        <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Module::t('module', 'Delete'), ['delete'], [
+            ]
+        ) ?>
+        <?= Html::a(
+            '<span class="glyphicon glyphicon-trash"></span> ' . Module::t(
+                'module',
+                'Delete'
+            ),
+            ['delete'],
+            [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => Module::t('module', 'Are you sure you want to delete the record?'),
                 'method' => 'post',
             ],
-        ]) ?>
+            ]
+        ) ?>
     </div>
 </div>

@@ -24,7 +24,10 @@ class RolesController extends Controller
     public function actionAssign()
     {
         $authManager = Yii::$app->authManager;
-        $username = $this->prompt(Console::convertEncoding(Module::t('module', 'Username:')), ['required' => true]);
+        $username = $this->prompt(Console::convertEncoding(Module::t(
+            'module',
+            'Username:'
+        )), ['required' => true]);
         $user = $this->findModel($username);
 
         $roles = Yii::$app->authManager->getRoles();
@@ -38,10 +41,16 @@ class RolesController extends Controller
         $userRoles = $this->getUserRoleValue($user->id);
         if ($userRoles === null) {
             $authManager->assign($role, $user->id);
-            $this->stdout(Console::convertEncoding(Module::t('module', 'Success!')), Console::FG_GREEN, Console::BOLD);
+            $this->stdout(Console::convertEncoding(Module::t(
+                'module',
+                'Success!'
+            )), Console::FG_GREEN, Console::BOLD);
             $this->stdout(PHP_EOL);
         } else {
-            $this->stdout(Console::convertEncoding(Module::t('module', 'The user already has a role.')), Console::FG_RED, Console::BOLD);
+            $this->stdout(Console::convertEncoding(Module::t(
+                'module',
+                'The user already has a role.'
+            )), Console::FG_RED, Console::BOLD);
             $this->stdout(PHP_EOL);
         }
     }
@@ -53,15 +62,19 @@ class RolesController extends Controller
     public function actionRevoke()
     {
         $authManager = Yii::$app->authManager;
-        $username = $this->prompt(Console::convertEncoding(Yii::t('app', 'Username:')), ['required' => true]);
+        $username = $this->prompt(Console::convertEncoding(Yii::t(
+            'app',
+            'Username:'
+        )), ['required' => true]);
         $user = $this->findModel($username);
         $roleName = $this->select(
-            Console::convertEncoding(Module::t('module', 'Role:')), ArrayHelper::merge(
-            ['all' => Console::convertEncoding(Module::t('module', 'All Roles'))],
-            Console::convertEncoding(
-                ArrayHelper::map($authManager->getRolesByUser($user->id), 'name', 'description')
+            Console::convertEncoding(Module::t('module', 'Role:')),
+            ArrayHelper::merge(
+                ['all' => Console::convertEncoding(Module::t('module', 'All Roles'))],
+                Console::convertEncoding(
+                    ArrayHelper::map($authManager->getRolesByUser($user->id), 'name', 'description')
+                )
             )
-        )
         );
         if ($roleName == 'all') {
             $authManager->revokeAll($user->id);
@@ -69,13 +82,17 @@ class RolesController extends Controller
             $role = $authManager->getRole($roleName);
             $authManager->revoke($role, $user->id);
         }
-        $this->stdout(Console::convertEncoding(Module::t('module', 'Done!')), Console::FG_GREEN, Console::BOLD);
+        $this->stdout(Console::convertEncoding(Module::t(
+            'module',
+            'Done!'
+        )), Console::FG_GREEN, Console::BOLD);
         $this->stdout(PHP_EOL);
     }
 
     /**
      * @param string|int $user_id
      * @return mixed|null
+     * @throws \Exception
      */
     public function getUserRoleValue($user_id)
     {

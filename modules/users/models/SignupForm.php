@@ -3,6 +3,7 @@
 namespace modules\users\models;
 
 use Yii;
+use yii\base\Exception;
 use yii\base\Model;
 use modules\users\Module;
 
@@ -30,17 +31,26 @@ class SignupForm extends Model
             ['username', 'trim'],
             ['username', 'required'],
             ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
-            ['username', 'unique', 'targetClass' => '\modules\users\models\User', 'message' => Module::t('module', 'This username already exists.')],
+            ['username', 'unique', 'targetClass' => '\modules\users\models\User', 'message' => Module::t(
+                'module',
+                'This username already exists.'
+            )],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\modules\users\models\User', 'message' => Module::t('module', 'This email already exists.')],
+            ['email', 'unique', 'targetClass' => '\modules\users\models\User', 'message' => Module::t(
+                'module',
+                'This email already exists.'
+            )],
 
             ['password', 'required'],
-            ['password', 'string', 'min' => User::LENGTH_STRING_PASSWORD_MIN, 'max' => User::LENGTH_STRING_PASSWORD_MAX],
+            ['password', 'string',
+                'min' => User::LENGTH_STRING_PASSWORD_MIN,
+                'max' => User::LENGTH_STRING_PASSWORD_MAX
+            ],
         ];
     }
 
@@ -61,7 +71,7 @@ class SignupForm extends Model
      * Signs users up.
      *
      * @return User|null the saved model or null if saving fails
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function signup()
     {
@@ -69,11 +79,18 @@ class SignupForm extends Model
             $user = $this->processLoadModel();
             if ($user->save()) {
                 Yii::$app->mailer->compose(
-                    ['html' => '@modules/users/mail/emailConfirm-html', 'text' => '@modules/users/mail/emailConfirm-text'],
-                    ['user' => $user])
+                    [
+                        'html' => '@modules/users/mail/emailConfirm-html',
+                        'text' => '@modules/users/mail/emailConfirm-text'
+                    ],
+                    ['user' => $user]
+                )
                     ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
                     ->setTo($this->email)
-                    ->setSubject(Yii::$app->name . ' | ' . Module::t('module', 'Account activation'))
+                    ->setSubject(Yii::$app->name . ' | ' . Module::t(
+                        'module',
+                        'Account activation'
+                    ))
                     ->send();
 
                 return $user;
@@ -84,7 +101,7 @@ class SignupForm extends Model
 
     /**
      * @return User
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     protected function processLoadModel()
     {

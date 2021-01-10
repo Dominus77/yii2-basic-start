@@ -266,8 +266,9 @@ class Role extends Model
         $children = $auth->getChildren($this->name);
         $perm = [];
         foreach ($children as $key => $child) {
-            if ($child->type == 2)
+            if ($child->type == 2) {
                 $perm[$key] = $child;
+            }
         }
         return $perm;
     }

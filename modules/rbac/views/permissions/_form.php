@@ -22,7 +22,7 @@ use modules\rbac\Module;
 
             <?= $form->field($model, 'name')->textInput([
                 'maxlength' => true,
-                'disabled' => ($model->scenario == $model::SCENARIO_UPDATE) ? true : false,
+                'disabled' => $model->scenario == $model::SCENARIO_UPDATE,
             ])->hint(Module::t('module', 'Example: updatePost')) ?>
 
             <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
@@ -51,8 +51,14 @@ use modules\rbac\Module;
                 </div>
                 <div class="col-md-2">
                     <div class="text-center">
-                        <?= Html::submitButton('<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>', ['class' => 'btn btn-default', 'form' => 'form-items-permission']) ?>
-                        <?= Html::submitButton('<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>', ['class' => 'btn btn-default', 'form' => 'form-add-permissions']) ?>
+                        <?= Html::submitButton(
+                            '<span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>',
+                            ['class' => 'btn btn-default', 'form' => 'form-items-permission']
+                        ) ?>
+                        <?= Html::submitButton(
+                            '<span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>',
+                            ['class' => 'btn btn-default', 'form' => 'form-add-permissions']
+                        ) ?>
                     </div>
                 </div>
                 <div class="col-md-5">

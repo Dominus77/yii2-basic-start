@@ -63,7 +63,8 @@ class UserController extends Controller
         $assetManager = Yii::$app->assetManager;
         $assetManager->publish($this->jsFile);
         $url = $assetManager->getPublishedUrl($this->jsFile);
-        $this->view->registerJsFile($url,
+        $this->view->registerJsFile(
+            $url,
             ['depends' => 'yii\web\JqueryAsset',] // depends
         );
     }
@@ -154,8 +155,9 @@ class UserController extends Controller
         $model = $this->findModel($id);
         /** @var object $identity */
         $identity = Yii::$app->user->identity;
-        if ($model->id !== $identity->id || $model->isSuperAdmin($model->id))
+        if ($model->id !== $identity->id || $model->isSuperAdmin($model->id)) {
             $model->delete();
+        }
 
         return $this->redirect(['index']);
     }

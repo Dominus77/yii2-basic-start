@@ -1,13 +1,13 @@
 <?php
 
+use yii\helpers\Html;
+use yii\bootstrap\Tabs;
+use modules\users\Module;
+
 /**
  * @var $this yii\web\View
  * @var $model modules\users\models\User
  */
-
-use yii\helpers\Html;
-use yii\bootstrap\Tabs;
-use modules\users\Module;
 
 $this->title = Module::t('module', 'Profile');
 $this->params['breadcrumbs'][] = $this->title;
@@ -26,7 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'model' => $model
                     ]),
                     'options' => ['id' => 'profile', 'role' => 'tabpanel'],
-                    'active' => (!Yii::$app->request->get('tab') || (Yii::$app->request->get('tab') == 'profile')) ? true : false,
+                    'active' => !Yii::$app->request->get('tab') ||
+                        (Yii::$app->request->get('tab') === 'profile'),
                 ],
             ]
         ]); ?>

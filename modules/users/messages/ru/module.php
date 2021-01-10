@@ -46,18 +46,18 @@ return [
     'If you have forgotten your password, use {:Link}' => 'Если вы забыли свой пароль, воспользуйтесь {:Link}',
     'Password Reset Form' => 'Форма сброса пароля',
     'Enter your email address and press {:Send}' => 'Введите адрес Вашей электронной почты и нажмите {:Send}',
-    'To the address {:Email} We sent you a letter with further instructions, check mail.' => 'На адрес <strong>{:Email}</strong> мы выслали письмо с дальнейшими инструкциями, проверьте почту.',
+    'To the address {:Email} We sent you a letter with further instructions, check mail.' => 'На адрес <strong>{:Email}</strong> мы выслали письмо с дальнейшими инструкциями, проверьте почту.', // phpcs:ignore
     'Sorry, we are unable to reset password.' => 'Извините, мы не можем сбросить пароль.',
     'The new password was successfully saved.' => 'Новый пароль успешно сохранён.',
-    'It remains to activate the account, check your mail.' => 'Осталось активировать учётную запись, проверьте Вашу почту.',
-    'Thank you for registering! Now you can log in using your credentials.' => 'Спасибо за регистрацию! Теперь Вы можете войти используя свои учетные данные.',
+    'It remains to activate the account, check your mail.' => 'Осталось активировать учётную запись, проверьте Вашу почту.', // phpcs:ignore
+    'Thank you for registering! Now you can log in using your credentials.' => 'Спасибо за регистрацию! Теперь Вы можете войти используя свои учетные данные.', // phpcs:ignore
     'Error sending message!' => 'Ошибка отправки сообщения!',
 
     'Access recovery' => 'Восстановление доступа',
     'Hello {username}' => 'Привет {username}',
-    'You or someone else indicated your email address in the form of a password reset on the {:Website}. If you did not then just ignore this email.' => 'Вы или кто то другой указал адрес Вашей электронной почты в форме сброса пароля на сайте {:Website}. Если Вы этого не делали, то просто проигнорируйте данное письмо.',
-    'To reset your password follow the link below, or copy it to your browser.' => 'Для сброса пароля, пройдите по ссылке ниже, или скопируйте её в адресную строку браузера.',
-    'The letter was sent by the robot and you do not need to respond to it.' => 'Письмо отправлено роботом и отвечать на него не нужно.',
+    'You or someone else indicated your email address in the form of a password reset on the {:Website}. If you did not then just ignore this email.' => 'Вы или кто то другой указал адрес Вашей электронной почты в форме сброса пароля на сайте {:Website}. Если Вы этого не делали, то просто проигнорируйте данное письмо.', // phpcs:ignore
+    'To reset your password follow the link below, or copy it to your browser.' => 'Для сброса пароля, пройдите по ссылке ниже, или скопируйте её в адресную строку браузера.', // phpcs:ignore
+    'The letter was sent by the robot and you do not need to respond to it.' => 'Письмо отправлено роботом и отвечать на него не нужно.', // phpcs:ignore
     'Sincerely, website administration {:Website}' => 'С уважением, администрация сайта {:Website}',
 
     'There is no users with this e-mail.' => 'Пользователь с таким адресом электронной почты не найден.',
@@ -69,9 +69,9 @@ return [
 
     'Account activation' => 'Активация аккаунта',
     'Hello!' => 'Здравствуйте!',
-    'When registering on the site {:Website} you or someone else has indicated the address of your email.' => 'При регистрации на сайте {:Website} Вы или кто то другой указал адрес Вашей электронной почты.',
-    'If you did not do this, then just ignore this letter.' => 'Если Вы этого не делали, то просто проигнорируйте данное письмо.',
-    'To activate your account, please follow the link below or copy it to your browser.' => 'Для активации аккаунта. пройдите по ссылке ниже, или скопируйте её в адресную строку браузера.',
+    'When registering on the site {:Website} you or someone else has indicated the address of your email.' => 'При регистрации на сайте {:Website} Вы или кто то другой указал адрес Вашей электронной почты.', // phpcs:ignore
+    'If you did not do this, then just ignore this letter.' => 'Если Вы этого не делали, то просто проигнорируйте данное письмо.', // phpcs:ignore
+    'To activate your account, please follow the link below or copy it to your browser.' => 'Для активации аккаунта. пройдите по ссылке ниже, или скопируйте её в адресную строку браузера.', // phpcs:ignore
 
     'This username already exists.' => 'Такое имя пользователя уже существует.',
     'This email already exists.' => 'Такой адрес электронной почты уже существует.',
@@ -87,7 +87,7 @@ return [
     'Generate' => 'Генерировать',
     'Generate new key' => 'Генерировать новый ключ',
 
-    'To change the avatar, please use the {:link} service.' => 'Чтобы изменить аватар, воспользуйтесь сервисом {:link}.',
+    'To change the avatar, please use the {:link} service.' => 'Чтобы изменить аватар, воспользуйтесь сервисом {:link}.', // phpcs:ignore
 
     'Not all fields are filled in correctly.' => 'Не все поля заполнены корректно.',
     'Incorrect current password.' => 'Текущий пароль указан не верно.',
@@ -101,7 +101,7 @@ return [
     'The requested page does not exist.' => 'Запрошенная страницы не существует.',
 
     'Please fill in the following fields to sign up' => 'Для регистрации, пожалуйста заполните следующие поля',
-    'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.' => 'Если у Вас есть вопросы или деловое предложение, пожалуйста, свяжитесь с нами. Спасибо!',
+    'If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.' => 'Если у Вас есть вопросы или деловое предложение, пожалуйста, свяжитесь с нами. Спасибо!', // phpcs:ignore
 
     'Remove expired users {:Username}' => 'Удалены истекшие пользователи {:Username}',
     'Cannot remove expired users {:Username}' => 'Не удалось удалить истекших пользователей {:Username}',

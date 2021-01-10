@@ -18,8 +18,8 @@ use modules\rbac\Module;
  */
 class AssignController extends Controller
 {
-    /** @var $user object */
-    private $_user = null;
+    /** @var $p_user object */
+    private $p_user = null;
 
     /**
      * @param \yii\base\Action $action
@@ -30,9 +30,12 @@ class AssignController extends Controller
     public function beforeAction($action)
     {
         if (empty(Yii::$app->controller->module->params['userClass'])) {
-            throw new InvalidConfigException(Module::t('module', 'You must specify the User class in the module settings.'));
+            throw new InvalidConfigException(Module::t(
+                'module',
+                'You must specify the User class in the module settings.'
+            ));
         }
-        $this->_user = new Yii::$app->controller->module->params['userClass']();
+        $this->p_user = new Yii::$app->controller->module->params['userClass']();
         return parent::beforeAction($action);
     }
 
@@ -67,7 +70,7 @@ class AssignController extends Controller
     public function actionIndex()
     {
         $assignModel = new Assignment();
-        $users = $this->_user->find()->all();
+        $users = $this->p_user->find()->all();
         $dataProvider = new ArrayDataProvider([
             'allModels' => $users,
             'sort' => [
@@ -138,12 +141,20 @@ class AssignController extends Controller
         $auth = Yii::$app->authManager;
         if ($auth->getRolesByUser($model->id)) {
             if ($auth->revokeAll($model->id)) {
-                Yii::$app->session->setFlash('success', Module::t('module', 'User "{:username}" successfully unassigned.', [':username' => $model->username]));
+                Yii::$app->session->setFlash('success', Module::t(
+                    'module',
+                    'User "{:username}" successfully unassigned.',
+                    [':username' => $model->username]
+                ));
             } else {
                 Yii::$app->session->setFlash('error', Module::t('module', 'Error!'));
             }
         } else {
-            Yii::$app->session->setFlash('warning', Module::t('module', 'User "{:username}" is not attached to any role!', [':username' => $model->username]));
+            Yii::$app->session->setFlash('warning', Module::t(
+                'module',
+                'User "{:username}" is not attached to any role!',
+                [':username' => $model->username]
+            ));
         }
         return $this->redirect(['index']);
     }
@@ -157,7 +168,7 @@ class AssignController extends Controller
      */
     protected function findModel($id)
     {
-        $userModel = $this->_user;
+        $userModel = $this->p_user;
         if (($model = $userModel->findOne($id)) !== null) {
             return $model;
         } else {

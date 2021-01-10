@@ -33,6 +33,7 @@ use modules\users\Module;
 class IdentityUser extends ActiveRecord implements IdentityInterface
 {
     use ModuleTrait;
+
     private $roles;
 
     /**
@@ -84,12 +85,22 @@ class IdentityUser extends ActiveRecord implements IdentityInterface
         return [
             ['username', 'required'],
             ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
-            ['username', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This username is already taken.')],
+            ['username', 'unique', 'targetClass' => self::class,
+                'message' => Module::t(
+                    'module',
+                    'This username is already taken.'
+                )
+            ],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This email is already taken.')],
+            ['email', 'unique', 'targetClass' => self::class,
+                'message' => Module::t(
+                    'module',
+                    'This email is already taken.'
+                )
+            ],
             ['email', 'string', 'max' => 255],
 
             ['first_name', 'string', 'max' => 45],

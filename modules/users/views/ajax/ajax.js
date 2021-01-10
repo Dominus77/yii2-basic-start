@@ -2,7 +2,8 @@
  * Ajax Link
  * @param e mixed
  */
-function handleAjaxLink(e) {
+function handleAjaxLink(e)
+{
 
     e.preventDefault();
 

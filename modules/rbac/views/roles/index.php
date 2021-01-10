@@ -79,7 +79,10 @@ $this->params['breadcrumbs'][] = Module::t('module', 'Roles');
                                     'data' => [
                                         'toggle' => 'tooltip',
                                         'method' => 'post',
-                                        'confirm' => Module::t('module', 'Are you sure you want to delete the entry?'),
+                                        'confirm' => Module::t(
+                                            'module',
+                                            'Are you sure you want to delete the entry?'
+                                        ),
                                     ],
                                 ]);
                             },

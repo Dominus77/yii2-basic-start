@@ -2,8 +2,8 @@
 
 namespace modules\users\commands;
 
-use Yii;
 use modules\users\models\User;
+use yii\base\Model;
 use yii\console\Controller;
 use yii\console\Exception;
 use app\components\helpers\Console;
@@ -41,7 +41,10 @@ class UserController extends Controller
         ]));
         $model->generateAuthKey();
         if (($select = Console::convertEncoding(User::getStatusesArray())) && is_array($select)) {
-            $model->status = $this->select(Console::convertEncoding(Module::t('module', 'Status:')), $select);
+            $model->status = $this->select(Console::convertEncoding(Module::t(
+                'module',
+                'Status:'
+            )), $select);
             $this->log($model->save());
         } else {
             $this->log();
@@ -55,7 +58,10 @@ class UserController extends Controller
      */
     public function actionRemove()
     {
-        $username = $this->prompt(Console::convertEncoding(Module::t('module', 'Username:')), ['required' => true]);
+        $username = $this->prompt(Console::convertEncoding(Module::t(
+            'module',
+            'Username:'
+        )), ['required' => true]);
         $model = $this->findModel($username);
         if ($model->delete() !== false) {
             $this->log(true);
@@ -69,7 +75,10 @@ class UserController extends Controller
      */
     public function actionActivate()
     {
-        $username = $this->prompt(Console::convertEncoding(Module::t('module', 'Username:')), ['required' => true]);
+        $username = $this->prompt(Console::convertEncoding(Module::t(
+            'module',
+            'Username:'
+        )), ['required' => true]);
         $model = $this->findModel($username);
         $model->status = User::STATUS_ACTIVE;
         $model->removeEmailConfirmToken();
@@ -82,9 +91,15 @@ class UserController extends Controller
      */
     public function actionChangePassword()
     {
-        $username = $this->prompt(Console::convertEncoding(Module::t('module', 'Username:')), ['required' => true]);
+        $username = $this->prompt(Console::convertEncoding(Module::t(
+            'module',
+            'Username:'
+        )), ['required' => true]);
         $model = $this->findModel($username);
-        $model->setPassword($this->prompt(Console::convertEncoding(Module::t('module', 'New password:')), [
+        $model->setPassword($this->prompt(Console::convertEncoding(Module::t(
+            'module',
+            'New password:'
+        )), [
             'required' => true,
             'pattern' => '#^.{6,255}$#i',
             'error' => Console::convertEncoding(Module::t('module', 'More than 6 symbols')),
@@ -94,8 +109,8 @@ class UserController extends Controller
 
     /**
      * @param string $username
-     * @throws \yii\console\Exception
      * @return User the loaded model
+     * @throws Exception
      */
     private function findModel($username)
     {
@@ -110,16 +125,19 @@ class UserController extends Controller
     }
 
     /**
-     * @param \yii\base\Model $model
+     * @param Model $model
      * @param string $attribute
      */
     private function readValue($model = null, $attribute = '')
     {
-        $model->$attribute = $this->prompt(Console::convertEncoding(Module::t('module', mb_convert_case($attribute, MB_CASE_TITLE, 'UTF-8') . ':')), [
+        $model->$attribute = $this->prompt(Console::convertEncoding(Module::t(
+            'module',
+            mb_convert_case($attribute, MB_CASE_TITLE, 'UTF-8') . ':'
+        )), [
             'validator' => function ($input, &$error) use ($model, $attribute) {
                 /** @var string $input */
                 $model->$attribute = $input;
-                /** @var \yii\base\Model $model */
+                /** @var Model $model */
                 if ($model->validate([$attribute])) {
                     return true;
                 } else {
@@ -136,9 +154,15 @@ class UserController extends Controller
     private function log($success = false)
     {
         if ($success === true || $success !== 0) {
-            $this->stdout(Console::convertEncoding(Module::t('module', 'Success!')), Console::FG_GREEN, Console::BOLD);
+            $this->stdout(Console::convertEncoding(Module::t(
+                'module',
+                'Success!'
+            )), Console::FG_GREEN, Console::BOLD);
         } else {
-            $this->stderr(Console::convertEncoding(Module::t('module', 'Error!')), Console::FG_RED, Console::BOLD);
+            $this->stderr(Console::convertEncoding(Module::t(
+                'module',
+                'Error!'
+            )), Console::FG_RED, Console::BOLD);
         }
         echo PHP_EOL;
     }

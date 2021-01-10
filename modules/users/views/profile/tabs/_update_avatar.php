@@ -1,14 +1,13 @@
 <?php
 
-/**
- * @var $this yii\web\View
- * @var $model modules\users\models\User
- */
-
 use yii\helpers\Html;
 use modules\users\widgets\AvatarWidget;
 use modules\users\Module;
 
+/**
+ * @var $this yii\web\View
+ * @var $model modules\users\models\User
+ */
 ?>
 
 <div class="user-profile-tabs-_update_avatar text-center">
@@ -20,5 +19,9 @@ use modules\users\Module;
             ]
         ]) ?>
     </p>
-    <p><?= Module::t('module', 'To change the avatar, please use the {:link} service.', [':link' => Html::a('Gravatar', 'http://www.gravatar.com', ['target' => '_blank'])]) ?></p>
+    <p><?= Module::t(
+        'module',
+        'To change the avatar, please use the {:link} service.',
+        [':link' => Html::a('Gravatar', 'http://www.gravatar.com', ['target' => '_blank'])]
+    ) ?></p>
 </div>

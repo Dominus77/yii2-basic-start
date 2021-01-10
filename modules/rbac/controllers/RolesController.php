@@ -170,7 +170,11 @@ class RolesController extends Controller
                 if (!$result) {
                     $auth->addChild($role, $add);
                 } else {
-                    Yii::$app->session->setFlash('error', Module::t('module', 'The role of the "{:parent}" is the parent of the "{:role}"!', [':parent' => $add->name, ':role' => $role->name]));
+                    Yii::$app->session->setFlash('error', Module::t(
+                        'module',
+                        'The role of the "{:parent}" is the parent of the "{:role}"!',
+                        [':parent' => $add->name, ':role' => $role->name]
+                    ));
                 }
             }
             return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-roles']);
@@ -221,7 +225,11 @@ class RolesController extends Controller
                 if (!$result) {
                     $auth->addChild($role, $add);
                 } else {
-                    Yii::$app->session->setFlash('error', Module::t('module', 'The permission of the "{:parent}" is the parent of the "{:permission}"!', [':parent' => $add->name, ':permission' => $role->name]));
+                    Yii::$app->session->setFlash('error', Module::t(
+                        'module',
+                        'The permission of the "{:parent}" is the parent of the "{:permission}"!',
+                        [':parent' => $add->name, ':permission' => $role->name]
+                    ));
                 }
             }
             return $this->redirect(['update', 'id' => $model->name, '#' => 'assign-container-permissions']);
@@ -262,7 +270,11 @@ class RolesController extends Controller
         $auth = Yii::$app->authManager;
         $role = $auth->getRole($id);
         if ($auth->remove($role)) {
-            Yii::$app->session->setFlash('success', Module::t('module', 'The role "{:name}" have been successfully deleted.', [':name' => $role->name]));
+            Yii::$app->session->setFlash('success', Module::t(
+                'module',
+                'The role "{:name}" have been successfully deleted.',
+                [':name' => $role->name]
+            ));
         } else {
             Yii::$app->session->setFlash('error', Module::t('module', 'Error!'));
         }

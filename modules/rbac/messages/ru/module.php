@@ -65,13 +65,13 @@ return [
     'Enter name permission.' => 'Введите название разрешения.',
     'Enter name role.' => 'Введите название роли.',
 
-    'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)' => 'Разрешено использовать латиницу, цифры, тире и знак подчеркивания.(A-z,0-1,-,_)',
+    'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)' => 'Разрешено использовать латиницу, цифры, тире и знак подчеркивания.(A-z,0-1,-,_)', // phpcs:ignore
 
     'Not a valid request to the method!' => 'Не верный запрос к методу!',
     'The data being processed is not an array!' => 'Обрабатываемые данные не являются массивом!',
     'There is no data in the POST method!' => 'Данные в методе POST отсутствуют!',
 
-    'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?' => 'Внимание! Все ранее созданные разрешения и роли будут удалены. Вы действительно хотите выполнить это действие?',
+    'Attention! All previously created permissions and roles will be deleted. Do you really want to perform this action?' => 'Внимание! Все ранее созданные разрешения и роли будут удалены. Вы действительно хотите выполнить это действие?', // phpcs:ignore
     'The operation was successful!' => 'Операция выполнена успешно!',
     'Do you really want to untie all roles?' => 'Вы действительно хотите отвязать все роли?',
     'You must select in the field «{attribute}».' => 'Необходимо сделать выбор в поле «{attribute}».',
@@ -79,10 +79,10 @@ return [
     'Are you sure you want to delete the entry?' => 'Вы действительно хотите удалить запись?',
     'Do you really want to untie the user from the role?' => 'Вы действительно хотите отвязать пользователя от роли?',
 
-    'The permission of the "{:parent}" is the parent of the "{:permission}"!' => 'Разрешение "{:parent}" является родителем "{:permission}"!',
+    'The permission of the "{:parent}" is the parent of the "{:permission}"!' => 'Разрешение "{:parent}" является родителем "{:permission}"!', // phpcs:ignore
     'The role of the "{:parent}" is the parent of the "{:role}"!' => 'Роль "{:parent}" является родителем "{:role}"!',
 
-    'The element will be irrevocably removed, which may affect some data. Do you really want to delete it?' => 'Элемент будет безвозвратно удален, что может повлиять на некоторые данные. Вы действительно хотите удалить его?',
+    'The element will be irrevocably removed, which may affect some data. Do you really want to delete it?' => 'Элемент будет безвозвратно удален, что может повлиять на некоторые данные. Вы действительно хотите удалить его?', // phpcs:ignore
 
     'The role "{:name}" have been successfully deleted.' => 'Роль "{:name}" успешно удалена.',
     'The permission "{:name}" have been successfully deleted.' => 'Разрешение "{:name}" успешно удалено.',

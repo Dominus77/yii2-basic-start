@@ -31,7 +31,10 @@ $confirm = Module::t('module', 'Attention! All previously created permissions an
             <p>
                 <a href="<?= Url::to(['init']) ?>" data-toggle="tooltip" data-method="post"
                    data-confirm="<?= $confirm ?>">
-                    <span class="glyphicon glyphicon-exclamation-sign"></span> <?= Module::t('module', 'Reset rbac') ?>
+                    <span class="glyphicon glyphicon-exclamation-sign"></span> <?= Module::t(
+                        'module',
+                        'Reset rbac'
+                    ) ?>
                 </a>
             </p>
         </div>

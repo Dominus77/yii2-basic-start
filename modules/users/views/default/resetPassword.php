@@ -1,14 +1,15 @@
 <?php
 
-/**
- * @var $this yii\web\View
- * @var $form yii\bootstrap\ActiveForm
- * @var $model \modules\users\models\ResetPasswordForm
- */
-
+use modules\users\models\ResetPasswordForm;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use modules\users\Module;
+
+/**
+ * @var $this yii\web\View
+ * @var $form yii\bootstrap\ActiveForm
+ * @var $model ResetPasswordForm
+ */
 
 $this->title = Module::t('module', 'Reset Password');
 $this->params['breadcrumbs'][] = $this->title;
@@ -29,7 +30,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]) ?>
             </div>
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-floppy-saved"></span> ' . Module::t('module', 'Save'), ['class' => 'btn btn-primary']) ?>
+                <?= Html::submitButton(
+                    '<span class="glyphicon glyphicon-floppy-saved"></span> ' . Module::t(
+                        'module',
+                        'Save'
+                    ),
+                    ['class' => 'btn btn-primary']
+                ) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

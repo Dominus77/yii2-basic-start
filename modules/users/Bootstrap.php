@@ -25,7 +25,7 @@ class Bootstrap
         $urlManager->addRules(
             [
                 // Declaration of rules here
-                '<_a:(login|logout|request-password-reset|reset-password|signup|email-confirm)>' => 'users/default/<_a>',
+                '<_a:(login|logout|request-password-reset|reset-password|signup|email-confirm)>' => 'users/default/<_a>', // phpcs:ignore
                 'profile' => 'users/profile/index',
                 'profile/<_a:[\w\-]+>' => 'users/profile/<_a>',
             ]

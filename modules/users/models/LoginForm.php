@@ -12,6 +12,7 @@ use modules\users\Module;
  *
  * @property string $email Email
  * @property string $password Password
+ * @property-read null|array|User $user
  * @property bool $rememberMe Remember Me
  */
 class LoginForm extends Model
@@ -20,7 +21,7 @@ class LoginForm extends Model
     public $password;
     public $rememberMe = false;
 
-    private $_user;
+    private $user;
 
     /**
      * @inheritdoc
@@ -99,9 +100,9 @@ class LoginForm extends Model
      */
     protected function getUser()
     {
-        if ($this->_user === null) {
-            $this->_user = User::findByUsernameEmail($this->email);
+        if ($this->user === null) {
+            $this->user = User::findByUsernameEmail($this->email);
         }
-        return $this->_user;
+        return $this->user;
     }
 }

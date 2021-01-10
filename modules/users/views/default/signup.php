@@ -1,14 +1,15 @@
 <?php
 
-/**
- * @var $this yii\web\View
- * @var $form yii\bootstrap\ActiveForm
- * @var $model \modules\users\models\SignupForm
- */
-
+use modules\users\models\SignupForm;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use modules\users\Module;
+
+/**
+ * @var $this yii\web\View
+ * @var $form yii\bootstrap\ActiveForm
+ * @var $model SignupForm
+ */
 
 $this->title = Module::t('module', 'Check in');
 $this->params['breadcrumbs'][] = $this->title;
@@ -39,7 +40,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ]) ?>
 
             <div class="form-group">
-                <?= Html::submitButton('<span class="glyphicon glyphicon-ok"></span> ' . Module::t('module', 'Sign Up'), ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+                <?= Html::submitButton(
+                    '<span class="glyphicon glyphicon-ok"></span> ' . Module::t(
+                        'module',
+                        'Sign Up'
+                    ),
+                    ['class' => 'btn btn-primary', 'name' => 'signup-button']
+                ) ?>
             </div>
 
             <?php ActiveForm::end(); ?>

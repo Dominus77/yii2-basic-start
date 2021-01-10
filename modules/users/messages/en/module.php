@@ -46,18 +46,18 @@ return [
     'If you have forgotten your password, use {:Link}' => 'If you have forgotten your password, use {:Link}',
     'Password Reset Form' => 'Password Reset Form',
     'Enter your email address and press {:Send}' => 'Enter your email address and press {:Send}',
-    'To the address {:Email} We sent you a letter with further instructions, check mail.' => 'To the address <strong>{:Email}</strong> We sent you a letter with further instructions, check mail.',
+    'To the address {:Email} We sent you a letter with further instructions, check mail.' => 'To the address <strong>{:Email}</strong> We sent you a letter with further instructions, check mail.', // phpcs:ignore
     'Sorry, we are unable to reset password.' => 'Sorry, we are unable to reset password.',
     'The new password was successfully saved.' => 'The new password was successfully saved.',
     'It remains to activate the account, check your mail.' => 'It remains to activate the account, check your mail.',
-    'Thank you for registering! Now you can log in using your credentials.' => 'Thank you for registering! Now you can log in using your credentials.',
+    'Thank you for registering! Now you can log in using your credentials.' => 'Thank you for registering! Now you can log in using your credentials.', // phpcs:ignore
     'Error sending message!' => 'Error sending message!',
 
     'Access recovery' => 'Access recovery',
     'Hello {username}' => 'Hello {username}',
-    'You or someone else indicated your email address in the form of a password reset on the {:Website}. If you did not then just ignore this email.' => 'You or someone else indicated your email address in the form of a password reset on the {:Website}. If you did not then just ignore this email.',
-    'To reset your password follow the link below, or copy it to your browser.' => 'To reset your password follow the link below, or copy it to your browser.',
-    'The letter was sent by the robot and you do not need to respond to it.' => 'The letter was sent by the robot and you do not need to respond to it.',
+    'You or someone else indicated your email address in the form of a password reset on the {:Website}. If you did not then just ignore this email.' => 'You or someone else indicated your email address in the form of a password reset on the {:Website}. If you did not then just ignore this email.', // phpcs:ignore
+    'To reset your password follow the link below, or copy it to your browser.' => 'To reset your password follow the link below, or copy it to your browser.', // phpcs:ignore
+    'The letter was sent by the robot and you do not need to respond to it.' => 'The letter was sent by the robot and you do not need to respond to it.', // phpcs:ignore
     'Sincerely, website administration {:Website}' => 'Sincerely, website administration {:Website}',
 
     'There is no users with this e-mail.' => 'There is no users with this e-mail.',
@@ -69,9 +69,9 @@ return [
 
     'Account activation' => 'Account activation',
     'Hello!' => 'Hello!',
-    'When registering on the site {:Website} you or someone else has indicated the address of your email.' => 'When registering on the site {:Website} you or someone else has indicated the address of your email.',
+    'When registering on the site {:Website} you or someone else has indicated the address of your email.' => 'When registering on the site {:Website} you or someone else has indicated the address of your email.', // phpcs:ignore
     'If you did not do this, then just ignore this letter.' => 'If you did not do this, then just ignore this letter.',
-    'To activate your account, please follow the link below or copy it to your browser.' => 'To activate your account, please follow the link below or copy it to your browser.',
+    'To activate your account, please follow the link below or copy it to your browser.' => 'To activate your account, please follow the link below or copy it to your browser.', // phpcs:ignore
 
     'This username already exists.' => 'This username already exists.',
     'This email already exists.' => 'This email already exists.',

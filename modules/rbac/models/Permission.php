@@ -10,6 +10,10 @@ use modules\rbac\Module;
 /**
  * Class Permission
  * @package modules\rbac\models
+ *
+ * @property-read array $itemsPermissions
+ * @property-read array $permissionChildren
+ * @property-read array|string[] $permissionsArray
  */
 class Permission extends Model
 {
@@ -54,11 +58,19 @@ class Permission extends Model
         return [
             ['name', 'required', 'on' => self::SCENARIO_CREATE],
             ['name', 'string', 'max' => 64, 'on' => self::SCENARIO_CREATE],
-            ['name', 'match', 'pattern' => '#^[\w_-]+$#i', 'message' => Module::t('module', 'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)'), 'on' => self::SCENARIO_CREATE],
-            ['name', 'validateUniqueName', 'skipOnEmpty' => false, 'skipOnError' => false, 'on' => [self::SCENARIO_CREATE]],
+            ['name', 'match', 'pattern' => '#^[\w_-]+$#i', 'message' => Module::t(
+                'module',
+                'It is allowed to use the Latin alphabet, numbers, dashes and underscores.(A-z,0-1,-,_)'
+            ), 'on' => self::SCENARIO_CREATE],
+            ['name', 'validateUniqueName', 'skipOnEmpty' => false, 'skipOnError' => false,
+                'on' => [self::SCENARIO_CREATE]
+            ],
 
             [['description'], 'string'],
-            [['permissionItems', 'permissions'], 'required', 'message' => Module::t('module', 'You must select in the field «{attribute}».'), 'on' => self::SCENARIO_UPDATE],
+            [['permissionItems', 'permissions'], 'required', 'message' => Module::t(
+                'module',
+                'You must select in the field «{attribute}».'
+            ), 'on' => self::SCENARIO_UPDATE],
         ];
     }
 

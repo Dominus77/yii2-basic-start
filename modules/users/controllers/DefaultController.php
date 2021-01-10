@@ -3,6 +3,7 @@
 namespace modules\users\controllers;
 
 use Yii;
+use yii\base\Exception;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -84,16 +85,28 @@ class DefaultController extends Controller
     /**
      * Requests password reset.
      *
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
     public function actionRequestPasswordReset()
     {
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                return $this->processGoHome(Module::t('module', 'To the address {:Email} We sent you a letter with further instructions, check mail.', [':Email' => $model->email]));
+                return $this->processGoHome(
+                    Module::t(
+                        'module',
+                        'To the address {:Email} We sent you a letter with further instructions, check mail.',
+                        [':Email' => $model->email]
+                    )
+                );
             } else {
-                Yii::$app->session->setFlash('error', Module::t('module', 'Sorry, we are unable to reset password.'));
+                Yii::$app->session->setFlash(
+                    'error',
+                    Module::t(
+                        'module',
+                        'Sorry, we are unable to reset password.'
+                    )
+                );
             }
         }
         return $this->render('requestPasswordResetToken', [
@@ -104,7 +117,7 @@ class DefaultController extends Controller
     /**
      * @param string $message
      * @param string $type
-     * @return \yii\web\Response
+     * @return Response
      */
     public function processGoHome($message = '', $type = 'success')
     {
@@ -113,14 +126,14 @@ class DefaultController extends Controller
         }
         return $this->goHome();
     }
-    
+
     /**
      * Resets password.
      *
      * @param string $token
      * @return string|Response
      * @throws BadRequestHttpException
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function actionResetPassword($token)
     {
@@ -131,7 +144,12 @@ class DefaultController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $this->processResetPassword($model)) {
-            return $this->processGoHome(Module::t('module', 'The new password was successfully saved.'));
+            return $this->processGoHome(
+                Module::t(
+                    'module',
+                    'The new password was successfully saved.'
+                )
+            );
         }
 
         return $this->render('resetPassword', [
@@ -142,7 +160,7 @@ class DefaultController extends Controller
     /**
      * @param ResetPasswordForm $model
      * @return bool
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function processResetPassword($model)
     {
@@ -156,14 +174,19 @@ class DefaultController extends Controller
      * Signs users up.
      *
      * @return string|Response
-     * @throws \yii\base\Exception
+     * @throws Exception
      */
     public function actionSignup()
     {
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($model->signup()) {
-                return $this->processGoHome(Module::t('module', 'It remains to activate the account, check your mail.'));
+                return $this->processGoHome(
+                    Module::t(
+                        'module',
+                        'It remains to activate the account, check your mail.'
+                    )
+                );
             }
         }
         return $this->render('signup', [
@@ -186,7 +209,12 @@ class DefaultController extends Controller
         }
 
         if ($model->confirmEmail()) {
-            return $this->processGoHome(Module::t('module', 'Thank you for registering! Now you can log in using your credentials.'));
+            return $this->processGoHome(
+                Module::t(
+                    'module',
+                    'Thank you for registering! Now you can log in using your credentials.'
+                )
+            );
         }
         return $this->processGoHome(Module::t('module', 'Error sending message!'), 'error');
     }

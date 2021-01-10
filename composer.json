@@ -12,6 +12,7 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=5.6",
+        "ext-json": "*",
         "yiisoft/yii2": "~2.0.15",
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "yiisoft/yii2-swiftmailer": "~2.0.0",
@@ -24,7 +25,6 @@
         "yiisoft/yii2-debug": "~2.0.0",
         "yiisoft/yii2-gii": "~2.0.0",
         "yiisoft/yii2-faker": "~2.0.0",
-
         "codeception/codeception": "^4.0",
         "codeception/module-asserts": "^1.0",
         "codeception/module-yii2": "^1.0",
@@ -33,9 +33,24 @@
         "symfony/browser-kit": ">=2.7 <=4.2.4",
         "codeception/module-rest": "^1.2",
         "codeception/module-phpbrowser": "^1.0",
-        "flow/jsonpath": "^0.5.0"
+        "softcreatr/jsonpath": "^0.6.4",
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "scripts": {
+        "app-init-dev": "php init --env=Development --overwrite=n",
+        "app-init-prod": "php init --env=Production --overwrite=n",
+        "migrate-up": "php yii migrate/up --interactive=0",
+        "migrate-down": "php yii migrate/down --interactive=0",
+        "migrate-test-up": "php yii_test migrate/up --interactive=0",
+        "migrate-test-down": "php yii_test migrate/down --interactive=0",
+        "rbac-init": "php yii rbac/init",
+        "build": "codecept build",
+        "test": "codecept run",
+        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 modules --ignore=*/assets/src,*/runtime/*,*/web/assets/*,assets/bootstrap/*,requirements.php,*/migrations/*",
+        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 modules --ignore=*/assets/src,*/runtime/*,*/web/assets/*,assets/bootstrap/*,requirements.php,*/migrations/*"
     },
     "config": {
+        "sort-packages": true,
         "process-timeout": 1800,
         "fxp-asset": {
             "enabled": false

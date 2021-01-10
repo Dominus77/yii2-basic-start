@@ -53,21 +53,43 @@ class Profile extends User
         return [
             ['username', 'required'],
             ['username', 'match', 'pattern' => '#^[\w_-]+$#i'],
-            ['username', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This username is already taken.')],
+            ['username', 'unique', 'targetClass' => self::class, 'message' => Module::t(
+                'module',
+                'This username is already taken.'
+            )],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => self::class, 'message' => Module::t('module', 'This email is already taken.')],
+            ['email', 'unique', 'targetClass' => self::class, 'message' => Module::t(
+                'module',
+                'This email is already taken.'
+            )],
             ['email', 'string', 'max' => 255],
 
             ['first_name', 'string', 'max' => 45],
             ['last_name', 'string', 'max' => 45],
 
-            [['currentPassword', 'newPassword', 'newPasswordRepeat'], 'required', 'on' => [self::SCENARIO_PASSWORD_UPDATE]],
-            ['newPassword', 'string', 'min' => self::LENGTH_STRING_PASSWORD_MIN, 'max' => self::LENGTH_STRING_PASSWORD_MAX],
-            ['newPasswordRepeat', 'compare', 'compareAttribute' => 'newPassword', 'on' => [self::SCENARIO_PASSWORD_UPDATE]],
-            ['currentPassword', 'validateCurrentPassword', 'skipOnEmpty' => false, 'skipOnError' => false, 'on' => [self::SCENARIO_PASSWORD_UPDATE]],
+            [
+                ['currentPassword', 'newPassword', 'newPasswordRepeat'],
+                'required',
+                'on' => [self::SCENARIO_PASSWORD_UPDATE]
+            ],
+            [
+                'newPassword', 'string',
+                'min' => self::LENGTH_STRING_PASSWORD_MIN,
+                'max' => self::LENGTH_STRING_PASSWORD_MAX
+            ],
+            [
+                'newPasswordRepeat', 'compare',
+                'compareAttribute' => 'newPassword',
+                'on' => [self::SCENARIO_PASSWORD_UPDATE]
+            ],
+            ['currentPassword', 'validateCurrentPassword',
+                'skipOnEmpty' => false,
+                'skipOnError' => false,
+                'on' => [self::SCENARIO_PASSWORD_UPDATE]
+            ],
         ];
     }
 
@@ -79,7 +101,10 @@ class Profile extends User
         if (!empty($this->newPassword) && !empty($this->newPasswordRepeat) && !$this->hasErrors()) {
             $this->processValidatePassword($attribute);
         } else {
-            $this->addError($attribute, Module::t('module', 'Not all fields are filled in correctly.'));
+            $this->addError($attribute, Module::t(
+                'module',
+                'Not all fields are filled in correctly.'
+            ));
         }
     }
 
@@ -89,8 +114,9 @@ class Profile extends User
     public function processValidatePassword($attribute)
     {
         if ($attribute) {
-            if (!$this->validatePassword($this->$attribute))
+            if (!$this->validatePassword($this->$attribute)) {
                 $this->addError($attribute, Module::t('module', 'Incorrect current password.'));
+            }
         } else {
             $this->addError($attribute, Module::t('module', 'Enter your current password.'));
         }

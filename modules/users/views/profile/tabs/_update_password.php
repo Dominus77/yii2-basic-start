@@ -1,16 +1,15 @@
 <?php
 
-/**
- * @var $this yii\web\View
- * @var $model modules\users\models\Profile
- * @var $form yii\widgets\ActiveForm
- */
-
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 use modules\users\Module;
 
+/**
+ * @var $this yii\web\View
+ * @var $model modules\users\models\Profile
+ * @var $form yii\widgets\ActiveForm
+ */
 ?>
 
 <div class="users-frontend-profile-tabs-_update_password">
@@ -50,10 +49,16 @@ use modules\users\Module;
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <?= Html::submitButton('<span class="glyphicon glyphicon-floppy-saved"></span> ' . Module::t('module', 'Save'), [
+            <?= Html::submitButton(
+                '<span class="glyphicon glyphicon-floppy-saved"></span> ' . Module::t(
+                    'module',
+                    'Save'
+                ),
+                [
                 'class' => 'btn btn-primary',
                 'name' => 'submit-button',
-            ]) ?>
+                ]
+            ) ?>
         </div>
     </div>
     <?php ActiveForm::end(); ?>

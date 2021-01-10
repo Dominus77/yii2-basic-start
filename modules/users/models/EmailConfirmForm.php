@@ -2,9 +2,11 @@
 
 namespace modules\users\models;
 
+use Exception;
 use yii\base\InvalidArgumentException;
 use yii\base\Model;
 use modules\users\Module;
+use yii\rbac\Assignment;
 
 /**
  * Class EmailConfirmForm
@@ -13,24 +15,27 @@ use modules\users\Module;
 class EmailConfirmForm extends Model
 {
     /**
-     * @var \modules\users\models\User|bool
+     * @var User|bool
      */
-    private $_user;
+    private $user;
 
     /**
      * Creates a form model given a token.
      *
      * @param  mixed $token
      * @param  array $config
-     * @throws \yii\base\InvalidArgumentException if token is empty or not valid
+     * @throws InvalidArgumentException if token is empty or not valid
      */
     public function __construct($token = '', $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidArgumentException(Module::t('module', 'Email confirm token cannot be blank.'));
+            throw new InvalidArgumentException(Module::t(
+                'module',
+                'Email confirm token cannot be blank.'
+            ));
         }
-        $this->_user = User::findByEmailConfirmToken($token);
-        if (!$this->_user) {
+        $this->user = User::findByEmailConfirmToken($token);
+        if (!$this->user) {
             throw new InvalidArgumentException(Module::t('module', 'Wrong Email confirm token.'));
         }
         parent::__construct($config);
@@ -39,12 +44,12 @@ class EmailConfirmForm extends Model
     /**
      * Confirm email.
      *
-     * @return bool|\yii\rbac\Assignment if email was confirmed.
-     * @throws \Exception
+     * @return bool|Assignment if email was confirmed.
+     * @throws Exception
      */
     public function confirmEmail()
     {
-        $user = $this->_user;
+        $user = $this->user;
         $user->status = User::STATUS_ACTIVE;
         $user->removeEmailConfirmToken();
         if ($user->save(false)) {

@@ -1,12 +1,13 @@
 <?php
 
+use modules\rbac\models\Assignment;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use modules\rbac\Module;
 
 /* @var $this yii\web\View */
 /* @var $model modules\users\models\User */
-/* @var $assignModel \modules\rbac\models\Assignment */
+/* @var $assignModel Assignment */
 
 $this->title = Module::t('module', 'Role Based Access Control');
 $this->params['breadcrumbs'][] = ['label' => Module::t('module', 'RBAC'), 'url' => ['default/index']];
@@ -56,7 +57,10 @@ $this->params['breadcrumbs'][] = Html::encode($model->username);
                         <strong><?= Module::t('module', 'Permissions by role') ?></strong>
                         <ul>
                             <?php foreach ($permissionsRole as $value) {
-                                echo Html::tag('li', $value->name . ' (' . $value->description . ')') . PHP_EOL;
+                                echo Html::tag(
+                                    'li',
+                                    $value->name . ' (' . $value->description . ')'
+                                ) . PHP_EOL;
                             } ?>
                         </ul>
                     <?php endif; ?>
@@ -65,11 +69,20 @@ $this->params['breadcrumbs'][] = Html::encode($model->username);
         </div>
         <div class="box-footer">
             <p>
-                <?= Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ' . Module::t('module', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ' . Module::t('module', 'Revoke'), ['revoke', 'id' => $model->id], [
+                <?= Html::a('<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> ' . Module::t(
+                    'module',
+                    'Update'
+                ), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> ' . Module::t(
+                    'module',
+                    'Revoke'
+                ), ['revoke', 'id' => $model->id], [
                     'class' => 'btn btn-danger',
                     'data' => [
-                        'confirm' => Module::t('module', 'Do you really want to untie the user from the role?'),
+                        'confirm' => Module::t(
+                            'module',
+                            'Do you really want to untie the user from the role?'
+                        ),
                         'method' => 'post',
                     ],
                 ]) ?>

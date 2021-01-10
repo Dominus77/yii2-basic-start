@@ -16,6 +16,7 @@ use modules\rbac\Module;
  * @property string|int $id Id
  * @property string $username Username
  * @property mixed $role Role
+ * @property-read array $rolesArray
  * @property bool $isNewRecord Is New Record
  */
 class Assignment extends Model
@@ -82,13 +83,14 @@ class Assignment extends Model
     public function getUserRoleName($id)
     {
         $id = $id ? $id : $this->user->id;
-        if ($role = Yii::$app->authManager->getRolesByUser($id))
+        if ($role = Yii::$app->authManager->getRolesByUser($id)) {
             return ArrayHelper::getValue($role, function ($role) {
                 foreach ($role as $key => $value) {
                     return $value->description;
                 }
                 return null;
             });
+        }
         return null;
     }
 
@@ -100,13 +102,14 @@ class Assignment extends Model
     public function getRoleUser($id)
     {
         $id = $id ? $id : $this->user->id;
-        if ($role = Yii::$app->authManager->getRolesByUser($id))
+        if ($role = Yii::$app->authManager->getRolesByUser($id)) {
             return ArrayHelper::getValue($role, function ($role) {
                 foreach ($role as $key => $value) {
                     return $value->name;
                 }
                 return null;
             });
+        }
         return null;
     }
 }
