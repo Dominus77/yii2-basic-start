@@ -2,6 +2,7 @@
 
 namespace modules\rbac\console;
 
+use Exception;
 use modules\rbac\components\AuthorRule;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -46,7 +47,7 @@ class InitController extends Controller
 
     /**
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
     public function processInit()
     {
@@ -107,6 +108,7 @@ class InitController extends Controller
      * @param object $auth
      * @param array $roles
      * @param array $permissions
+     * @throws Exception
      */
     protected function processAddPermissionToRoles($auth, $roles = [], $permissions = [])
     {

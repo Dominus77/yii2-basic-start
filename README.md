@@ -46,13 +46,13 @@ The minimum requirement by this project template that your Web server supports P
 
 Create a project:
 
-```
+```bash
 composer create-project --prefer-dist --stability=dev dominus77/yii2-basic-start basic-project
 ```
 
 or clone the repository for `pull` command availability:
 
-```
+```bash
 git clone https://github.com/Dominus77/yii2-basic-start.git basic-project
 cd basic-project
 composer install
@@ -60,27 +60,45 @@ composer install
 
 Init an environment:
 
+Run command in the root directory `public_html` of the project
+
+if Development environment
+```bash
+composer app-init-dev
 ```
+if Production environment
+```bash
+composer app-init-prod
+```
+otherwise choose Wednesday
+```bash
 php init
 ```
 
-Create a database, default configure: yii2_basic_start
+Create a database, default configure: `yii2_basic_start` in `app/config/common-local.php`
+```php
+$config = [
+    //...
+    'components' => [
+        'db' => [
+            'dsn' => 'mysql:host=localhost;dbname=yii2_basic_start',
+            //...
+        ],
+        //...
+    ],
+    //...
+];
+```
 
 Apply migration:
 
-```
-php yii migrate
-```
-
-See all available commands:
-
-```
-php yii
+```bash
+composer migrate-up
 ```
 
 Create users, enter the command and follow the instructions:
 
-```
+```bash
 php yii users/user/create
 ```
 
@@ -89,12 +107,18 @@ php yii users/user/create
 - Password: set password username (min 6 symbol);
 - Status: set status username (0 - blocked, 1 - active, 2 - wait, ? - Help);
 
+See all available commands:
+
+```bash
+php yii
+```
+
 ### Initialize RBAC
 
 When initialized, the user with ID:1 is assigned the SuperAdmin role.
 
-```
-php yii rbac/init
+```bash
+composer rbac-init
 ```
 A command to assign roles to other users:
 
@@ -114,7 +138,7 @@ http://localhost/basic-project/web/
 
 Create .htaccess file or add folder \web
 
-```
+```apache
 AddDefaultCharset utf-8
 # Mod_Autoindex
 <IfModule mod_autoindex.c>
@@ -137,33 +161,42 @@ AddDefaultCharset utf-8
 </IfModule>
 ```
 
+## Code Sniffer
+
+```bash
+composer check-style
+```
+
 ## TESTING
 
-Create a database, default configure yii2_basic_start_test in app\config\test-local.php
+Create a database, default configure `yii2_basic_start_test` in `app/config/test-local.php`
 
-```
-//...
-'components' => [
-    'db' => [
-        'dsn' => 'mysql:host=localhost;dbname=yii2_basic_start_test',
+```php
+$config = [
+    //...
+    'components' => [
+        'db' => [
+            'dsn' => 'mysql:host=localhost;dbname=yii2_basic_start_test',
+            //...
+        ],
+        //...
     ],
-]
-//...
+    //...
+];
 ```
 
 Apply migration:
 
-```
-php yii_test migrate/up
+```bash
+composer migrate-test-up
 ```
 
-Run in console for Windows system:
+#### Run in console
+
+```bash
+composer build
+composer test
 ```
-vendor\bin\codecept build
-vendor\bin\codecept run
-```
-Other:
-```
-vendor/bin/codecept build
-vendor/bin/codecept run
-```
+## License
+
+The BSD License (BSD). Please see [License File](https://github.com/Dominus77/yii2-basic-start/blob/master/LICENSE.md) for more information.
