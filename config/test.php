@@ -39,7 +39,7 @@ return ArrayHelper::merge([
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=yii2basic_start_test',
-            'username' => '',
+            'username' => 'root',
             'password' => '',
             'tablePrefix' => 'tbl_',
             'charset' => 'utf8',
