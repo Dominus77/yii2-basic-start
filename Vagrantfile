@@ -1,13 +1,24 @@
 require 'yaml'
 require 'fileutils'
 
+required_plugins_installed = nil
 required_plugins = %w( vagrant-hostmanager vagrant-vbguest )
 required_plugins.each do |plugin|
-    exec "vagrant plugin install #{plugin}" unless Vagrant.has_plugin? plugin
+  unless Vagrant.has_plugin? plugin
+    system "vagrant plugin install #{plugin}"
+    required_plugins_installed = true
+  end
+end
+
+# IF plugin[s] was just installed - restart required
+if required_plugins_installed
+  # Get CLI command[s] and call again
+  system 'vagrant' + ARGV.to_s.gsub(/\[\"|\", \"|\"\]/, ' ')
+  exit
 end
 
 domains = {
-  app: 'yii2basic.dev'
+  app: 'yii2-basic-start.test'
 }
 
 vagrantfile_dir_path = File.dirname(__FILE__)
@@ -31,7 +42,7 @@ end
 # vagrant configurate
 Vagrant.configure(2) do |config|
   # select the box
-  config.vm.box = 'bento/ubuntu-16.04'
+  config.vm.box = 'bento/ubuntu-18.04'
 
   # should we ask about box updates?
   config.vm.box_check_update = options['box_check_update']
@@ -54,7 +65,7 @@ Vagrant.configure(2) do |config|
   # network settings
   config.vm.network 'private_network', ip: options['ip']
 
-  # sync: folder 'yii2-app-advanced' (host machine) -> folder '/app' (guest machine)
+  # sync: folder 'yii2-app-basic' (host machine) -> folder '/app' (guest machine)
   config.vm.synced_folder './', '/app', owner: 'vagrant', group: 'vagrant'
 
   # disable folder '/vagrant' (guest machine)
@@ -72,7 +83,7 @@ Vagrant.configure(2) do |config|
   # config.vbguest.auto_update = false
 
   # provisioners
-  config.vm.provision 'shell', path: './vagrant/provision/once-as-root.sh', args: [options['timezone']]
+  config.vm.provision 'shell', path: './vagrant/provision/once-as-root.sh', args: [options['timezone'], options['ip']]
   config.vm.provision 'shell', path: './vagrant/provision/once-as-vagrant.sh', args: [options['github_token']], privileged: false
   config.vm.provision 'shell', path: './vagrant/provision/always-as-root.sh', run: 'always'
 
