@@ -1,3 +1,2 @@
-#nginx logs
-yii2basic.access.log
-yii2basic.error.log
+*
+!.gitignore
